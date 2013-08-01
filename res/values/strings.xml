@@ -2,5 +2,7 @@
 <resources>
 
     <string name="library_name">Update Checker</string>
+    <string name="newUpdataAvailable">New Update Available</string>
+    <string name="downloadFor">Download new update for</string>
 
 </resources>
