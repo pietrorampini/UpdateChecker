@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="newUpdataAvailable">Nuovo Aggiornamento Trovato</string>
+    <string name="downloadFor">Scarica nuovo aggiornamento per"&#160;"</string>
+    <string name="dialogPositiveButton">OK</string>
+    <string name="dialogNeutralButton">Dopo</string>
+    <string name="dialogNegativeButton">No Grazie</string>
+</resources>

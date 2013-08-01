@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialogPositiveButton">Bewerten</string>
+    <string name="dialogNeutralButton">Später</string>
+    <string name="dialogNegativeButton">Nein danke</string>
+</resources>

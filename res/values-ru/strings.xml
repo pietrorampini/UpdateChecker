@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialogPositiveButton">Оценить сейчас</string>
+    <string name="dialogNeutralButton">Напомнить позже</string>
+    <string name="dialogNegativeButton">Спасибо, но нет</string>
+</resources>

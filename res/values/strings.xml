@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="library_name">Update Checker</string>
-    <string name="newUpdataAvailable">New Update Available</string>
-    <string name="downloadFor">Download new update for</string>
 
+    <string name="newUpdataAvailable">New Update Available</string>
+    <string name="downloadFor">Download new update for"&#160;"</string>
+    <string name="dialogPositiveButton">OK</string>
+    <string name="dialogNeutralButton">Later</string>
+    <string name="dialogNegativeButton">No Thanks</string>
 </resources>

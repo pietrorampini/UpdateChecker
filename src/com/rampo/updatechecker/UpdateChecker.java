@@ -45,11 +45,18 @@ import java.io.InputStreamReader;
 
 public class UpdateChecker extends Fragment {
     Thread thread;
-    final String logTag = "newUpdateAvailable";
+    final String logTag = "UpdateChecker";
     static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
 
-    public static void CheckForDialog(FragmentActivity activity) {
-        android.support.v4.app.FragmentTransaction content = activity.getSupportFragmentManager().beginTransaction();
+    /**
+     * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
+     *
+     * @param fragmentActivity
+     * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
+     * @see FragmentActivity
+     */
+    public static void CheckForDialog(FragmentActivity fragmentActivity) {
+        android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
         args.putBoolean(NotificationInstedOfDialogKey, false);
@@ -57,8 +64,14 @@ public class UpdateChecker extends Fragment {
         content.add(updateChecker, null).commit();
     }
 
-    public static void CheckForNotification(FragmentActivity activity) {
-        android.support.v4.app.FragmentTransaction content = activity.getSupportFragmentManager().beginTransaction();
+    /**
+     * Show a Notification if an update is available for download. Callable in a FragmentActivity
+     * @param fragmentActivity
+     * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
+     * @see FragmentActivity
+     */
+    public static void CheckForNotification(FragmentActivity fragmentActivity) {
+        android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
         args.putBoolean(NotificationInstedOfDialogKey, true);
@@ -74,6 +87,9 @@ public class UpdateChecker extends Fragment {
         CheckForUpdates(NotificationInstedOfDialogBool);
     }
 
+    /**
+     * Heart of the library. Check if an update is available for download by parsing the Desktop Play Store Page of the app
+     */
     private void CheckForUpdates(final boolean NotificationInstedOfDialogBool) {
         thread = new Thread() {
             @Override
@@ -101,8 +117,8 @@ public class UpdateChecker extends Fragment {
                 String line;
                 try {
                     while ((line = reader.readLine()) != null) {
-                        if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtained HTML line contaning version available in Play Store
-                            String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get a String starting with version available + Other HTML tags
+                        if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
+                            String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
                             String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
                             String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
                             finalStep(versionDownloadable, NotificationInstedOfDialogBool);
@@ -116,6 +132,13 @@ public class UpdateChecker extends Fragment {
         thread.start();
     }
 
+    /**
+     * If the version dowloadable from the Play Store is different from the versionName installed notify it to the user.
+     * @param versionDownloadable to compare to versionName of the app.
+     * @param NotificationInstedOfDialogBool boolean getting if you have called CheckForDialog o CheckForNotification
+     * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
+     * @see UpdateChecker#CheckForNotification(android.support.v4.app.FragmentActivity)
+     */
     public void finalStep(String versionDownloadable, boolean NotificationInstedOfDialogBool) {
         thread.interrupt();
         Looper.prepare();
@@ -124,7 +147,7 @@ public class UpdateChecker extends Fragment {
             if (versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) {
             } else {
                 if (containsNumber(versionDownloadable)) {
-                    if (NotificationInstedOfDialogBool == true) {
+                    if (NotificationInstedOfDialogBool) {
                         showNotification();
                     } else {
                         showDialog();
@@ -135,6 +158,11 @@ public class UpdateChecker extends Fragment {
         }
     }
 
+    /**
+     * Since the library check from the Desktop Web Page of the app the Current Version, if there are different apks for the app,
+     * the Play Store will shown Varies depending on the device, so the Library can't compare it to versionName installed.
+     * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
+     */
     public final boolean containsNumber(String string) {
         boolean containsDigit;
 
@@ -147,16 +175,19 @@ public class UpdateChecker extends Fragment {
         return containsDigit;
     }
 
-    private void showNotification() {
+    /**
+     * Show Notification
+     */
+    private void showNotification() throws PackageManager.NameNotFoundException {
         Context context = getActivity().getApplicationContext();
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rootPlayStoreDevice) + context.getPackageName()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
-        Notification noti;
-        noti = new NotificationCompat.Builder(context)
-                .setTicker("New Update Available")
-                .setContentTitle("BO2 Full Guide")
-                .setContentText("1 new update found")
-                .setSmallIcon(R.drawable.play_store_notification_icon)
+        String appName = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0).loadLabel(context.getPackageManager()).toString();
+        Notification noti = new NotificationCompat.Builder(context)
+                .setTicker(getString(R.string.newUpdataAvailable))
+                .setContentTitle(appName)
+                .setContentText(getString(R.string.newUpdataAvailable))
+                .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
                 .setContentIntent(pendingIntent).build();
         noti.flags = Notification.FLAG_AUTO_CANCEL;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
@@ -167,6 +198,10 @@ public class UpdateChecker extends Fragment {
         Log.e(logTag, "Cannot connect to the Internet!");
     }
 
+    /**
+     * Show dialog
+     * @see UpdateCheckerDialog#show(android.support.v4.app.FragmentActivity)
+     */
     private void showDialog() {
         UpdateCheckerDialog.show(getActivity());
     }
