@@ -45,8 +45,12 @@ import java.io.InputStreamReader;
 
 public class UpdateChecker extends Fragment {
     Thread thread;
-    final String logTag = "UpdateChecker";
+    static final String logTag = "UpdateChecker";
     static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
+    static final String notificationIconResIdKey = "resId";
+    int notificationIconResIdPublic;
+    boolean customNotificationIcon;
+    Notification noti;
 
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
@@ -66,6 +70,7 @@ public class UpdateChecker extends Fragment {
 
     /**
      * Show a Notification if an update is available for download. Callable in a FragmentActivity
+     *
      * @param fragmentActivity
      * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
      * @see FragmentActivity
@@ -79,11 +84,23 @@ public class UpdateChecker extends Fragment {
         content.add(updateChecker, null).commit();
     }
 
+    public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
+        android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        UpdateChecker updateChecker = new UpdateChecker();
+        Bundle args = new Bundle();
+        args.putBoolean(NotificationInstedOfDialogKey, true);
+        args.putInt(notificationIconResIdKey, notificationIconResId);
+        updateChecker.setArguments(args);
+        content.add(updateChecker, null).commit();
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         Bundle args = getArguments();
         Boolean NotificationInstedOfDialogBool = args.getBoolean(NotificationInstedOfDialogKey);
+        if (args.getInt(notificationIconResIdKey) != 0)
+            notificationIconResIdPublic = args.getInt(notificationIconResIdKey);
         CheckForUpdates(NotificationInstedOfDialogBool);
     }
 
@@ -134,7 +151,8 @@ public class UpdateChecker extends Fragment {
 
     /**
      * If the version dowloadable from the Play Store is different from the versionName installed notify it to the user.
-     * @param versionDownloadable to compare to versionName of the app.
+     *
+     * @param versionDownloadable            to compare to versionName of the app.
      * @param NotificationInstedOfDialogBool boolean getting if you have called CheckForDialog o CheckForNotification
      * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
      * @see UpdateChecker#CheckForNotification(android.support.v4.app.FragmentActivity)
@@ -161,6 +179,7 @@ public class UpdateChecker extends Fragment {
     /**
      * Since the library check from the Desktop Web Page of the app the Current Version, if there are different apks for the app,
      * the Play Store will shown Varies depending on the device, so the Library can't compare it to versionName installed.
+     *
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
     public final boolean containsNumber(String string) {
@@ -183,12 +202,21 @@ public class UpdateChecker extends Fragment {
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rootPlayStoreDevice) + context.getPackageName()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
         String appName = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0).loadLabel(context.getPackageManager()).toString();
-        Notification noti = new NotificationCompat.Builder(context)
-                .setTicker(getString(R.string.newUpdataAvailable))
-                .setContentTitle(appName)
-                .setContentText(getString(R.string.newUpdataAvailable))
-                .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
-                .setContentIntent(pendingIntent).build();
+        if (notificationIconResIdPublic == 0) {
+            noti = new NotificationCompat.Builder(context)
+                    .setTicker(getString(R.string.newUpdataAvailable))
+                    .setContentTitle(appName)
+                    .setContentText(getString(R.string.newUpdataAvailable))
+                    .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
+                    .setContentIntent(pendingIntent).build();
+        } else {
+            noti = new NotificationCompat.Builder(context)
+                    .setTicker(getString(R.string.newUpdataAvailable))
+                    .setContentTitle(appName)
+                    .setContentText(getString(R.string.newUpdataAvailable))
+                    .setSmallIcon(notificationIconResIdPublic)
+                    .setContentIntent(pendingIntent).build();
+        }
         noti.flags = Notification.FLAG_AUTO_CANCEL;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, noti);
@@ -200,6 +228,7 @@ public class UpdateChecker extends Fragment {
 
     /**
      * Show dialog
+     *
      * @see UpdateCheckerDialog#show(android.support.v4.app.FragmentActivity)
      */
     private void showDialog() {
