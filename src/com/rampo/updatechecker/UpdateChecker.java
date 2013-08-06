@@ -22,6 +22,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
@@ -112,37 +113,39 @@ public class UpdateChecker extends Fragment {
             @Override
             public void run() {
                 Context context = getActivity().getApplicationContext();
-                HttpParams params = new BasicHttpParams();
-                HttpConnectionParams.setConnectionTimeout(params, 4000);
-                HttpConnectionParams.setSoTimeout(params, 5000);
-                HttpClient client = new DefaultHttpClient(params);
-                HttpGet request = new HttpGet(getString(R.string.rootPlayStoreWeb) + context.getPackageName()); // Set the right Play Store page by getting package name.
-                HttpResponse response = null;
-                try {
-                    response = client.execute(request);
-                } catch (IOException e) {
-                    logConnectionError();
-                }
-
-                InputStream is = null;
-                try {
-                    is = response.getEntity().getContent();
-                } catch (IOException e) {
-                    logConnectionError();
-                }
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                String line;
-                try {
-                    while ((line = reader.readLine()) != null) {
-                        if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
-                            String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
-                            String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
-                            String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
-                            finalStep(versionDownloadable, NotificationInstedOfDialogBool);
-                        }
+                if (isNetworkAvailable(context)) {
+                    HttpParams params = new BasicHttpParams();
+                    HttpConnectionParams.setConnectionTimeout(params, 4000);
+                    HttpConnectionParams.setSoTimeout(params, 5000);
+                    HttpClient client = new DefaultHttpClient(params);
+                    HttpGet request = new HttpGet(getString(R.string.rootPlayStoreWeb) + context.getPackageName()); // Set the right Play Store page by getting package name.
+                    HttpResponse response = null;
+                    try {
+                        response = client.execute(request);
+                    } catch (IOException e) {
+                        logConnectionError();
                     }
-                } catch (IOException e) {
-                    logConnectionError();
+
+                    InputStream is = null;
+                    try {
+                        is = response.getEntity().getContent();
+                    } catch (IOException e) {
+                        logConnectionError();
+                    }
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    String line;
+                    try {
+                        while ((line = reader.readLine()) != null) {
+                            if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
+                                String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
+                                String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
+                                String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
+                                finalStep(versionDownloadable, NotificationInstedOfDialogBool);
+                            }
+                        }
+                    } catch (IOException e) {
+                        logConnectionError();
+                    }
                 }
             }
         };
@@ -224,6 +227,10 @@ public class UpdateChecker extends Fragment {
 
     public void logConnectionError() {
         Log.e(logTag, "Cannot connect to the Internet!");
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
     /**
