@@ -17,6 +17,7 @@ package com.rampo.updatechecker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -43,7 +44,9 @@ public class UpdateChecker extends Fragment {
     private static final String logTag = "UpdateChecker";
     private static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
     private static final String notificationIconResIdKey = "resId";
-    int notificationIconResIdPublic;
+    private static final String intOfLaunchesPrefKey = "nlaunches";
+    private static final String prefsFileName = "updateChecker";
+    int notificationIconResIdPublic, numberOfCheckForUpdatedVersion;
     private boolean versionDownloadableFound;
 
     /**
@@ -135,15 +138,15 @@ public class UpdateChecker extends Fragment {
                     try {
                         while ((line = reader.readLine()) != null) {
                             if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
-                            	versionDownloadableFound = true;
+                                versionDownloadableFound = true;
                                 String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
                                 String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
                                 String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
                                 finalStep(versionDownloadable, NotificationInstedOfDialogBool);
                                 Log.e(logTag, versionDownloadable);
                             }
-                            if (!versionDownloadableFound){ // Cannot find version downloadable in Play Store. Log It.
-                            	logCannotFindVersionName();
+                            if (!versionDownloadableFound) { // Cannot find version downloadable in Play Store. Log It.
+                                logCannotFindVersionName();
                             }
                         }
                     } catch (IOException e) {
@@ -172,11 +175,13 @@ public class UpdateChecker extends Fragment {
         try {
             if (containsNumber(versionDownloadable)) {
             } else {
-                if (!versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) {
-                    if (NotificationInstedOfDialogBool) {
-                        showNotification();
-                    } else {
-                        showDialog();
+                if (!versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) { // New Update Available
+                    if (iDontWantToBeTooMuchInvasive(versionDownloadable)) {
+                        if (NotificationInstedOfDialogBool) {
+                            showNotification();
+                        } else {
+                            showDialog();
+                        }
                     }
                 }
             }
@@ -191,11 +196,7 @@ public class UpdateChecker extends Fragment {
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
     public final boolean containsNumber(String string) {
-        if (string.matches(".*[0-9].*")) {
-            return true;
-        } else {
-            return false;
-        }
+        return string.matches(".*[0-9].*");
     }
 
     /**
@@ -215,13 +216,14 @@ public class UpdateChecker extends Fragment {
     private void showNotification() {
         Notification.show(getActivity(), 1);
     }
-    
+
     /**
-     *  Cannot find versionName, probably this app hasn't benn published on Play Store
+     * Cannot find versionName, probably this app hasn't benn published on Play Store
      */
-	private void logCannotFindVersionName() {	
-		Log.e(logTag, "Cannot find versionName, probably this app hasn't benn published on Play Store");
-	}
+    private void logCannotFindVersionName() {
+        Log.e(logTag, "Cannot find versionName, probably this app hasn't benn published on Play Store");
+    }
+
     /**
      * Log connection error
      */
@@ -234,6 +236,31 @@ public class UpdateChecker extends Fragment {
      */
     public static boolean isNetworkAvailable(Context context) {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
+    }
+
+    /**
+     * Show the Dialog/Notification only if it is the first time or divisible for 5.
+     */
+    private boolean iDontWantToBeTooMuchInvasive(String versionDownloadable) {
+        String prefKey = intOfLaunchesPrefKey + versionDownloadable;
+        SharedPreferences prefs = getActivity().getSharedPreferences(prefsFileName, 0);
+        numberOfCheckForUpdatedVersion = prefs.getInt(prefKey, 0);
+        if (numberOfCheckForUpdatedVersion % 5 == 0 || numberOfCheckForUpdatedVersion == 0) {
+            saveNumberOfChecksForUpdatedVersion(versionDownloadable);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Update number of checks for the versionName of the version downloadable from Play Store.
+     */
+    private void saveNumberOfChecksForUpdatedVersion(String versionDownloadable) {
+        SharedPreferences prefs = getActivity().getSharedPreferences(prefsFileName, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(intOfLaunchesPrefKey + versionDownloadable, numberOfCheckForUpdatedVersion);
+        editor.commit();
+        numberOfCheckForUpdatedVersion++;
     }
 }
 
