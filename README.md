@@ -23,6 +23,8 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 
 Import [Styled Dialogs](https://github.com/inmite/android-styled-dialogs) into the library.
 
+Import android-support-v4.jar into the library.
+
 Import the library into you app.
 
 First, Add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's Manifest:
