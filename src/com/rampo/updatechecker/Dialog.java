@@ -41,7 +41,10 @@ public class Dialog extends SimpleDialogFragment {
      * @see FragmentActivity
      */
     public static void show(FragmentActivity activity) {
-        new Dialog().show(activity.getSupportFragmentManager(), null);
+    	try {
+            new Dialog().show(activity.getSupportFragmentManager(), null);
+    	}
+    	catch (IllegalStateException ignored){}
     }
 
     @Override
@@ -61,12 +64,12 @@ public class Dialog extends SimpleDialogFragment {
                 dismiss();
             }
         });
-        builder.setNeutralButton(context.getString(R.string.dialogNeutralButton), new View.OnClickListener() {
+        /*builder.setNeutralButton(context.getString(R.string.dialogNeutralButton), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
-        });
+        }); */
 
         builder.setNegativeButton(context.getString(R.string.dialogNegativeButton), new View.OnClickListener() {
             @Override

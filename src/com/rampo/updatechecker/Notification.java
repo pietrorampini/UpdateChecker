@@ -12,7 +12,6 @@ import android.support.v4.app.NotificationCompat;
  */
 @SuppressWarnings("static-access")
 public class Notification {
-
     public static void show(Context context, int notificationIconResIdPublic) {
         android.app.Notification noti;
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.rootPlayStoreDevice) + context.getPackageName()));

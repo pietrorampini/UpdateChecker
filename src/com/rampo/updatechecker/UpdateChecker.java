@@ -47,7 +47,7 @@ public class UpdateChecker extends Fragment {
     private static final String intOfLaunchesPrefKey = "nlaunches";
     private static final String prefsFileName = "updateChecker";
     int notificationIconResIdPublic, numberOfCheckForUpdatedVersion;
-    private boolean versionDownloadableFound;
+    FragmentActivity context;
 
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
@@ -96,14 +96,17 @@ public class UpdateChecker extends Fragment {
     /**
      * This class is a Fragment. Check for the method you have chosen.
      */
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        context = (FragmentActivity) activity;
         Bundle args = getArguments();
         Boolean NotificationInstedOfDialogBool = args.getBoolean(NotificationInstedOfDialogKey);
         if (args.getInt(notificationIconResIdKey) != 0)
             notificationIconResIdPublic = args.getInt(notificationIconResIdKey);
         CheckForUpdates(NotificationInstedOfDialogBool);
+
     }
 
     /**
@@ -113,13 +116,12 @@ public class UpdateChecker extends Fragment {
         thread = new Thread() {
             @Override
             public void run() {
-                Context context = getActivity().getApplicationContext();
                 if (isNetworkAvailable(context)) {
                     HttpParams params = new BasicHttpParams();
                     HttpConnectionParams.setConnectionTimeout(params, 4000);
                     HttpConnectionParams.setSoTimeout(params, 5000);
                     HttpClient client = new DefaultHttpClient(params);
-                    HttpGet request = new HttpGet(getString(R.string.rootPlayStoreWeb) + context.getPackageName()); // Set the right Play Store page by getting package name.
+                    HttpGet request = new HttpGet(context.getString(R.string.rootPlayStoreWeb) + context.getPackageName()); // Set the right Play Store page by getting package name.
                     HttpResponse response = null;
                     try {
                         response = client.execute(request);
@@ -138,15 +140,10 @@ public class UpdateChecker extends Fragment {
                     try {
                         while ((line = reader.readLine()) != null) {
                             if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
-                                versionDownloadableFound = true;
                                 String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
                                 String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
                                 String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
                                 finalStep(versionDownloadable, NotificationInstedOfDialogBool);
-                                Log.e(logTag, versionDownloadable);
-                            }
-                            if (!versionDownloadableFound) { // Cannot find version downloadable in Play Store. Log It.
-                                logCannotFindVersionName();
                             }
                         }
                     } catch (IOException e) {
@@ -171,10 +168,8 @@ public class UpdateChecker extends Fragment {
     private void finalStep(String versionDownloadable, boolean NotificationInstedOfDialogBool) {
         thread.interrupt();
         Looper.prepare();
-        Context context = getActivity().getApplicationContext();
         try {
             if (containsNumber(versionDownloadable)) {
-            } else {
                 if (!versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) { // New Update Available
                     if (iDontWantToBeTooMuchInvasive(versionDownloadable)) {
                         if (NotificationInstedOfDialogBool) {
@@ -183,7 +178,8 @@ public class UpdateChecker extends Fragment {
                             showDialog();
                         }
                     }
-                }
+                } else {
+                } // No new update available
             }
         } catch (PackageManager.NameNotFoundException ignored) {
         }
@@ -205,7 +201,7 @@ public class UpdateChecker extends Fragment {
      * @see Dialog#show(android.support.v4.app.FragmentActivity)
      */
     private void showDialog() {
-        Dialog.show(getActivity());
+        Dialog.show(context);
     }
 
     /**
@@ -214,14 +210,7 @@ public class UpdateChecker extends Fragment {
      * @see Notification#show(android.content.Context, int)
      */
     private void showNotification() {
-        Notification.show(getActivity(), 1);
-    }
-
-    /**
-     * Cannot find versionName, probably this app hasn't benn published on Play Store
-     */
-    private void logCannotFindVersionName() {
-        Log.e(logTag, "Cannot find versionName, probably this app hasn't benn published on Play Store");
+        Notification.show(context, notificationIconResIdPublic);
     }
 
     /**
@@ -234,7 +223,7 @@ public class UpdateChecker extends Fragment {
     /**
      * Check if a network available
      */
-    public static boolean isNetworkAvailable(Context context) {
+    public boolean isNetworkAvailable(Context context) {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
@@ -243,24 +232,26 @@ public class UpdateChecker extends Fragment {
      */
     private boolean iDontWantToBeTooMuchInvasive(String versionDownloadable) {
         String prefKey = intOfLaunchesPrefKey + versionDownloadable;
-        SharedPreferences prefs = getActivity().getSharedPreferences(prefsFileName, 0);
+        SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
         numberOfCheckForUpdatedVersion = prefs.getInt(prefKey, 0);
         if (numberOfCheckForUpdatedVersion % 5 == 0 || numberOfCheckForUpdatedVersion == 0) {
             saveNumberOfChecksForUpdatedVersion(versionDownloadable);
             return true;
         } else {
+            saveNumberOfChecksForUpdatedVersion(versionDownloadable);
             return false;
         }
     }
+
     /**
      * Update number of checks for the versionName of the version downloadable from Play Store.
      */
     private void saveNumberOfChecksForUpdatedVersion(String versionDownloadable) {
-        SharedPreferences prefs = getActivity().getSharedPreferences(prefsFileName, 0);
+        numberOfCheckForUpdatedVersion++;
+        SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(intOfLaunchesPrefKey + versionDownloadable, numberOfCheckForUpdatedVersion);
         editor.commit();
-        numberOfCheckForUpdatedVersion++;
     }
 }
 
