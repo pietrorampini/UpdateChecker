@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Pietro Rampini "Rampo"
+ * Copyright (C) 2013 Pietro Rampini "Rampo" - Piko Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,13 @@
 package com.rampo.updatechecker;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
@@ -45,20 +39,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class UpdateChecker extends Fragment {
-    Thread thread;
-    static final String logTag = "UpdateChecker";
-    static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
-    static final String notificationIconResIdKey = "resId";
+    private Thread thread;
+    private static final String logTag = "UpdateChecker";
+    private static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
+    private static final String notificationIconResIdKey = "resId";
     int notificationIconResIdPublic;
-    boolean customNotificationIcon;
-    Notification noti;
+    private boolean versionDownloadableFound;
 
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
      *
-     * @param fragmentActivity
-     * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
-     * @see FragmentActivity
+     * @param fragmentActivity Required.
      */
     public static void CheckForDialog(FragmentActivity fragmentActivity) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
@@ -72,9 +63,7 @@ public class UpdateChecker extends Fragment {
     /**
      * Show a Notification if an update is available for download. Callable in a FragmentActivity
      *
-     * @param fragmentActivity
-     * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
-     * @see FragmentActivity
+     * @param fragmentActivity Required.
      */
     public static void CheckForNotification(FragmentActivity fragmentActivity) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
@@ -85,6 +74,12 @@ public class UpdateChecker extends Fragment {
         content.add(updateChecker, null).commit();
     }
 
+    /**
+     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity      Required
+     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     */
     public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
@@ -95,6 +90,9 @@ public class UpdateChecker extends Fragment {
         content.add(updateChecker, null).commit();
     }
 
+    /**
+     * This class is a Fragment. Check for the method you have chosen.
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -106,7 +104,7 @@ public class UpdateChecker extends Fragment {
     }
 
     /**
-     * Heart of the library. Check if an update is available for download by parsing the Desktop Play Store Page of the app
+     * Heart of the library. Check if an update is available for download parsing the desktop Play Store page of the app
      */
     private void CheckForUpdates(final boolean NotificationInstedOfDialogBool) {
         thread = new Thread() {
@@ -137,10 +135,15 @@ public class UpdateChecker extends Fragment {
                     try {
                         while ((line = reader.readLine()) != null) {
                             if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
+                            	versionDownloadableFound = true;
                                 String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
                                 String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
                                 String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
                                 finalStep(versionDownloadable, NotificationInstedOfDialogBool);
+                                Log.e(logTag, versionDownloadable);
+                            }
+                            if (!versionDownloadableFound){ // Cannot find version downloadable in Play Store. Log It.
+                            	logCannotFindVersionName();
                             }
                         }
                     } catch (IOException e) {
@@ -148,6 +151,8 @@ public class UpdateChecker extends Fragment {
                     }
                 }
             }
+
+
         };
         thread.start();
     }
@@ -155,19 +160,19 @@ public class UpdateChecker extends Fragment {
     /**
      * If the version dowloadable from the Play Store is different from the versionName installed notify it to the user.
      *
-     * @param versionDownloadable            to compare to versionName of the app.
+     * @param versionDownloadable            String to compare to versionName of the app.
      * @param NotificationInstedOfDialogBool boolean getting if you have called CheckForDialog o CheckForNotification
      * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
      * @see UpdateChecker#CheckForNotification(android.support.v4.app.FragmentActivity)
      */
-    public void finalStep(String versionDownloadable, boolean NotificationInstedOfDialogBool) {
+    private void finalStep(String versionDownloadable, boolean NotificationInstedOfDialogBool) {
         thread.interrupt();
         Looper.prepare();
         Context context = getActivity().getApplicationContext();
         try {
-            if (versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) {
+            if (containsNumber(versionDownloadable)) {
             } else {
-                if (containsNumber(versionDownloadable)) {
+                if (!versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) {
                     if (NotificationInstedOfDialogBool) {
                         showNotification();
                     } else {
@@ -186,60 +191,49 @@ public class UpdateChecker extends Fragment {
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
     public final boolean containsNumber(String string) {
-        boolean containsDigit;
-
         if (string.matches(".*[0-9].*")) {
-            containsDigit = true;
+            return true;
         } else {
-            containsDigit = false;
+            return false;
         }
-
-        return containsDigit;
-    }
-
-    /**
-     * Show Notification
-     */
-    private void showNotification() throws PackageManager.NameNotFoundException {
-        Context context = getActivity().getApplicationContext();
-        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rootPlayStoreDevice) + context.getPackageName()));
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
-        String appName = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0).loadLabel(context.getPackageManager()).toString();
-        if (notificationIconResIdPublic == 0) {
-            noti = new NotificationCompat.Builder(context)
-                    .setTicker(getString(R.string.newUpdataAvailable))
-                    .setContentTitle(appName)
-                    .setContentText(getString(R.string.newUpdataAvailable))
-                    .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
-                    .setContentIntent(pendingIntent).build();
-        } else {
-            noti = new NotificationCompat.Builder(context)
-                    .setTicker(getString(R.string.newUpdataAvailable))
-                    .setContentTitle(appName)
-                    .setContentText(getString(R.string.newUpdataAvailable))
-                    .setSmallIcon(notificationIconResIdPublic)
-                    .setContentIntent(pendingIntent).build();
-        }
-        noti.flags = Notification.FLAG_AUTO_CANCEL;
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, noti);
-    }
-
-    public void logConnectionError() {
-        Log.e(logTag, "Cannot connect to the Internet!");
-    }
-
-    public static boolean isNetworkAvailable(Context context) {
-        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
     /**
      * Show dialog
      *
-     * @see UpdateCheckerDialog#show(android.support.v4.app.FragmentActivity)
+     * @see Dialog#show(android.support.v4.app.FragmentActivity)
      */
     private void showDialog() {
-        UpdateCheckerDialog.show(getActivity());
+        Dialog.show(getActivity());
+    }
+
+    /**
+     * Show Notification
+     *
+     * @see Notification#show(android.content.Context, int)
+     */
+    private void showNotification() {
+        Notification.show(getActivity(), 1);
+    }
+    
+    /**
+     *  Cannot find versionName, probably this app hasn't benn published on Play Store
+     */
+	private void logCannotFindVersionName() {	
+		Log.e(logTag, "Cannot find versionName, probably this app hasn't benn published on Play Store");
+	}
+    /**
+     * Log connection error
+     */
+    public void logConnectionError() {
+        Log.e(logTag, "Cannot connect to the Internet!");
+    }
+
+    /**
+     * Check if a network available
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 }
 

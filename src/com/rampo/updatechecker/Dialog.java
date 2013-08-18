@@ -23,31 +23,30 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+
 /**
  * Extends SimpleDialogFragment class of StyledDialogs library.
- * @see <a href="https://github.com/inmite/android-styled-dialogs">GitHub - Android Styled Dialogs</a>
- * @see SimpleDialogFragment
+ *
+ * @see <a href="https://github.com/inmite/android-styled-dialogs">inmite - Android Styled Dialogs</a> Required.
+ * @see SimpleDialogFragment class to extend.
  */
-public class UpdateCheckerDialog extends SimpleDialogFragment {
+public class Dialog extends SimpleDialogFragment {
     final static String sharedPreferencesGeneralKey = "updateChecker";
     final static String sharedPreferencesDontShowAgainKey = "dontshowagain";
 
     /**
-     * Show this Dialog if you have added the method UpdateChecker.CheckForDialog(); in a FragmentActivity
+     * Show this Dialog if you have added the method UpdateChecker.CheckForDialog(FragmentActivity activity) and a new update can be downloaded.
+     *
      * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
      * @see FragmentActivity
      */
     public static void show(FragmentActivity activity) {
-        new UpdateCheckerDialog().show(activity.getSupportFragmentManager(), null);
+        new Dialog().show(activity.getSupportFragmentManager(), null);
     }
 
     @Override
     public Builder build(Builder builder) {
         Context context = getActivity().getApplicationContext();
-        try {
-            String versionName = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-        } catch (NameNotFoundException ignored) {
-        }
         String appName = null;
         try {
             appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
