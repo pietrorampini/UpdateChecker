@@ -13,6 +13,6 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		UpdateChecker.CheckForDialog(this);
+		UpdateChecker.CheckForNotification(this);
 	}
 }
