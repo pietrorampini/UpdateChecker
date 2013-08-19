@@ -38,13 +38,11 @@ So, in the class you want to use the library extend a FragmentActivity (or, obvi
 Show a notification if a new updated was found:
 
     UpdateChecker.CheckForNotification(this);
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/code_noti_standard.png?login=rampo&token=e30fc4dc0ecc7a8dd0108cde2849fc64)
 ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/noti_standard.png?login=rampo&token=9748e4286d445646604f65317a460f45)
 
 Show a dialog if a new updated was found
 
     UpdateChecker.CheckForDialog(this);
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/code_dialog.png?login=rampo&token=3393b80781b1a08fa9d91ca5d7a01fe4)
 ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_standard.png?login=rampo&token=25af58a7f40b050980746ccdc149cac3)
 
 
