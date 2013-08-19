@@ -31,19 +31,21 @@ First, Add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's M
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/permissions.png?login=rampo&token=f92ee11bc4a2597f62cf8b2b2dc98bb7 "CheckForDialog();")
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/code_permissions.png?login=rampo&token=e002eea59f6436f20c7af0b088c17a15)
 
 So, in the class you want to use the library extend a FragmentActivity (or, obviously, a [SherlockFragmentActivity](https://github.com/JakeWharton/ActionBarSherlock/blob/master/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java)).
 
 Show a notification if a new updated was found:
 
     UpdateChecker.CheckForNotification(this);
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/activity_notification.png?login=rampo&token=1d5dc537e83d272ae9ee0a9e502b4c06 "CheckForDialog();")
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/code_noti_standard.png?login=rampo&token=e30fc4dc0ecc7a8dd0108cde2849fc64)
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/noti_standard.png?login=rampo&token=9748e4286d445646604f65317a460f45)
 
 Show a dialog if a new updated was found
 
     UpdateChecker.CheckForDialog(this);
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/activity_dialog.png?login=rampo&token=86fbbf02361265434d72ef758a573660 "CheckForDialog();")
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/code_dialog.png?login=rampo&token=3393b80781b1a08fa9d91ca5d7a01fe4)
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_standard.png?login=rampo&token=25af58a7f40b050980746ccdc149cac3)
 
 
 ##Important!
