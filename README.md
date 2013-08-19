@@ -2,6 +2,8 @@
 
 > Android User, never miss an Update.
 
+![image](https://raw.github.com/rampo/UpdateChecker/master/arts/Device%20Arts/device_dialog_small.png)
+
 ## Overview
 
 **Update Checker** is a class that can be used by Android Developers to increse the number of users update their apps by showing a *"New Update Available"* Notification or Dialog. 
