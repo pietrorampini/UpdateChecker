@@ -54,6 +54,15 @@ It's a precaution to make the library not too invasive.
 
 - See [Issue #1](https://github.com/rampo/UpdateChecker/issues/1)
 
+##Customization
+
+- You can call a variant of CheckForNotification method:
+
+        UpdateChecker.CheckForNotification(this, R.drawable.ic_launcher);
+    
+- See [How to style StyleDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog
+
+
 ## Contribution
 
 ###Questions
