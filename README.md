@@ -71,8 +71,6 @@ It's a precaution to make the library not too invasive.
 
 ###Questions
 
-Questions regarding Crouton can be asked on [StackOverflow, using the crouton tag](http://stackoverflow.com/questions/tagged/crouton).
-
 If you have any questions regarding UpdateChecker, [create an issue](https://github.com/rampo/UpdateChecker/issues/new).
 
 ### Feaure request
@@ -91,7 +89,8 @@ Please note, if you're working on a pull request, make sure to use the [develop 
 
 ### Coming soon
  - *Remember me later* button on dialog
-
+ - Stackoverflow tag for more specific code problems
+ 
 ## License
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
