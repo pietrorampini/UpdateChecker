@@ -1,6 +1,6 @@
 # Update Checker
 
-Android User, never miss an Update.
+> Android User, never miss an Update.
 
 ## Overview
 
@@ -48,7 +48,7 @@ Show a dialog if a new updated was found
 
 ##Important!
 
-If there is a new update available, when app launched, **not every time the Notification / Dialog will be shown.**
+- If there is a new update available, when app launched, **not every time the Notification / Dialog will be shown.**
 The Notification/Dialog will be shown every 5 times the app ascertain that a new update is available.
 It's a precaution to make the library not too invasive.
 
@@ -56,12 +56,13 @@ It's a precaution to make the library not too invasive.
 
 ##Customization
 
-- You can call a variant of CheckForNotification method:
+- You can modify the notification Drawable by calling a variant of CheckForNotification method:
 
         UpdateChecker.CheckForNotification(this, R.drawable.ic_launcher);
-    
-- See [How to style StyleDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog
-
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/noti_custom.png?login=rampo&token=006f69a349f66c549cfee66f47bb4b29)
+        
+- See [How to style StyledDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_custom.png?login=rampo&token=e90f49819afdf05c7f09ae891a0499ea)
 
 ## Contribution
 
