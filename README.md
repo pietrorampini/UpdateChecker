@@ -10,6 +10,8 @@
 
 It's based on  [Fragments](http://developer.android.com/guide/components/fragments.html), It checks for new updates downloadable by parsing the Play Store desktop page of your app.
 
+[XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
+
 ### Changelog
 #### Current version: 1.0.0
 
@@ -69,9 +71,10 @@ It's a precaution to make the library not too invasive.
 - See [How to style StyledDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog:
 ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_custom.png?login=rampo&token=e90f49819afdf05c7f09ae891a0499ea)
 
-## Contribution
 
-###Questions
+##Contribution
+
+### Questions
 
 If you have any questions regarding UpdateChecker, [create an issue](https://github.com/rampo/UpdateChecker/issues/new).
 
@@ -89,7 +92,11 @@ Either you found a bug or have created a new and awesome feature, just create a 
 
 Please note, if you're working on a pull request, make sure to use the [develop branch](https://github.com/rampo/UpdateChecker/tree/develop) as your base.
 
-### Coming soon
+### Discuss
+
+Join in the conversation, check it out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
+
+## Coming soon
  - *Remember me later* button on dialog
  - Stackoverflow tag for more specific code problems
  
