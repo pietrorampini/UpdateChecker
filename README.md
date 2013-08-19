@@ -11,7 +11,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 ### Changelog
 #### Current version: 1.0.0
 
-####[1.0.0](https://github.com/keyboardsurfer/Crouton/tree/1.8)
+####[1.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v1.0.0)
 
 - First Release
 
@@ -85,7 +85,7 @@ Feel free to contribute to UpdateChecker.
 
 Either you found a bug or have created a new and awesome feature, just create a pull request.
 
-Please note, if you're working on a pull request, make sure to use the [develop branch](https://github.com/keyboardsurfer/Crouton/tree/develop) as your base.
+Please note, if you're working on a pull request, make sure to use the [develop branch](https://github.com/rampo/UpdateChecker/tree/develop) as your base.
 
 ### Coming soon
  - *Remember me later* button on dialog
