@@ -1,18 +1,19 @@
 package com.rampo.updatechecker.demo;
 
-import com.rampo.updatechecker.UpdateChecker;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
+
+import com.rampo.updatechecker.UpdateChecker;
 
 public class MainActivity extends FragmentActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		UpdateChecker.CheckForNotification(this);
-	}
+        UpdateChecker.CheckForDialog(this);
+        // or UpdateChecker.CheckForNotification(this);
+        // or UpdateChecker.CheckForNotification(this, R.drawable.ic_launcher);
+    }
 }
