@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="newUpdataAvailable">Nuovo Aggiornamento Trovato</string>
-    <string name="downloadFor">Scarica nuovo aggiornamento per"&#160;"</string>
+    <string name="downloadFor">Scarica il nuovo aggiornamento per %1$s!\nDisponibile ora nel Play Store.</string>
     <string name="dialogPositiveButton">OK</string>
     <string name="dialogNeutralButton">Dopo</string>
     <string name="dialogNegativeButton">No Grazie</string>
+    <string name="newUpdataAvailable">Nuovo aggiornamento trovato</string>
 </resources>

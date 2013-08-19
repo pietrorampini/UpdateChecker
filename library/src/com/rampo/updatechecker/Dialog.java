@@ -31,9 +31,6 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
  * @see SimpleDialogFragment class to extend.
  */
 public class Dialog extends SimpleDialogFragment {
-    final static String sharedPreferencesGeneralKey = "updateChecker";
-    final static String sharedPreferencesDontShowAgainKey = "dontshowagain";
-
     /**
      * Show this Dialog if you have added the method UpdateChecker.CheckForDialog(FragmentActivity activity) and a new update can be downloaded.
      *
@@ -53,10 +50,9 @@ public class Dialog extends SimpleDialogFragment {
         String appName = null;
         try {
             appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
-        } catch (NameNotFoundException ignored) {
-        }
+        } catch (NameNotFoundException ignored) {}
         builder.setTitle(context.getString(R.string.newUpdataAvailable));
-        builder.setMessage(context.getString(R.string.downloadFor) + appName);
+        builder.setMessage(context.getString(R.string.downloadFor, appName));
         builder.setPositiveButton(context.getString(R.string.dialogPositiveButton), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +66,7 @@ public class Dialog extends SimpleDialogFragment {
                 dismiss();
             }
         }); */
-
+        // TODO Create "Later" button
         builder.setNegativeButton(context.getString(R.string.dialogNegativeButton), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
