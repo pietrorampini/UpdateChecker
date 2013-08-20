@@ -1,5 +1,4 @@
 # built application files
-*.apk
 *.ap_
 
 # files for the dex VM
@@ -18,3 +17,7 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+
+# Mac OS X Folder Configuration Files
+.DS_Store
+

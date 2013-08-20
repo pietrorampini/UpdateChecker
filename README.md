@@ -99,6 +99,8 @@ Join in the conversation, check it out the [XDA Thread](http://forum.xda-develop
 ## Coming soon
  - *Remember me later* button on dialog
  - Stackoverflow tag for more specific code problems
+ - Library Icon
+ - Preference to disable UpdateChecker
  
 ## License
 
