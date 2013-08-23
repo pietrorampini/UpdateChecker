@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="library_name">Update Checker</string>
-    <string name="downloadFor">Check it out the new update for %1$s!\nAvailable now on Play Store.</string>
+    <string name="downloadFor">Check out the new update for %1$s!\nAvailable on Google Play now.</string>
     <string name="dialogPositiveButton">OK</string>
     <string name="dialogNeutralButton">Later</string>
-    <string name="dialogNegativeButton">No, Thanks</string>
-    <string name="newUpdataAvailable">New Update Found</string>
+    <string name="dialogNegativeButton">No, thanks</string>
+    <string name="newUpdataAvailable">New update found</string>
 </resources>
