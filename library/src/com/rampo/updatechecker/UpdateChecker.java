@@ -45,6 +45,7 @@ public class UpdateChecker extends Fragment {
     private static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
     private static final String notificationIconResIdKey = "resId";
     private static final String intOfLaunchesPrefKey = "nlaunches";
+    private static final String checkCountPrefKey = "checkCount";
     private static final String prefsFileName = "updateChecker";
     int notificationIconResIdPublic, numberOfCheckForUpdatedVersion;
     FragmentActivity context;
@@ -234,7 +235,8 @@ public class UpdateChecker extends Fragment {
         String prefKey = intOfLaunchesPrefKey + versionDownloadable;
         SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
         numberOfCheckForUpdatedVersion = prefs.getInt(prefKey, 0);
-        if (numberOfCheckForUpdatedVersion % 5 == 0 || numberOfCheckForUpdatedVersion == 0) {
+        int checkCount = prefs.getInt(checkCountPrefKey, 5);
+        if (numberOfCheckForUpdatedVersion % checkCount == 0 || numberOfCheckForUpdatedVersion == 0) {
             saveNumberOfChecksForUpdatedVersion(versionDownloadable);
             return true;
         } else {
@@ -251,6 +253,17 @@ public class UpdateChecker extends Fragment {
         SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(intOfLaunchesPrefKey + versionDownloadable, numberOfCheckForUpdatedVersion);
+        editor.commit();
+    }
+    
+    /**
+     * Set how often it should check for updates.
+     * It will check for an update every checkCount times the update checker is started.
+     */
+    public static void setCheckCount(Context c, int checkCount) {
+    	SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(checkCountPrefKey, checkCount);
         editor.commit();
     }
 }
