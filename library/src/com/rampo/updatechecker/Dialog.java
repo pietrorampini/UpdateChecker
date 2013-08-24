@@ -78,6 +78,6 @@ public class Dialog extends SimpleDialogFragment {
 
     private void goToMarket() {
         Context context = getActivity().getApplicationContext();
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rootPlayStoreDevice) + context.getPackageName())));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName())));
     }
 }

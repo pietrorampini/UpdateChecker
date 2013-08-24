@@ -46,7 +46,12 @@ public class UpdateChecker extends Fragment {
     private static final String NOTIFICATION_ICON_RES_ID_KEY = "resId";
     private static final String INT_OF_LAUNCHES_PREF_KEY = "nlaunches";
     private static final String PREFS_FILENAME = "updateChecker";
-   
+    private static final String ROOT_PLAY_STORE_WEB = "https://play.google.com/store/apps/details?id=";
+    public  static final String ROOT_PLAY_STORE_DEVICE = "market://details?id=";
+    private static final String HTML_TAGS_TO_GET_RIGHT_LINE = "</script> </div> <div class=\"details-wrapper\">";
+    private static final String HTML_TAGS_TO_GET_RIGHT_POSITION = "itemprop=\"softwareVersion\"> ";
+    private static final String HTML_TAGS_TO_REMOVE_UNUSEFUL_CONTENT = "  </div> </div>";
+
     public int notificationIconResIdPublic, numberOfCheckForUpdatedVersion;
     
     private FragmentActivity mContext;
@@ -64,16 +69,6 @@ public class UpdateChecker extends Fragment {
         args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, false);
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
-    }
-
-    /**
-     * Show a Notification if an update is available for download. Callable in a FragmentActivity
-     *
-     * @param fragmentActivity Required.
-     * @deprecated use {@link #checkForNotification(FragmentActivity)} instead.
-     */
-    public static void CheckForNotification(FragmentActivity fragmentActivity) {
-        checkForNotification(fragmentActivity);
     }
     
     /**
@@ -128,7 +123,16 @@ public class UpdateChecker extends Fragment {
     public static void CheckForDialog(FragmentActivity fragmentActivity) {
         checkForDialog(fragmentActivity);
     }
-    
+
+    /**
+     * Show a Notification if an update is available for download. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity Required.
+     * @deprecated use {@link #checkForNotification(FragmentActivity)} instead.
+     */
+    public static void CheckForNotification(FragmentActivity fragmentActivity) {
+        checkForNotification(fragmentActivity);
+    }
     /**
      * This class is a Fragment. Check for the method you have chosen.
      */
@@ -156,7 +160,7 @@ public class UpdateChecker extends Fragment {
                     HttpConnectionParams.setConnectionTimeout(params, 4000);
                     HttpConnectionParams.setSoTimeout(params, 5000);
                     HttpClient client = new DefaultHttpClient(params);
-                    HttpGet request = new HttpGet(mContext.getString(R.string.rootPlayStoreWeb) + mContext.getPackageName()); // Set the right Play Store page by getting package name.
+                    HttpGet request = new HttpGet(ROOT_PLAY_STORE_WEB + mContext.getPackageName()); // Set the right Play Store page by getting package name.
                     HttpResponse response = null;
                     try {
                         response = client.execute(request);
@@ -174,9 +178,9 @@ public class UpdateChecker extends Fragment {
                     String line;
                     try {
                         while ((line = reader.readLine()) != null) {
-                            if (line.contains("</script> </div> <div class=\"details-wrapper\">")) { // Obtain HTML line contaning version available in Play Store
-                                String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
-                                String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
+                            if (line.contains(HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Play Store
+                                String containingVersion = line.substring(line.lastIndexOf(HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
+                                String[] removingUnusefulTags = containingVersion.split(HTML_TAGS_TO_REMOVE_UNUSEFUL_CONTENT); // Remove unseful HTML tags
                                 String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
                                 finalStep(versionDownloadable, notificationInsteadOfDialog);
                             }

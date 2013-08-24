@@ -26,7 +26,7 @@ import android.support.v4.app.NotificationCompat;
 public class Notification {
     public static void show(Context context, int notificationIconResIdPublic) {
         android.app.Notification noti;
-        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.rootPlayStoreDevice) + context.getPackageName()));
+        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
         String appName = null;
         try {
