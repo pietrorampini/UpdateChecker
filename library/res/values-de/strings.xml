@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="downloadFor">Check it out das neue Update für %1$s!\nSofort verfügbar auf Google Play.</string>
+    <string name="downloadFor">Teste das neue Update für %1$s!\nJetzt verfügbar auf Google Play.</string>
     <string name="dialogPositiveButton">Bewerten</string>
     <string name="dialogNeutralButton">Später</string>
-    <string name="dialogNegativeButton">Nein danke</string>
-    <string name="newUpdataAvailable">Neues Update gefunden</string>
+    <string name="dialogNegativeButton">Nein, danke</string>
+    <string name="newUpdateAvailable">Neues update gefunden</string>
 </resources>

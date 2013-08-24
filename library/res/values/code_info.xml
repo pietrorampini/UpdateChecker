@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="rootPlayStoreWeb">https://play.google.com/store/apps/details?id=</string>
-    <string name="rootPlayStoreDevice">market://details?id=</string>
-    <string name="htmlTagsToGetRightString"><![CDATA[</script> </div> <div class=\"details-wrapper\">]]></string>
-    <string name="htmlTagsToGetRightPosition"><![CDATA[itemprop=\"softwareVersion\"> ]]></string>
-    <string name="htmlTagsToRemoveUnesefulContent"><![CDATA["&#160;""&#160;"</div> </div>]]></string>
-</resources>

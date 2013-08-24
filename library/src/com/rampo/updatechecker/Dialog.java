@@ -51,7 +51,7 @@ public class Dialog extends SimpleDialogFragment {
         try {
             appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
         } catch (NameNotFoundException ignored) {}
-        builder.setTitle(context.getString(R.string.newUpdataAvailable));
+        builder.setTitle(context.getString(R.string.newUpdateAvailable));
         builder.setMessage(context.getString(R.string.downloadFor, appName));
         builder.setPositiveButton(context.getString(R.string.dialogPositiveButton), new View.OnClickListener() {
             @Override
@@ -78,6 +78,6 @@ public class Dialog extends SimpleDialogFragment {
 
     private void goToMarket() {
         Context context = getActivity().getApplicationContext();
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rootPlayStoreDevice) + context.getPackageName())));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName())));
     }
 }
