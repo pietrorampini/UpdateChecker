@@ -26,7 +26,7 @@ import android.support.v4.app.NotificationCompat;
 public class Notification {
     public static void show(Context context, int notificationIconResIdPublic) {
         android.app.Notification noti;
-        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(context.getString(R.string.rootPlayStoreDevice) + context.getPackageName()));
+        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
         String appName = null;
         try {
@@ -35,16 +35,16 @@ public class Notification {
         }
         if (notificationIconResIdPublic == 0) {
             noti = new NotificationCompat.Builder(context)
-                    .setTicker(context.getString(R.string.newUpdataAvailable))
+                    .setTicker(context.getString(R.string.newUpdateAvailable))
                     .setContentTitle(appName)
-                    .setContentText(context.getString(R.string.newUpdataAvailable))
+                    .setContentText(context.getString(R.string.newUpdateAvailable))
                     .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
                     .setContentIntent(pendingIntent).build();
         } else {
             noti = new NotificationCompat.Builder(context)
-                    .setTicker(context.getString(R.string.newUpdataAvailable))
+                    .setTicker(context.getString(R.string.newUpdateAvailable))
                     .setContentTitle(appName)
-                    .setContentText(context.getString(R.string.newUpdataAvailable))
+                    .setContentText(context.getString(R.string.newUpdateAvailable))
                     .setSmallIcon(notificationIconResIdPublic)
                     .setContentIntent(pendingIntent).build();
         }
