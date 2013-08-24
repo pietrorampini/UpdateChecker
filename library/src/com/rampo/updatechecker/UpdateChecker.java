@@ -51,17 +51,6 @@ public class UpdateChecker extends Fragment {
     
     private FragmentActivity mContext;
     private Thread mThread;
-
-    /**
-     * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
-     *
-     * @param fragmentActivity Required.
-     * @deprecated use {@link #checkForDialog(FragmentActivity)} instead.
-     */
-    @Deprecated
-    public static void CheckForDialog(FragmentActivity fragmentActivity) {
-        checkForDialog(fragmentActivity);
-    }
     
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
@@ -100,18 +89,6 @@ public class UpdateChecker extends Fragment {
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
-
-    /**
-     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
-     *
-     * @param fragmentActivity      Required
-     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
-     * @deprecated use {@link #checkForNotification(FragmentActivity, int)} instead.
-     */
-    @Deprecated
-    public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
-       checkForNotification(fragmentActivity, notificationIconResId);
-    }
     
     /**
      * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
@@ -128,7 +105,30 @@ public class UpdateChecker extends Fragment {
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
+    
+   /**
+     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity      Required
+     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     * @deprecated use {@link #checkForNotification(FragmentActivity, int)} instead.
+     */
+    @Deprecated
+    public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
+       checkForNotification(fragmentActivity, notificationIconResId);
+    }
 
+    /**
+     * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
+     *
+     * @param fragmentActivity Required.
+     * @deprecated use {@link #checkForDialog(FragmentActivity)} instead.
+     */
+    @Deprecated
+    public static void CheckForDialog(FragmentActivity fragmentActivity) {
+        checkForDialog(fragmentActivity);
+    }
+    
     /**
      * This class is a Fragment. Check for the method you have chosen.
      */
