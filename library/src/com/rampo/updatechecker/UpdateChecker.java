@@ -53,8 +53,19 @@ public class UpdateChecker extends Fragment {
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
      *
      * @param fragmentActivity Required.
+     * @deprecated use {@link #checkForDialog(FragmentActivity)} instead.
      */
+    @Deprecated
     public static void CheckForDialog(FragmentActivity fragmentActivity) {
+        checkForDialog(fragmentActivity);
+    }
+    
+    /**
+     * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
+     *
+     * @param fragmentActivity Required.
+     */
+    public static void checkForDialog(FragmentActivity fragmentActivity) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
@@ -67,8 +78,18 @@ public class UpdateChecker extends Fragment {
      * Show a Notification if an update is available for download. Callable in a FragmentActivity
      *
      * @param fragmentActivity Required.
+     * @deprecated use {@link #checkForNotification(FragmentActivity)} instead.
      */
     public static void CheckForNotification(FragmentActivity fragmentActivity) {
+        checkForNotification(fragmentActivity);
+    }
+    
+    /**
+     * Show a Notification if an update is available for download. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity Required.
+     */
+    public static void checkForNotification(FragmentActivity fragmentActivity) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
@@ -82,8 +103,20 @@ public class UpdateChecker extends Fragment {
      *
      * @param fragmentActivity      Required
      * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     * @deprecated use {@link #checkForNotification(FragmentActivity, int)} instead.
      */
+    @Deprecated
     public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
+       checkForNotification(fragmentActivity, notificationIconResId);
+    }
+    
+    /**
+     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity      Required
+     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     */
+    public static void checkForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
@@ -105,14 +138,13 @@ public class UpdateChecker extends Fragment {
         Boolean NotificationInstedOfDialogBool = args.getBoolean(NotificationInstedOfDialogKey);
         if (args.getInt(notificationIconResIdKey) != 0)
             notificationIconResIdPublic = args.getInt(notificationIconResIdKey);
-        CheckForUpdates(NotificationInstedOfDialogBool);
-
+        checkForUpdates(NotificationInstedOfDialogBool);
     }
-
+    
     /**
      * Heart of the library. Check if an update is available for download parsing the desktop Play Store page of the app
      */
-    private void CheckForUpdates(final boolean NotificationInstedOfDialogBool) {
+    private void checkForUpdates(final boolean NotificationInstedOfDialogBool) {
         thread = new Thread() {
             @Override
             public void run() {
