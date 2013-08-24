@@ -23,6 +23,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 - Added Dutch translation
 - Fixed other translation errors
 - New demo app
+
 ####[1.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v1.0.0)
 
 - First Release
