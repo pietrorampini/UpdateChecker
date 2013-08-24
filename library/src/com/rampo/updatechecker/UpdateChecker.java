@@ -41,7 +41,7 @@ import java.io.InputStreamReader;
 
 public class UpdateChecker extends Fragment {
     
-	private static final String LOG_TAG = "UpdateChecker";
+    private static final String LOG_TAG = "UpdateChecker";
     private static final String NOTIFICATION_INSTEAD_OF_DIALOG_KEY = "notificatioInstedOfDialog";
     private static final String NOTIFICATION_ICON_RES_ID_KEY = "resId";
     private static final String INT_OF_LAUNCHES_PREF_KEY = "nlaunches";
