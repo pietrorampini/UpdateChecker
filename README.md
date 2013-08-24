@@ -24,7 +24,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 - android-support-v4.jar
 
 ## Example
-- Check it out the 	[example](https://github.com/rampo/UpdateChecker/tree/master/example) folder
+- Check it out the 	[Demos](https://github.com/rampo/UpdateChecker/tree/master/demos) folder
 
 ## Usage
 
