@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
@@ -63,7 +64,7 @@ public class UpdateChecker extends Fragment {
      * @param fragmentActivity Required.
      */
     public static void checkForDialog(FragmentActivity fragmentActivity) {
-        android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
         args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, false);
@@ -77,7 +78,7 @@ public class UpdateChecker extends Fragment {
      * @param fragmentActivity Required.
      */
     public static void checkForNotification(FragmentActivity fragmentActivity) {
-        android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
         args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, true);
@@ -92,7 +93,7 @@ public class UpdateChecker extends Fragment {
      * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
      */
     public static void checkForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
-        android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
+        FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
         args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, true);
@@ -100,18 +101,7 @@ public class UpdateChecker extends Fragment {
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
-    
-   /**
-     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
-     *
-     * @param fragmentActivity      Required
-     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
-     * @deprecated use {@link #checkForNotification(FragmentActivity, int)} instead.
-     */
-    @Deprecated
-    public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
-       checkForNotification(fragmentActivity, notificationIconResId);
-    }
+
 
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
@@ -130,13 +120,26 @@ public class UpdateChecker extends Fragment {
      * @param fragmentActivity Required.
      * @deprecated use {@link #checkForNotification(FragmentActivity)} instead.
      */
+    @Deprecated
     public static void CheckForNotification(FragmentActivity fragmentActivity) {
         checkForNotification(fragmentActivity);
     }
+
+    /**
+     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity      Required
+     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     * @deprecated use {@link #checkForNotification(FragmentActivity, int)} instead.
+     */
+    @Deprecated
+    public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
+        checkForNotification(fragmentActivity, notificationIconResId);
+    }
+
     /**
      * This class is a Fragment. Check for the method you have chosen.
      */
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
