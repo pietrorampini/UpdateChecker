@@ -40,25 +40,39 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class UpdateChecker extends Fragment {
-    private Thread thread;
-    private static final String logTag = "UpdateChecker";
-    private static final String NotificationInstedOfDialogKey = "notificatioInstedOfDialog";
-    private static final String notificationIconResIdKey = "resId";
-    private static final String intOfLaunchesPrefKey = "nlaunches";
-    private static final String prefsFileName = "updateChecker";
-    int notificationIconResIdPublic, numberOfCheckForUpdatedVersion;
-    FragmentActivity context;
+    
+	private static final String LOG_TAG = "UpdateChecker";
+    private static final String NOTIFICATION_INSTEAD_OF_DIALOG_KEY = "notificatioInstedOfDialog";
+    private static final String NOTIFICATION_ICON_RES_ID_KEY = "resId";
+    private static final String INT_OF_LAUNCHES_PREF_KEY = "nlaunches";
+    private static final String PREFS_FILENAME = "updateChecker";
+   
+    public int notificationIconResIdPublic, numberOfCheckForUpdatedVersion;
+    
+    private FragmentActivity mContext;
+    private Thread mThread;
 
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
      *
      * @param fragmentActivity Required.
+     * @deprecated use {@link #checkForDialog(FragmentActivity)} instead.
      */
+    @Deprecated
     public static void CheckForDialog(FragmentActivity fragmentActivity) {
+        checkForDialog(fragmentActivity);
+    }
+    
+    /**
+     * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
+     *
+     * @param fragmentActivity Required.
+     */
+    public static void checkForDialog(FragmentActivity fragmentActivity) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
-        args.putBoolean(NotificationInstedOfDialogKey, false);
+        args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, false);
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
@@ -67,12 +81,22 @@ public class UpdateChecker extends Fragment {
      * Show a Notification if an update is available for download. Callable in a FragmentActivity
      *
      * @param fragmentActivity Required.
+     * @deprecated use {@link #checkForNotification(FragmentActivity)} instead.
      */
     public static void CheckForNotification(FragmentActivity fragmentActivity) {
+        checkForNotification(fragmentActivity);
+    }
+    
+    /**
+     * Show a Notification if an update is available for download. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity Required.
+     */
+    public static void checkForNotification(FragmentActivity fragmentActivity) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
-        args.putBoolean(NotificationInstedOfDialogKey, true);
+        args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, true);
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
@@ -82,13 +106,25 @@ public class UpdateChecker extends Fragment {
      *
      * @param fragmentActivity      Required
      * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     * @deprecated use {@link #checkForNotification(FragmentActivity, int)} instead.
      */
+    @Deprecated
     public static void CheckForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
+       checkForNotification(fragmentActivity, notificationIconResId);
+    }
+    
+    /**
+     * Show a Notification if an update is available for download. Set the notificationIcon Resource Id. Callable in a FragmentActivity
+     *
+     * @param fragmentActivity      Required
+     * @param notificationIconResId R.drawable.* resource to set to Notification Icon.
+     */
+    public static void checkForNotification(FragmentActivity fragmentActivity, int notificationIconResId) {
         android.support.v4.app.FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
-        args.putBoolean(NotificationInstedOfDialogKey, true);
-        args.putInt(notificationIconResIdKey, notificationIconResId);
+        args.putBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY, true);
+        args.putInt(NOTIFICATION_ICON_RES_ID_KEY, notificationIconResId);
         updateChecker.setArguments(args);
         content.add(updateChecker, null).commit();
     }
@@ -100,28 +136,27 @@ public class UpdateChecker extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        context = (FragmentActivity) activity;
+        mContext = (FragmentActivity) activity;
         Bundle args = getArguments();
-        Boolean NotificationInstedOfDialogBool = args.getBoolean(NotificationInstedOfDialogKey);
-        if (args.getInt(notificationIconResIdKey) != 0)
-            notificationIconResIdPublic = args.getInt(notificationIconResIdKey);
-        CheckForUpdates(NotificationInstedOfDialogBool);
-
+        boolean notificationInsteadOfDialog = args.getBoolean(NOTIFICATION_INSTEAD_OF_DIALOG_KEY);
+        if (args.getInt(NOTIFICATION_ICON_RES_ID_KEY) != 0)
+            notificationIconResIdPublic = args.getInt(NOTIFICATION_ICON_RES_ID_KEY);
+        checkForUpdates(notificationInsteadOfDialog);
     }
-
+    
     /**
      * Heart of the library. Check if an update is available for download parsing the desktop Play Store page of the app
      */
-    private void CheckForUpdates(final boolean NotificationInstedOfDialogBool) {
-        thread = new Thread() {
+    private void checkForUpdates(final boolean notificationInsteadOfDialog) {
+        mThread = new Thread() {
             @Override
             public void run() {
-                if (isNetworkAvailable(context)) {
+                if (isNetworkAvailable(mContext)) {
                     HttpParams params = new BasicHttpParams();
                     HttpConnectionParams.setConnectionTimeout(params, 4000);
                     HttpConnectionParams.setSoTimeout(params, 5000);
                     HttpClient client = new DefaultHttpClient(params);
-                    HttpGet request = new HttpGet(context.getString(R.string.rootPlayStoreWeb) + context.getPackageName()); // Set the right Play Store page by getting package name.
+                    HttpGet request = new HttpGet(mContext.getString(R.string.rootPlayStoreWeb) + mContext.getPackageName()); // Set the right Play Store page by getting package name.
                     HttpResponse response = null;
                     try {
                         response = client.execute(request);
@@ -143,7 +178,7 @@ public class UpdateChecker extends Fragment {
                                 String containingVersion = line.substring(line.lastIndexOf("itemprop=\"softwareVersion\"> ") + 28);  // Get the String starting with version available + Other HTML tags
                                 String[] removingUnusefulTags = containingVersion.split("  </div> </div>"); // Remove unseful HTML tags
                                 String versionDownloadable = removingUnusefulTags[0]; // Obtain version available
-                                finalStep(versionDownloadable, NotificationInstedOfDialogBool);
+                                finalStep(versionDownloadable, notificationInsteadOfDialog);
                             }
                         }
                     } catch (IOException e) {
@@ -154,7 +189,7 @@ public class UpdateChecker extends Fragment {
 
 
         };
-        thread.start();
+        mThread.start();
     }
 
     /**
@@ -166,11 +201,11 @@ public class UpdateChecker extends Fragment {
      * @see UpdateChecker#CheckForNotification(android.support.v4.app.FragmentActivity)
      */
     private void finalStep(String versionDownloadable, boolean NotificationInstedOfDialogBool) {
-        thread.interrupt();
+        mThread.interrupt();
         Looper.prepare();
         try {
             if (containsNumber(versionDownloadable)) {
-                if (!versionDownloadable.equals(context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName)) { // New Update Available
+                if (!versionDownloadable.equals(mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionName)) { // New Update Available
                     if (iDontWantToBeTooMuchInvasive(versionDownloadable)) {
                         if (NotificationInstedOfDialogBool) {
                             showNotification();
@@ -201,7 +236,7 @@ public class UpdateChecker extends Fragment {
      * @see Dialog#show(android.support.v4.app.FragmentActivity)
      */
     private void showDialog() {
-        Dialog.show(context);
+        Dialog.show(mContext);
     }
 
     /**
@@ -210,14 +245,14 @@ public class UpdateChecker extends Fragment {
      * @see Notification#show(android.content.Context, int)
      */
     private void showNotification() {
-        Notification.show(context, notificationIconResIdPublic);
+        Notification.show(mContext, notificationIconResIdPublic);
     }
 
     /**
      * Log connection error
      */
     public void logConnectionError() {
-        Log.e(logTag, "Cannot connect to the Internet!");
+        Log.e(LOG_TAG, "Cannot connect to the Internet!");
     }
 
     /**
@@ -231,8 +266,8 @@ public class UpdateChecker extends Fragment {
      * Show the Dialog/Notification only if it is the first time or divisible for 5.
      */
     private boolean iDontWantToBeTooMuchInvasive(String versionDownloadable) {
-        String prefKey = intOfLaunchesPrefKey + versionDownloadable;
-        SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
+        String prefKey = INT_OF_LAUNCHES_PREF_KEY + versionDownloadable;
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_FILENAME, 0);
         numberOfCheckForUpdatedVersion = prefs.getInt(prefKey, 0);
         if (numberOfCheckForUpdatedVersion % 5 == 0 || numberOfCheckForUpdatedVersion == 0) {
             saveNumberOfChecksForUpdatedVersion(versionDownloadable);
@@ -248,9 +283,9 @@ public class UpdateChecker extends Fragment {
      */
     private void saveNumberOfChecksForUpdatedVersion(String versionDownloadable) {
         numberOfCheckForUpdatedVersion++;
-        SharedPreferences prefs = context.getSharedPreferences(prefsFileName, 0);
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFS_FILENAME, 0);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(intOfLaunchesPrefKey + versionDownloadable, numberOfCheckForUpdatedVersion);
+        editor.putInt(INT_OF_LAUNCHES_PREF_KEY + versionDownloadable, numberOfCheckForUpdatedVersion);
         editor.commit();
     }
 }

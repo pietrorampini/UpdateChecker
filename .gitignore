@@ -21,3 +21,4 @@ local.properties
 # Mac OS X Folder Configuration Files
 .DS_Store
 
+library/project.properties
