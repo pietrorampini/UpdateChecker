@@ -35,16 +35,16 @@ public class Notification {
         }
         if (notificationIconResIdPublic == 0) {
             noti = new NotificationCompat.Builder(context)
-                    .setTicker(context.getString(R.string.newUpdataAvailable))
+                    .setTicker(context.getString(R.string.newUpdateAvailable))
                     .setContentTitle(appName)
-                    .setContentText(context.getString(R.string.newUpdataAvailable))
+                    .setContentText(context.getString(R.string.newUpdateAvailable))
                     .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
                     .setContentIntent(pendingIntent).build();
         } else {
             noti = new NotificationCompat.Builder(context)
-                    .setTicker(context.getString(R.string.newUpdataAvailable))
+                    .setTicker(context.getString(R.string.newUpdateAvailable))
                     .setContentTitle(appName)
-                    .setContentText(context.getString(R.string.newUpdataAvailable))
+                    .setContentText(context.getString(R.string.newUpdateAvailable))
                     .setSmallIcon(notificationIconResIdPublic)
                     .setContentIntent(pendingIntent).build();
         }

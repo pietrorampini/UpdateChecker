@@ -4,5 +4,5 @@
     <string name="dialogPositiveButton">Оценить сейчас</string>
     <string name="dialogNeutralButton">Напомнить позже</string>
     <string name="dialogNegativeButton">Спасибо, но нет</string>
-    <string name="newUpdataAvailable">Новое обновление найден</string>
+    <string name="newUpdateAvailable">Новое обновление найден</string>
 </resources>

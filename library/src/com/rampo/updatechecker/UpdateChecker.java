@@ -61,7 +61,7 @@ public class UpdateChecker extends Fragment {
     private Thread mThread;
 
     /**
-     * Show a Dialog -f an update is available for download. Callable in a FragmentActivity.
+     * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
      * Number of checks after the dialog will be shown: default, 5
      *
      * @param fragmentActivity Required.
@@ -288,7 +288,7 @@ public class UpdateChecker extends Fragment {
      *
      * @see Dialog#show(android.support.v4.app.FragmentActivity)
      */
-    private void showDialog() {
+    public void showDialog() {
         Dialog.show(mContext);
     }
 
@@ -297,7 +297,7 @@ public class UpdateChecker extends Fragment {
      *
      * @see Notification#show(android.content.Context, int)
      */
-    private void showNotification() {
+    public void showNotification() {
         Notification.show(mContext, notificationIconResIdPublic);
     }
 
