@@ -15,7 +15,11 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 [Featured on XDA Portal!](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-#### Current version: 1.1.0
+#### Current version: 1.1.1
+
+####[1.1.1](https://github.com/rampo/UpdateChecker/releases/tag/v1.1.1)
+
+- Text strings improved
 
 ####[1.1.0](https://github.com/rampo/UpdateChecker/releases/tag/v1.1.0)
 
