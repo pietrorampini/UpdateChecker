@@ -5,5 +5,5 @@
     <string name="dialogPositiveButton">OK</string>
     <string name="dialogNeutralButton">Later</string>
     <string name="dialogNegativeButton">No, Thanks</string>
-    <string name="newUpdateAvailable">New update found</string>
+    <string name="newUpdataAvailable">New Update Found</string>
 </resources>
