@@ -4,6 +4,6 @@
     <string name="downloadFor">Check out the new update for %1$s!\nAvailable now on Google Play.</string>
     <string name="dialogPositiveButton">OK</string>
     <string name="dialogNeutralButton">Later</string>
-    <string name="dialogNegativeButton">No, Thanks</string>
-    <string name="newUpdataAvailable">New update found</string>
+    <string name="dialogNegativeButton">No, thanks</string>
+    <string name="newUpdateAvailable">New update found</string>
 </resources>
