@@ -2,7 +2,7 @@
 
 > Android User, never miss an Update.
 
-![image](https://raw.github.com/rampo/UpdateChecker/develop/arts/flow_dialog.png)
+![image](https://raw.github.com/rampo/UpdateChecker/master/arts/flow_dialog.png)
 
 ## Overview
 
@@ -17,7 +17,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 ### Changelog
 ##### Current version: 1.2.0
 
-See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/develop/CHANGELOG.md)
+See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
 ## Dependencies
 - [Styled Dialogs](https://github.com/inmite/android-styled-dialogs)
@@ -44,12 +44,12 @@ See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/develop/CHA
 - To show a Play-Store-App-like notification if a new update was found:
 
     	UpdateChecker.checkForNotification(this);
-	![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/notification_only.png)
+	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only.png)
 
 - To show a dialog if a new update was found:
 
     	UpdateChecker.checkForDialog(this);
-	![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/dialog.png)
+	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
 
 
 ##Important!
@@ -73,10 +73,10 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
         UpdateChecker.checkForNotification(R.drawable.ic_launcher, this)
         
         UpdateChecker.checkForNotification(R.drawable.ic_launcher, this, 10)
-![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/notification_only_custom.png)
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only_custom.png)
         
 - See [How to style StyledDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog:
-![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/dialog_custom.png)
+![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_custom.png)
 
 
 ##Contribution
