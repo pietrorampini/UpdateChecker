@@ -2,11 +2,11 @@
 
 > Android User, never miss an Update.
 
-![image](https://raw.github.com/rampo/UpdateChecker/master/arts/Device%20Arts/device_dialog_small.png)
+![image](https://raw.github.com/rampo/UpdateChecker/develop/arts/flow_dialog.png)
 
 ## Overview
 
-**Update Checker** is a class that can be used by Android Developers to increase the number of users update their apps by showing a *"New Update Available"* Notification or Dialog. 
+`UpdateChecker`  is a class that can be used by Android Developers to increase the number of users update their apps by showing a *"New Update Available"* Notification or Dialog. 
 
 It's based on  [Fragments](http://developer.android.com/guide/components/fragments.html), It checks for new updates downloadable by parsing the Play Store desktop page of your app.
 
@@ -15,29 +15,16 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 [Featured on XDA Portal!](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-#### Current version: 1.1.1
+###### Current version: 1.2.0
 
-####[1.1.1](https://github.com/rampo/UpdateChecker/releases/tag/v1.1.1)
-
-- Text strings improved
-
-####[1.1.0](https://github.com/rampo/UpdateChecker/releases/tag/v1.1.0)
-
-- Change to customize the number of checks after the dialog/notification will be shown with new methods
-- Added Dutch translation
-- Fixed other translation errors
-- New demo app
-
-####[1.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v1.0.0)
-
-- First Release
+See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/develop/CHANGELOG.md)
 
 ## Dependencies
 - [Styled Dialogs](https://github.com/inmite/android-styled-dialogs)
 - android-support-v4.jar
 
 ## Example
-- Check it out the 	[Demos](https://github.com/rampo/UpdateChecker/tree/master/demos) folder
+- Check out the [Demos](https://github.com/rampo/UpdateChecker/tree/master/demos) folder
 
 ## Usage
 
@@ -52,17 +39,17 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
     	<uses-permission android:name="android.permission.INTERNET"/>
     	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     	
-- So, in the class you want to use the library **extend a FragmentActivity** (or, obviously, a [SherlockFragmentActivity](https://github.com/JakeWharton/ActionBarSherlock/blob/master/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java)).
+- So, in the class you want to use the library extend a `FragmentActivity`  (or, obviously, a [`SherlockFragmentActivity` ](https://github.com/JakeWharton/ActionBarSherlock/blob/master/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java)).
 
 - To show a Play-Store-App-like notification if a new update was found:
 
     	UpdateChecker.checkForNotification(this);
-	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/noti_standard.png?login=rampo&token=9748e4286d445646604f65317a460f45)
+	![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/notification_only.png)
 
 - To show a dialog if a new update was found:
 
     	UpdateChecker.checkForDialog(this);
-	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_standard.png?login=rampo&token=25af58a7f40b050980746ccdc149cac3)
+	![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/dialog.png)
 
 
 ##Important!
@@ -83,14 +70,17 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
 
 - You can modify the notification Drawable by calling a variant of checkForNotification(...) method:
 
-        UpdateChecker.checkForNotification(this, R.drawable.ic_launcher);
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/noti_custom.png?login=rampo&token=006f69a349f66c549cfee66f47bb4b29)
+        UpdateChecker.checkForNotification(R.drawable.ic_launcher, this)
+        
+        UpdateChecker.checkForNotification(R.drawable.ic_launcher, this, 10)
+![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/notification_only_custom.png)
         
 - See [How to style StyledDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog:
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_custom.png?login=rampo&token=e90f49819afdf05c7f09ae891a0499ea)
+![Image](https://raw.github.com/rampo/UpdateChecker/develop/arts/dialog_custom.png)
 
 
 ##Contribution
+
 
 ### Questions
 
@@ -98,7 +88,7 @@ If you have any questions regarding UpdateChecker, [create an issue](https://git
 
 ### Feaure request
 
-To create a new Feature request, open an issue with **request** label [here](https://github.com/rampo/UpdateChecker/issues?labels=optimization%2Crequest&page=1&state=open)
+To create a new Feature request, open an issue [here](https://github.com/rampo/UpdateChecker/issues?labels=optimization%2Crequest&page=1&state=open)
 
 I'll try to answer as soon as I find the time.
 
@@ -116,17 +106,25 @@ Join in the conversation, check it out the [XDA Thread](http://forum.xda-develop
 
 ## Coming soon
  - **Support for apps not published on Google Play**
- - *Remember me later* button on dialog
  - Stackoverflow tag for more specific code problems
- - Library Icon
  - Preference to disable UpdateChecker
  
+## Credits
+
+Author: Pietro "Rampo" - PiKo Technologies
+
+<a href="https://plus.google.com/u/0/110441803915933521642/posts">
+  <img alt="Follow me on Google+"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
+</a>
+<a href="https://twitter.com/GabMarioPower">
+  <img alt="Follow me on Twitter"
+       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
+</a>
 ## License
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-## Attributions
+## Credits
 
-Lead Developer: Pietro "Rampo" - PiKo Technologies
-
-This Readme.md file has been written with [Mou](http://mouapp.com/).
+Author: Pietro "Rampo" - PiKo Technologies
