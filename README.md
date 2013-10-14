@@ -6,7 +6,7 @@
 
 ## Overview
 
-`UpdateChecker`  is a class that can be used by Android Developers to increase the number of users update their apps by showing a *"New Update Available"* Notification or Dialog. 
+`UpdateChecker` is a class that can be used by Android Developers to increase the number of users update their apps by showing a *"New Update Available"* Notification or Dialog. 
 
 It's based on  [Fragments](http://developer.android.com/guide/components/fragments.html), It checks for new updates downloadable by parsing the Play Store desktop page of your app.
 
@@ -15,7 +15,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 [Featured on XDA Portal!](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-###### Current version: 1.2.0
+##### Current version: 1.2.0
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/develop/CHANGELOG.md)
 
@@ -111,20 +111,16 @@ Join in the conversation, check it out the [XDA Thread](http://forum.xda-develop
  
 ## Credits
 
-Author: Pietro "Rampo" - PiKo Technologies
+Author: Pietro Rampini - PiKo Technologies
 
 <a href="https://plus.google.com/u/0/110441803915933521642/posts">
   <img alt="Follow me on Google+"
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
 </a>
-<a href="https://twitter.com/GabMarioPower">
+<a href="https://twitter.com/rampinipietro">
   <img alt="Follow me on Twitter"
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
 </a>
 ## License
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
-
-## Credits
-
-Author: Pietro "Rampo" - PiKo Technologies

@@ -189,8 +189,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
                 } else {
 
                 } // No new update available
-            }
-            else {
+            } else {
             }
         } catch (PackageManager.NameNotFoundException ignored) {
         }
@@ -204,15 +203,26 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      */
     @Override
     public void versionDownloadableNotFound() {
-
     }
 
+    /**
+     * Get if the user has tapped on "No, thanks" button on dialog for this downloable version.
+     * See userHasTappedToNotShowNoticeAgain(...) callback.
+     *
+     * @param versionDownloadable Version downloadable.
+     */
     private boolean hasUserTappedToNotShowNoticeAgain(String versionDownloadable) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_FILENAME, 0);
         String prefKey = DONT_SHOW_PREF_KEY + versionDownloadable;
         return prefs.getBoolean(prefKey, false);
     }
 
+    /**
+     * User has tapped on "No, thanks" button on dialog.
+     * See hasUserTappedToNotShowNoticeAgain(...) boolean.
+     *
+     * @param versionDownloadable Update name to don't show any notice again about.
+     */
     @Override
     public void userHasTappedToNotShowNoticeAgain(String versionDownloadable) {
         SharedPreferences prefs = mContext.getSharedPreferences(PREFS_FILENAME, 0);
