@@ -27,6 +27,7 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 /**
  * Extends SimpleDialogFragment class of StyledDialogs library.
  *
+ * @author Pietro Rampini (rampini.pietro@gmail.com)
  * @see <a href="https://github.com/inmite/android-styled-dialogs">inmite - Android Styled Dialogs</a> Required.
  * @see SimpleDialogFragment class to extend.
  */
@@ -37,12 +38,14 @@ public class Dialog extends SimpleDialogFragment {
      * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
      * @see FragmentActivity
      */
-    public static void show(FragmentActivity activity) {
-    	try {
-            new Dialog().show(activity.getSupportFragmentManager(), null);
-    	}
-    	catch (IllegalStateException ignored){}
+    DialogInterface dialogInterface;
+    String versionDownloadable;
+
+    Dialog(DialogInterface ldialogInterface, String lVersionDownloadable) {
+        dialogInterface = ldialogInterface;
+        versionDownloadable = lVersionDownloadable;
     }
+
 
     @Override
     public Builder build(Builder builder) {
@@ -50,7 +53,8 @@ public class Dialog extends SimpleDialogFragment {
         String appName = null;
         try {
             appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
-        } catch (NameNotFoundException ignored) {}
+        } catch (NameNotFoundException ignored) {
+        }
         builder.setTitle(context.getString(R.string.newUpdateAvailable));
         builder.setMessage(context.getString(R.string.downloadFor, appName));
         builder.setPositiveButton(context.getString(R.string.dialogPositiveButton), new View.OnClickListener() {
@@ -60,16 +64,20 @@ public class Dialog extends SimpleDialogFragment {
                 dismiss();
             }
         });
-        /*builder.setNeutralButton(context.getString(R.string.dialogNeutralButton), new View.OnClickListener() {
+        builder.setNeutralButton(context.getString(R.string.dialogNeutralButton), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
-        }); */
-        // TODO Create "Later" button
+        });
+
         builder.setNegativeButton(context.getString(R.string.dialogNegativeButton), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 * Don't show again the dialog for this downloadable version.
+                 */
+                dialogInterface.userHasTappedToNotShowNoticeAgain(versionDownloadable);
                 dismiss();
             }
         });

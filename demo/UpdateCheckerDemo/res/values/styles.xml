@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="android:Widget.Holo.ActionBar">
+        <item name="android:background">@drawable/ab_solid_apptheme</item>
+        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+
+    <style name="DialogStyleLight.Custom">
+        <item name="titleTextColor">@color/dialog_title_text</item>
+        <item name="titleSeparatorColor">@color/dialog_title_separator</item>
+        <item name="messageTextColor">@color/dialog_message_text</item>
+        <item name="buttonTextColor">@color/dialog_button_text</item>
+        <item name="buttonSeparatorColor">@color/dialog_button_separator</item>
+        <item name="buttonBackgroundColorNormal">@color/dialog_button_normal</item>
+        <item name="buttonBackgroundColorPressed">@color/dialog_button_pressed</item>
+        <item name="buttonBackgroundColorFocused">@color/dialog_button_focused</item>
+    </style>
+
+    <color name="dialog_message_text">#333333</color>
+    <color name="dialog_title_text">#f3a71e</color>
+    <color name="dialog_title_separator">#f3a71e</color>
+    <color name="dialog_button_text">#333333</color>
+    <color name="dialog_button_normal">@android:color/transparent</color>
+    <color name="dialog_button_pressed">#99f3a71e</color> <!-- 60 % opacity -->
+    <color name="dialog_button_focused">#4Cf3a71e</color> <!-- 30 % opacity -->
+    <color name="dialog_button_separator">#25000000</color> <!-- 7% opacity -->
+    <color name="background">#FFA500</color>
+
+</resources>

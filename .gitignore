@@ -22,4 +22,8 @@ local.properties
 .DS_Store
 
 library/project.properties
+<<<<<<< HEAD
 *.iml
+=======
+lint.xml
+>>>>>>> develop
