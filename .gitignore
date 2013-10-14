@@ -22,3 +22,4 @@ local.properties
 .DS_Store
 
 library/project.properties
+lint.xml
