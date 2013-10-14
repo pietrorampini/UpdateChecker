@@ -2,7 +2,9 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android" name="Android">
-      <configuration />
+      <configuration>
+        <option name="UPDATE_PROPERTY_FILES" value="true" />
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
@@ -11,11 +13,9 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Android 4.2.2 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android 4.3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="library" exported="" />
-    <orderEntry type="library" name="android-support-v4" level="application" />
-    <orderEntry type="module" module-name="actionbarsherlock" />
+    <orderEntry type="module" module-name="library" />
   </component>
 </module>
 
