@@ -23,7 +23,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -44,7 +43,7 @@ import java.io.InputStreamReader;
 /**
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
-public class UpdateChecker extends Fragment implements CheckResultInterface, DialogInterface {
+public class UpdateChecker implements CheckResultInterface, DialogInterface {
 
     public static final String ROOT_PLAY_STORE_DEVICE = "market://details?id=";
 
@@ -56,11 +55,8 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
     private static final String PREFS_FILENAME = "updateChecker";
     private static final int NOTICE_NOTIFICATION = 2;
     private static final int NOTICE_DIALOG = 1;
+    private static final int NUMBER_OF_CHECKS_REQUIRED_DEFAULT = 5;
 
-    private FragmentActivity mContext;
-    private int mSuccessfulChecksRequired;
-    private int mTypeOfNotice;
-    private int mNotificationIconResId;
 
     /**
      * Show a Dialog if an update is available for download. Callable in a FragmentActivity.
@@ -68,14 +64,54 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      *
      * @param fragmentActivity required.
      */
-    public static void checkForDialog(FragmentActivity fragmentActivity) {
-        FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
-        UpdateChecker updateChecker = new UpdateChecker();
-        Bundle args = new Bundle();
-        args.putInt(NOTICE_TYPE_KEY, NOTICE_DIALOG);
-        args.putInt(SUCCESSFUL_CHECKS_REQUIRED_KEY, 5);
-        updateChecker.setArguments(args);
-        content.add(updateChecker, null).commit();
+    // TODO xx
+    public static void check(Activity activity) {
+        new UpdateChecker(activity, Store.GOOGLE_PLAY, 5, Notice.DIALOG);
+    }
+
+    public static void check(Activity activity, UpdateCheckerResult mPersonalCallback) {
+        new UpdateChecker(activity, mPersonalCallback, Store.GOOGLE_PLAY, 5, Notice.DIALOG);
+    }
+
+    static Activity mContext;
+    static Store mStore;
+    static int mSuccessfulChecksRequired;
+    static Notice mNotice;
+    static CheckResultInterface mCheckresultinterface;
+    static int mNotificationIconResId;
+    static UpdateCheckerResult mPersonalCallback;
+
+    public UpdateChecker(Activity activity, Store store, int successfulChecksRequired, Notice notice) {
+        mContext = activity;
+        mStore = store;
+        mSuccessfulChecksRequired = successfulChecksRequired;
+        mNotice = notice;
+        mCheckresultinterface = this;
+    }
+
+    public UpdateChecker(Activity activity, UpdateCheckerResult updateCheckerResult, Store store, int successfulChecksRequired) {
+        mContext = activity;
+        mPersonalCallback = updateCheckerResult;
+        mStore = store;
+        mSuccessfulChecksRequired = successfulChecksRequired;
+        mCheckresultinterface = this;
+    }
+
+    public static void setStore(Store store) {
+        mStore = store;
+    }
+
+    public static void setChecksRequired(int checksRequired) {
+        mSuccessfulChecksRequired = checksRequired;
+    }
+
+    public static void setNotice(Notice notice) {
+        mNotice = notice;
+    }
+
+    public static void start() {
+        AsyncCheck asynctask = new AsyncCheck(mStore, mCheckresultinterface, mContext);
+        asynctask.execute();
     }
 
     /**
@@ -85,7 +121,9 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      * @param fragmentActivity         Required.
      * @param successfulChecksRequired The number of checks after the dialog will be shown.
      */
+    @Deprecated
     public static void checkForDialog(FragmentActivity fragmentActivity, int successfulChecksRequired) {
+
         FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
         Bundle args = new Bundle();
@@ -101,6 +139,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      *
      * @param fragmentActivity Required.
      */
+    @Deprecated
     public static void checkForNotification(FragmentActivity fragmentActivity) {
         FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
@@ -119,6 +158,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      * @param fragmentActivity         Required.
      * @param successfulChecksRequired The number of checks after the notification will be shown.
      */
+    @Deprecated
     public static void checkForNotification(FragmentActivity fragmentActivity, int successfulChecksRequired) {
         FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
@@ -137,6 +177,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      * @param fragmentActivity      Required.
      * @param notificationIconResId R.drawable.* resource to set to Notification icon.
      */
+    @Deprecated
     public static void checkForNotification(int notificationIconResId, FragmentActivity fragmentActivity) {
         FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
@@ -156,6 +197,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      * @param successfulChecksRequired The number of checks after the notification will be shown.
      * @param notificationIconResId    R.drawable.* resource to set to Notification icon.
      */
+    @Deprecated
     public static void checkForNotification(int notificationIconResId, FragmentActivity fragmentActivity, int successfulChecksRequired) {
         FragmentTransaction content = fragmentActivity.getSupportFragmentManager().beginTransaction();
         UpdateChecker updateChecker = new UpdateChecker();
@@ -180,9 +222,9 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
             if (containsNumber(versionDownloadable)) {
                 if (!versionDownloadable.equals(mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionName)) { // New Update Available
                     if (iDontWantToBeTooMuchInvasive(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
-                        if (mTypeOfNotice == NOTICE_NOTIFICATION) { // Selected a checkForNotification(...) method
+                        if (mNotice == Notice.NOTIFICATION) { // Selected a checkForNotification(...) method
                             showNotification();
-                        } else if (mTypeOfNotice == NOTICE_DIALOG) { // Selected a checkForDialog(...) method
+                        } else if (mNotice == Notice.DIALOG) { // Selected a checkForDialog(...) method
                             showDialog(versionDownloadable);
                         }
                     }
@@ -267,21 +309,6 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
     }
 
     /**
-     * This class is a Fragment. Check for the method you have chosen.
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mContext = (FragmentActivity) activity;
-        Bundle args = getArguments();
-        mTypeOfNotice = args.getInt(NOTICE_TYPE_KEY);
-        mSuccessfulChecksRequired = args.getInt(SUCCESSFUL_CHECKS_REQUIRED_KEY);
-        mNotificationIconResId = args.getInt(NOTIFICATION_ICON_RES_ID_KEY);
-        AsyncCheck asynctask = new AsyncCheck(this, activity.getApplicationContext());
-        asynctask.execute();
-    }
-
-    /**
      * Since the library check from the Desktop Web Page of the app the Current Version, if there are different apks for the app,
      * the Play Store will shown Varies depending on the device, so the Library can't compare it to versionName installed.
      *
@@ -294,9 +321,9 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
     /**
      * Show dialog
      */
-    public void showDialog(String versionDownloadable) {
-        Dialog dialog = new Dialog(this, versionDownloadable);
-        dialog.show(getActivity().getSupportFragmentManager(), null);
+    public static void showDialog(Activity mContext, String versionDownloadable) {
+        Dialog dialog = new Dialog(versionDownloadable);
+        dialog.show(mContext.getFragmentManager(), null);
     }
 
     /**
@@ -304,7 +331,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      *
      * @see Notification#show(android.content.Context, int)
      */
-    public void showNotification() {
+    public static void showNotification() {
         Notification.show(mContext, mNotificationIconResId);
     }
 
@@ -349,13 +376,15 @@ class AsyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final int VERSION_FOUND = 5;
     private static final int ERROR = 7;
 
+    Store store;
     Context context;
-    CheckResultInterface resultInterface;
+    CheckResultInterface checkInterface;
     String versionDownloadable;
 
-    AsyncCheck(CheckResultInterface checkInterface, Context ctx) {
-        resultInterface = checkInterface;
-        context = ctx;
+    AsyncCheck(Store store, CheckResultInterface checkInterface, Context context) {
+        this.store = store;
+        this.checkInterface = checkInterface;
+        this.context = context;
     }
 
     @Override
@@ -366,18 +395,22 @@ class AsyncCheck extends AsyncTask<String, Integer, Integer> {
                 HttpConnectionParams.setConnectionTimeout(params, 4000);
                 HttpConnectionParams.setSoTimeout(params, 5000);
                 HttpClient client = new DefaultHttpClient(params);
-                HttpGet request = new HttpGet(ROOT_PLAY_STORE_WEB + context.getPackageName()); // Set the right Play Store page by getting package name.
-                HttpResponse response = client.execute(request);
-                InputStream is = response.getEntity().getContent();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.contains(HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Play Store
-                        String containingVersion = line.substring(line.lastIndexOf(HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
-                        String[] removingUnusefulTags = containingVersion.split(HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove unseful HTML tags
-                        versionDownloadable = removingUnusefulTags[0]; // Obtain version available
-
+                if (store == Store.GOOGLE_PLAY) {
+                    HttpGet request = new HttpGet(ROOT_PLAY_STORE_WEB + context.getPackageName()); // Set the right Play Store page by getting package name.
+                    HttpResponse response = client.execute(request);
+                    InputStream is = response.getEntity().getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.contains(HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Play Store
+                            String containingVersion = line.substring(line.lastIndexOf(HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
+                            String[] removingUnusefulTags = containingVersion.split(HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove unseful HTML tags
+                            versionDownloadable = removingUnusefulTags[0]; // Obtain version available
+                        }
                     }
+
+                } else if (store == Store.AMAZON) {
+
                 }
 
                 return VERSION_FOUND;
@@ -396,9 +429,9 @@ class AsyncCheck extends AsyncTask<String, Integer, Integer> {
      */
     protected void onPostExecute(Integer result) {
         if (result == VERSION_FOUND) {
-            resultInterface.versionDownloadableFound(versionDownloadable);
+            checkInterface.versionDownloadableFound(versionDownloadable);
         } else {
-            resultInterface.versionDownloadableNotFound();
+            checkInterface.versionDownloadableNotFound();
         }
     }
 

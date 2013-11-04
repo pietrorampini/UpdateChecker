@@ -106,6 +106,7 @@ Join in the conversation, check it out the [XDA Thread](http://forum.xda-develop
 
 ## Coming soon
  - **Support for apps not published on Google Play**
+ - Show Changelog from Play Store page 
  - Stackoverflow tag for more specific code problems
  - Preference to disable UpdateChecker
  

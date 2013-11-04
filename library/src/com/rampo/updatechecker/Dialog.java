@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
@@ -88,4 +89,11 @@ public class Dialog extends SimpleDialogFragment {
         Context context = getActivity().getApplicationContext();
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName())));
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle icicle) {
+
+        super.onSaveInstanceState(icicle);
+    }
+
 }
