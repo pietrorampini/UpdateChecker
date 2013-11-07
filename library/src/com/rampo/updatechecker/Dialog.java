@@ -41,11 +41,13 @@ public class Dialog extends SimpleDialogFragment {
     DialogInterface dialogInterface;
     String versionDownloadable;
 
-    Dialog(DialogInterface ldialogInterface, String lVersionDownloadable) {
+    public Dialog(DialogInterface ldialogInterface, String lVersionDownloadable) {
         dialogInterface = ldialogInterface;
         versionDownloadable = lVersionDownloadable;
     }
 
+    public Dialog() {
+    }
 
     @Override
     public Builder build(Builder builder) {
