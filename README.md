@@ -15,7 +15,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 [Featured on XDA Portal!](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-##### Current version: 1.2.0
+##### Current version: 1.2.1
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
