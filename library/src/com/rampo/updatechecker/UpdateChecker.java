@@ -296,7 +296,13 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
      */
     public void showDialog(String versionDownloadable) {
         Dialog dialog = new Dialog(this, versionDownloadable);
-        dialog.show(getActivity().getSupportFragmentManager(), null);
+        try {
+            dialog.show(getActivity().getSupportFragmentManager(), null);
+        } catch (NullPointerException activityClosed) {
+			/* This happens when the library tries to open a dialog,
+			   but the activity is already closed, so generates a NullPointerException.
+			   In this way, a force close is avoided.*/
+        }
     }
 
     /**
