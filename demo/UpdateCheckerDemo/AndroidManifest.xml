@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.2.1">
 
-    <!-- The actual version of ActionBarSherlock Demos is 4.1.0 set it in android:versionName to test UpdateChecker (The Dialog/Notification will not be shown) -->
+    <!-- The actual version of ActionBarSherlock Demos is 4.1.0. Set it in android:versionName to test UpdateChecker (The Dialog/Notification will not be shown) -->
 
     <uses-sdk
         android:minSdkVersion="7"

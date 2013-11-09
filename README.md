@@ -105,9 +105,14 @@ Please note, if you're working on a pull request, make sure to use the [develop 
 Join in the conversation, check it out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
 
 ## Coming soon
- - **Support for apps not published on Google Play**
+ - **Support for apps published on Amazon App Store**
+  - **Auto Update (Auto download apk)**
  - Stackoverflow tag for more specific code problems
  - Preference to disable UpdateChecker
+ - *Changelog* Functions
+ - *Rate this app* Functions
+ - Remove FragmentActivity requirment 
+ - Demo app published on Play Store.
  
 ## Credits
 
