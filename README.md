@@ -106,7 +106,7 @@ Join in the conversation, check it out the [XDA Thread](http://forum.xda-develop
 
 ## Coming soon
  - **Support for apps published on Amazon App Store**
-  - **Auto Update (Auto download apk)**
+ - **Auto Update (Auto download apk)**
  - Stackoverflow tag for more specific code problems
  - Preference to disable UpdateChecker
  - *Changelog* Functions
