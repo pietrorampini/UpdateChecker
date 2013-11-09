@@ -15,7 +15,7 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 [Featured on XDA Portal!](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-##### Current version: 1.2.0
+##### Current version: 1.2.1
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
@@ -24,7 +24,7 @@ See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHAN
 - android-support-v4.jar
 
 ## Example
-- Check out the [Demos](https://github.com/rampo/UpdateChecker/tree/master/demos) folder
+- Check out the [Demos](https://github.com/rampo/UpdateChecker/tree/master/demo) folder
 
 ## Usage
 
@@ -105,10 +105,14 @@ Please note, if you're working on a pull request, make sure to use the [develop 
 Join in the conversation, check it out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
 
 ## Coming soon
- - **Support for apps not published on Google Play**
- - Show Changelog from Play Store page 
+ - **Support for apps published on Amazon App Store**
+ - **Auto Update (Auto download apk)**
  - Stackoverflow tag for more specific code problems
  - Preference to disable UpdateChecker
+ - *Changelog* Functions
+ - *Rate this app* Functions
+ - Remove FragmentActivity requirment 
+ - Demo app published on Play Store.
  
 ## Credits
 
