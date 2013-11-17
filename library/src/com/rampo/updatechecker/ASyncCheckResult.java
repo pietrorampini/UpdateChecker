@@ -18,7 +18,7 @@ package com.rampo.updatechecker;
 /**
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
-public interface CheckResultInterface {
+public interface ASyncCheckResult {
     /**
      * versionName got from Play Store. Go back to fragment.
      *
@@ -32,5 +32,6 @@ public interface CheckResultInterface {
      *
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
-    public void versionDownloadableNotFound();
+    public void multipleApksPublished();
+    public void networkError();
 }

@@ -9,9 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.rampo.updatechecker.UpdateChecker;
-import com.rampo.updatechecker.UpdateCheckerResult;
 
-public class MainActivity extends Activity implements UpdateCheckerResult{
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +33,15 @@ public class MainActivity extends Activity implements UpdateCheckerResult{
     }
 
     public void dialog(View view) {
-
+      UpdateChecker checker =   new UpdateChecker(this);
+      checker.start();
     }
 
     public void notification(View view) {
-        UpdateChecker.checkForNotification(this, 1);
 
     }
 
     public void notification_custom(View view) {
-        UpdateChecker.checkForNotification(R.drawable.ic_launcher, this, 1);
 
     }
-
-    @Override
-    public void aVoid() {
-
-    }
-
-
 }
