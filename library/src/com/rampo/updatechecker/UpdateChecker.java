@@ -299,7 +299,7 @@ public class UpdateChecker extends Fragment implements CheckResultInterface, Dia
         try {
             dialog.show(getActivity().getSupportFragmentManager(), null);
         } catch (NullPointerException activityClosed) {
-			/* This happens when the library tries to open a dialog,
+            /* This happens when the library tries to open a dialog,
 			   but the activity is already closed, so generates a NullPointerException.
 			   In this way, a force close is avoided.*/
         }
@@ -382,11 +382,11 @@ class AsyncCheck extends AsyncTask<String, Integer, Integer> {
                         String containingVersion = line.substring(line.lastIndexOf(HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
                         String[] removingUnusefulTags = containingVersion.split(HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove unseful HTML tags
                         versionDownloadable = removingUnusefulTags[0]; // Obtain version available
-
+                        return VERSION_FOUND;
+                    } else {
+                        return ERROR;
                     }
                 }
-
-                return VERSION_FOUND;
             } catch (IOException connectionError) {
                 logConnectionError();
                 return ERROR;
