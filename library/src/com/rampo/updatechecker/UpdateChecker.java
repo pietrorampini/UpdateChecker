@@ -378,13 +378,11 @@ class AsyncCheck extends AsyncTask<String, Integer, Integer> {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (line.contains(HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Play Store
+                    if (line.contains(HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line containing version available in Play Store
                         String containingVersion = line.substring(line.lastIndexOf(HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
                         String[] removingUnusefulTags = containingVersion.split(HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove unseful HTML tags
                         versionDownloadable = removingUnusefulTags[0]; // Obtain version available
                         return VERSION_FOUND;
-                    } else {
-                        return ERROR;
                     }
                 }
             } catch (IOException connectionError) {
