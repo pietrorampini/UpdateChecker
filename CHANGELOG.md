@@ -1,9 +1,17 @@
 Change Log
 ===============================================================================
 
+Version [1.2.3](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.3) *(2013-12-10)*
+----------------------------
+ * LIB: Added Korean translation (thanks to @rino0601)
+ 
+Version [1.2.2](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.2) *(2013-12-02)*
+----------------------------
+ * LIB: Bugs fixed (Fixed [#26](https://github.com/rampo/UpdateChecker/issues/26) and [#27](https://github.com/rampo/UpdateChecker/issues/27))
+ 
 Version [1.2.1](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.1) *(2013-11-07)*
 ----------------------------
- * LIB: Bugs fixed (Fixed [#24](https://github.com/rampo/UpdateChecker/issues/24) and [#27](https://github.com/rampo/UpdateChecker/issues/27))
+ * LIB: Bugs fixed (Fixed [#24](https://github.com/rampo/UpdateChecker/issues/24) <del>and </del>[<del>#27</del>](https://github.com/rampo/UpdateChecker/issues/27))
 
 Version [1.2.0](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.0) *(2013-10-14)*
 ----------------------------

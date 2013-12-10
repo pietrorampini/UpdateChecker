@@ -177,13 +177,14 @@ public class UpdateChecker implements ASyncCheckResult, DialogInterface, UpdateC
     public void showDialog(String versionDownloadable) {
         Dialog dialog = new Dialog(this, versionDownloadable);
         try {
-            FragmentActivity mFragmentActivity = (FragmentActivity) mActivity;
-            dialog.show(new Fra, null);
         } catch (NullPointerException activityClosed) {
             /* This happens when the library tries to open a dialog,
                but the activity is already closed, so generates a NullPointerException.
 			   In this way, a force close is avoided.*/
-        }
+        } catch (IllegalStateException activityClosed) {
+        } /* Catch blocks happens when the library tries to open a dialog,
+             but the activity is already closed, so generates a NullPointerException or IllegalStateException.
+			 In this way, a force close is avoided.*/
     }
 
     /**
