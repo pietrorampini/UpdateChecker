@@ -23,7 +23,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
-@SuppressWarnings("static-access")
 /**
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
