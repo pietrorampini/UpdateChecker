@@ -1,9 +1,13 @@
 Change Log
 ===============================================================================
 
+Version [1.2.4](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.4) *(2013-12-11)*
+----------------------------
+ * LIB: Added Croatian translation (thanks to [@kristijandraca](https://github.com/kristijandraca))
+ 
 Version [1.2.3](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.3) *(2013-12-10)*
 ----------------------------
- * LIB: Added Korean translation (thanks to @rino0601)
+ * LIB: Added Korean translation (thanks to [@rino0601](https://github.com/rino0601))
  
 Version [1.2.2](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.2) *(2013-12-02)*
 ----------------------------
