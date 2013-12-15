@@ -128,3 +128,7 @@ Author: Pietro Rampini - PiKo Technologies
 ## License
 
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rampo/updatechecker/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
