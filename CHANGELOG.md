@@ -1,6 +1,10 @@
 Change Log
 ===============================================================================
 
+Version [1.2.5](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.5) *(2013-12-29)*
+----------------------------
+ * LIB: Added Slovak translation (thanks to [@pylerSM](https://github.com/pylerSM))
+ 
 Version [1.2.4](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.4) *(2013-12-11)*
 ----------------------------
  * LIB: Added Croatian translation (thanks to [@kristijandraca](https://github.com/kristijandraca))
