@@ -2,7 +2,7 @@
 
 > Android User, never miss an Update.
 
-![image](https://raw.github.com/rampo/UpdateChecker/master/arts/flow_dialog.png)
+![image](https://raw.github.com/rampo/UpdateChecker/master/arts/flow_dialog_small.png)
 
 ## Overview
 
