@@ -8,7 +8,7 @@
 
 `UpdateChecker` is a class that can be used by Android Developers to increase the number of users update their apps by showing a *"New Update Available"* Notification or Dialog. 
 
-It's based on  [Fragments](http://developer.android.com/guide/components/fragments.html), It checks for new updates downloadable by parsing the Play Store desktop page of your app.
+It's based on  [Fragments](http://developer.android.com/guide/components/fragments.html), It checks for new updates downloadable parsing the Play Store desktop page of your app.
 
 [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
 
