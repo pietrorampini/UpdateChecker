@@ -102,7 +102,7 @@ Please note, if you're working on a pull request, make sure to use the [develop 
 
 ### Discuss
 
-Join in the conversation, check it out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
+Join in the conversation, check out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
 
 ## Coming soon
  - **Support for apps published on Amazon App Store**
