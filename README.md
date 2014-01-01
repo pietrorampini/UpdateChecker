@@ -24,7 +24,7 @@ See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHAN
 - android-support-v4.jar
 
 ## Example
-- Check out the [Demos](https://github.com/rampo/UpdateChecker/tree/master/demo) folder
+Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/tree/master/demo) or download directly [the apk](https://github.com/rampo/UpdateChecker/tree/master/apk) 
 
 ## Usage
 
