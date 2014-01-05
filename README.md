@@ -34,21 +34,27 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 
 - Import the library into you app.
 
-- First, add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's Manifest:
+- First, add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's Manifest: 
 
-    	<uses-permission android:name="android.permission.INTERNET"/>
-    	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    ```xml		
+	<uses-permission android:name="android.permission.INTERNET"/
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	```
     	
 - So, in the class you want to use the library extend a `FragmentActivity`  (or, obviously, a [`SherlockFragmentActivity` ](https://github.com/JakeWharton/ActionBarSherlock/blob/master/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java)).
 
-- To show a Play-Store-App-like notification if a new update was found:
+- To show a Play-Store-like notification if a new update is found:
+		
+    ```java		
+    UpdateChecker.checkForNotification(this);
+    ```		
+    ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only.png)
 
-    	UpdateChecker.checkForNotification(this);
-	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only.png)
+- To show a dialog if a new update is found:
 
-- To show a dialog if a new update was found:
-
-    	UpdateChecker.checkForDialog(this);
+    ```java	
+    UpdateChecker.checkForDialog(this);
+    ```  
 	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
 
 
@@ -61,19 +67,21 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
 - See [Issue #1](https://github.com/rampo/UpdateChecker/issues/1)
 
 ##Customization
-- You can modify modify the number of checks after the dialog will be shown. Default is 5.
- 
-	    UpdateChecker.checkForNotification(this, 10);
-	    
-	    UpdateChecker.checkForDialog(this, 10);
 
+- You can modify modify the number of checks after the dialog will be shown. Default is 5.
+    
+    ```java
+    UpdateChecker.checkForNotification(this, 10);
+    UpdateChecker.checkForDialog(this, 10);
+    ```
 
 - You can modify the notification Drawable by calling a variant of checkForNotification(...) method:
-
-        UpdateChecker.checkForNotification(R.drawable.ic_launcher, this)
-        
-        UpdateChecker.checkForNotification(R.drawable.ic_launcher, this, 10)
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only_custom.png)
+    
+    ```java
+    UpdateChecker.checkForNotification(R.drawable.ic_launcher, this)
+    UpdateChecker.checkForNotification(R.drawable.ic_launcher, this, 10)
+    ```
+    ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only_custom.png)
         
 - See [How to style StyledDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog:
 ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_custom.png)
@@ -127,4 +135,4 @@ Author: Pietro Rampini - PiKo Technologies
 </a>
 ## License
 
-* [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+[Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
