@@ -37,7 +37,7 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 - First, add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's Manifest: 
 
     ```xml		
-	<uses-permission android:name="android.permission.INTERNET"/
+	<uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	```
     	
