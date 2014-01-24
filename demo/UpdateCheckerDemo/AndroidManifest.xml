@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.actionbarsherlock.sample.demos"
     android:versionCode="1"
-    android:versionName=“1.2.3”>
+    android:versionName="1.2.5">
 
     <!-- The actual version of ActionBarSherlock Demos is 4.1.0. Set it in android:versionName to test UpdateChecker (The Dialog/Notification will not be shown) -->
 
