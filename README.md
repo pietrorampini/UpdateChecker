@@ -20,7 +20,6 @@ It's based on  [Fragments](http://developer.android.com/guide/components/fragmen
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
 ## Dependencies
-- [Styled Dialogs](https://github.com/inmite/android-styled-dialogs)
 - android-support-v4.jar
 
 ## Example

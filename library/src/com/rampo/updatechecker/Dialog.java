@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2013 Pietro Rampini "Rampo" - Piko Technologies
+
+ * Copyright (C) 2014 Pietro Rampini - PiKo Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,79 +16,84 @@
  */
 package com.rampo.updatechecker;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
-
-import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
- * Extends SimpleDialogFragment class of StyledDialogs library.
- *
+ * Builds a dialog to alert the user if a new update is found. This is the default Notice.
+ * I've used the old AlertDialog API because newer APIs require FragmentActivity.
+ * @see com.rampo.updatechecker.Notice#DIALOG
  * @author Pietro Rampini (rampini.pietro@gmail.com)
- * @see <a href="https://github.com/inmite/android-styled-dialogs">inmite - Android Styled Dialogs</a> Required.
- * @see SimpleDialogFragment class to extend.
  */
-public class Dialog extends SimpleDialogFragment {
-    /**
-     * Show this Dialog if you have added the method UpdateChecker.CheckForDialog(FragmentActivity activity) and a new update can be downloaded.
-     *
-     * @see UpdateChecker#CheckForDialog(android.support.v4.app.FragmentActivity)
-     * @see FragmentActivity
-     */
-    DialogInterface dialogInterface;
-    String versionDownloadable;
+public class Dialog {
 
-    public Dialog(DialogInterface ldialogInterface, String lVersionDownloadable) {
-        dialogInterface = ldialogInterface;
-        versionDownloadable = lVersionDownloadable;
-    }
-
-    public Dialog() {
-    }
-
-    @Override
-    public Builder build(Builder builder) {
-        Context context = getActivity().getApplicationContext();
-        String appName = null;
+    public static void show(final Context mContext, final Store mStore, final String mVersionDownloadable, final int mDialogIconResId) {
         try {
-            appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
-        } catch (NameNotFoundException ignored) {
-        }
-        builder.setTitle(context.getString(R.string.newUpdateAvailable));
-        builder.setMessage(context.getString(R.string.downloadFor, appName));
-        builder.setPositiveButton(context.getString(R.string.dialogPositiveButton), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMarket();
-                dismiss();
+            String storeName = null;
+            if (mStore == Store.GOOGLE_PLAY){
+                storeName = mContext.getString(R.string.googlePlay);
             }
-        });
-        builder.setNeutralButton(context.getString(R.string.dialogNeutralButton), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
+            else if (mStore == Store.AMAZON){
+                storeName = mContext.getString(R.string.amazonStore);
             }
-        });
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            String appName = null;
+            try {
+                appName = (String) mContext.getPackageManager().getApplicationLabel(mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), 0));
+            } catch (PackageManager.NameNotFoundException ignored) {
+            }
+            alertDialogBuilder.setTitle(mContext.getResources().getString(R.string.newUpdateAvailable));
+            alertDialogBuilder.setMessage(mContext.getResources().getString(R.string.downloadFor, appName, storeName))
+                    .setCancelable(true)
+                    .setPositiveButton(mContext.getString(R.string.dialogPositiveButton), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goToMarket(mContext);
+                            dialog.cancel();
+                        }
+                    })
+                    .setNeutralButton(mContext.getString(R.string.dialogNeutralButton), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton(mContext.getString(R.string.dialogNegativeButton), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            userHasTappedToNotShowNoticeAgain(mContext, mVersionDownloadable);
+                            dialog.cancel();
+                        }
 
-        builder.setNegativeButton(context.getString(R.string.dialogNegativeButton), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /**
-                 * Don't show again the dialog for this downloadable version.
-                 */
-                dialogInterface.userHasTappedToNotShowNoticeAgain(versionDownloadable);
-                dismiss();
+                    });
+            if (mDialogIconResId != 0) {
+                alertDialogBuilder.setIcon(mDialogIconResId);
             }
-        });
-        return builder;
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        } catch (NullPointerException activityClosed) {
+        /*   Happens when the library tries to open a dialog,
+             but the activity is already closed, so generates a NullPointerException or IllegalStateException.
+			 In this way, a force close is avoided.*/
+        } catch (IllegalStateException activityClosed) {
+            // See up
+        }
     }
 
-    private void goToMarket() {
-        Context context = getActivity().getApplicationContext();
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName())));
+    private static void userHasTappedToNotShowNoticeAgain(Context mContext, String mVersionDownloadable) {
+        SharedPreferences prefs = mContext.getSharedPreferences(UpdateChecker.PREFS_FILENAME, 0);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(UpdateChecker.DONT_SHOW_AGAIN_PREF_KEY + mVersionDownloadable, true);
+        editor.commit();
+    }
+
+    private static void goToMarket(Context mContext) {
+        mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + mContext.getPackageName())));
+
     }
 }
