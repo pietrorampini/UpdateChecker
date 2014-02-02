@@ -1,4 +1,4 @@
-# Update Checker
+# ![Image](https://raw.github.com/rampo/UpdateChecker/develop/demo/UpdateCheckerDemo/res/drawable-xhdpi/ic_launcher.png)Update Checker
 
 > Android User, never miss an Update.
 
@@ -27,8 +27,6 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 
 ## Usage
 
-- Import [Styled Dialogs](https://github.com/inmite/android-styled-dialogs) into the library.
-
 - Import android-support-v4.jar into the library.
 
 - Import the library into you app.
@@ -40,22 +38,22 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	```
     	
-- In the class you want to use the library extend a `FragmentActivity`  (or, obviously, a [`SherlockFragmentActivity` ](https://github.com/JakeWharton/ActionBarSherlock/blob/master/actionbarsherlock/src/com/actionbarsherlock/app/SherlockFragmentActivity.java)).
+- To show a dialog if a new update is found:
+
+    ```java	
+    UpdateChecker checker = new UpdateChecker(this);
+    checker.setNotice(Notice.NOTIFICATION);
+    checker.start();
+    ```  
+	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
 
 - To show a Play-Store-like notification if a new update is found:
 		
     ```java		
-    UpdateChecker.checkForNotification(this);
+    UpdateChecker checker = new UpdateChecker(this);
+    checker.start();
     ```		
     ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only.png)
-
-- To show a dialog if a new update is found:
-
-    ```java	
-    UpdateChecker.checkForDialog(this);
-    ```  
-	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
-
 
 ##Important!
 
@@ -82,8 +80,6 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
     ```
     ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only_custom.png)
         
-- See [How to style StyledDialogs](https://github.com/inmite/android-styled-dialogs#how-to-style-all-dialogs), to customize the *New update avaialble* dialog:
-![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog_custom.png)
 
 
 ##Contribution
@@ -112,13 +108,10 @@ Please note, if you're working on a pull request, make sure to use the [develop 
 Join in the conversation, check out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
 
 ## Coming soon
- - **Support for apps published on Amazon App Store**
  - Stackoverflow tag for more specific code problems
  - Preference to disable UpdateChecker
  - *Changelog* Functions
  - *Rate this app* Functions
- - Remove FragmentActivity requirment 
- - Demo app published on Play Store.
  
 ## Credits
 
@@ -132,6 +125,8 @@ Author: Pietro Rampini - PiKo Technologies
   <img alt="Follow me on Twitter"
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
 </a>
+
+Icon: [Michael Cook](https://plus.google.com/+michaelcook/posts)
 ## License
 
 [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
