@@ -6,13 +6,20 @@
 
 ## Overview
 
-`UpdateChecker` is a class that can be used by Android Developers to increase the number of their apps' updates by showing a *"New Update Available"* Notification or Dialog. 
+`UpdateChecker` is a class that can be used by Android Developers to increase the number of their apps' updates by showing a *"New update available"* Notification or Dialog. 
 
 It checks for new updates downloadable parsing the Store desktop page of your app.
 
 [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
 
-[Featured on XDA Portal!](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
+[Featured on XDA Portal](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
+
+[Get the Demo on Google Play](https://play.google.com/store/apps/details?id=com.rampo.updatechecker.demo)
+
+<a href="https://play.google.com/store/apps/details?id=com.rampo.updatechecker.demo">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a>
 
 ### Changelog
 ##### Current version: 2.0.0
@@ -38,19 +45,19 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	```
     	
-- To show a dialog if a new update is found:
+- To show a **dialog** if a new update is found:
 
     ```java	
     UpdateChecker checker = new UpdateChecker(this);
-    checker.setNotice(Notice.NOTIFICATION);
     checker.start();
     ```  
 	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
 
-- To show a Play-Store-like notification if a new update is found:
+- To show a Play-Store-like **notification** if a new update is found:
 		
     ```java		
     UpdateChecker checker = new UpdateChecker(this);
+    checker.setNotice(Notice.NOTIFICATION);
     checker.start();
     ```		
     ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only.png)
@@ -115,9 +122,9 @@ Join in the conversation, check out the [XDA Thread](http://forum.xda-developers
  
 ## Credits
 
-Author: Pietro Rampini - PiKo Technologies
+Wrtiten and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroRampini/posts) - PiKo Technologies
 
-<a href="https://plus.google.com/u/0/110441803915933521642/posts">
+<a href="https://plus.google.com/u/0/+PietroRampini/posts">
   <img alt="Follow me on Google+"
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
 </a>
@@ -126,7 +133,7 @@ Author: Pietro Rampini - PiKo Technologies
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
 </a>
 
-Icon: [Michael Cook](https://plus.google.com/+michaelcook/posts)
+The UpdateChecker logo has been created by: [Michael Cook](https://plus.google.com/+michaelcook/posts)
 ## License
 
 [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
