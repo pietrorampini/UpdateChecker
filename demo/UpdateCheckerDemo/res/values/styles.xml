@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
         <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
     </style>
 
-    <style name="AppTheme.ActionBar" parent="android:Widget.Holo.ActionBar">
-        <item name="android:background">@drawable/ab_solid_apptheme</item>
+    <style name="AppTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_background_textured</item>
         <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
+        <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.SubTitleTextStyle</item>
     </style>
 
     <style name="AppTheme.ActionBar.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
@@ -35,5 +35,11 @@
     <color name="dialog_button_focused">#4Cf3a71e</color> <!-- 30 % opacity -->
     <color name="dialog_button_separator">#25000000</color> <!-- 7% opacity -->
     <color name="background">#FFA500</color>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.SubTitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/red</item>
+    </style>
 
 </resources>
