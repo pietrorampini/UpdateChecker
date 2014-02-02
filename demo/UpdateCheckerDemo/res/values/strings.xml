@@ -10,8 +10,13 @@
     <string name="feedback">Feel free to provide feedback (bugs, etc) and pull requests on %1$s. Also further documentation is available there.</string>
     <string name="infos">This app has the same package of ActionBarSherlock: Demos because the library, to works, needs a published app on Play Store. All credits to Jake Wharton\'s %1$s.</string>
     <string name="androidicons">Beautiful UI icons from %1$s.</string>
-    <string name="check_notification">Check for Notifcation</string>
-    <string name="how_to_test">Modify Manifest\'s versionName string to test.</string>
-    <string name="check_dialog">Check for Dialog</string>
-    <string name="check_notification_custom">Check for Notifcation with custom Icon</string>
+    <string name="how_to_test">Modify Manifest\'s versionName to test.</string>
+    <string name="standard">Standard</string>
+    <string name="custom">Custom</string>
+    <string name="loading">Loading…</string>
+    <string name="custom_impl">Custom implementation</string>
+    <string name="dialog">Dialog</string>
+    <string name="dialog_custom_icon">Dialog with custom Icon</string>
+    <string name="notification">Notification</string>
+    <string name="notification_custom_icon">Notification with custom Icon</string>
 </resources>
