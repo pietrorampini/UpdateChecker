@@ -41,7 +41,7 @@ public class StandardActivity extends Activity {
 
     public void dialog_custom(View view) {
         UpdateChecker checker = new UpdateChecker(this);
-        checker.setNoticeIcon(R.drawable.ic_action_info);
+        checker.setNoticeIcon(R.drawable.ic_launcher);
         checker.start();
     }
 
