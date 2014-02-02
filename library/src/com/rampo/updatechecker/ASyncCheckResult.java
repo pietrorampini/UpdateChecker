@@ -16,22 +16,31 @@
 package com.rampo.updatechecker;
 
 /**
+ * Returns the result of ASyncCheck to UpdateChecker.
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
 public interface ASyncCheckResult {
     /**
-     * versionName got from Play Store. Go back to fragment.
+     * If the library found a version available on the Store, and it's different from the installed one, notify it to the user.
      *
-     * @param versionDownloadable
+     * @param mVersionDownloadable String to compare to the version installed of the app.
      */
-    public void versionDownloadableFound(String versionDownloadable);
+    public void versionDownloadableFound(String mVersionDownloadable);
 
     /**
-     * Can't get the versionName from Play Store
-     * Connection error or #1
+     * Can't get the versionName from the Store.
+     * See #1
      *
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
     public void multipleApksPublished();
+    /**
+     * Can't download the store page.
+     */
     public void networkError();
+    /**
+     * Can't find the store page for this app.
+     */
+    public void appUnpublished();
+
 }
