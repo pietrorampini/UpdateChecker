@@ -1,4 +1,4 @@
-# ![Image](https://raw.github.com/rampo/UpdateChecker/develop/demo/UpdateCheckerDemo/res/drawable-xhdpi/ic_launcher.png)Update Checker
+# ![Image](https://raw.github.com/rampo/UpdateChecker/develop/demo/UpdateCheckerDemo/res/drawable-ldpi/ic_launcher.png)Update Checker
 
 > Android User, never miss an Update.
 
