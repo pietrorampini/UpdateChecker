@@ -16,6 +16,8 @@ public class Infos extends Activity {
         setContentView(R.layout.info_screen);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setSubtitle("Infos");
+
         TextView credits = (TextView) findViewById(R.id.credits);
         credits.setText(Html.fromHtml(getString(R.string.credits, createLink(getString(R.string.profile_url), "Pietro Rampini"))));
         credits.setMovementMethod(LinkMovementMethod.getInstance());
@@ -32,7 +34,7 @@ public class Infos extends Activity {
         TextView feedback = (TextView) findViewById(R.id.feedback);
         feedback.setText(Html.fromHtml(getString(R.string.feedback, gitHubLink)));
         feedback.setMovementMethod(LinkMovementMethod.getInstance());
-        
+
         TextView androidicons = (TextView) findViewById(R.id.androidicons);
         androidicons.setText(Html.fromHtml(getString(R.string.androidicons, createLink("http://www.androidicons.com/", "Androidicons.com"))));
         androidicons.setMovementMethod(LinkMovementMethod.getInstance());
@@ -42,14 +44,9 @@ public class Infos extends Activity {
         return String.format("<a href=\"%s\">%s</a>", url, title);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
+        NavUtils.navigateUpFromSameTask(this);
         return super.onOptionsItemSelected(item);
     }
 }
