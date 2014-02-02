@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Pietro Rampini "Rampo" - Piko Technologies
+ * Copyright (C) 2014 Pietro Rampini - PiKo Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
