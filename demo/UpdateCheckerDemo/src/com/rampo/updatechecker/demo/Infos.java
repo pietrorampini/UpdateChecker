@@ -27,10 +27,6 @@ public class Infos extends Activity {
         attrs.setText(Html.fromHtml(getString(R.string.attributions, createLink("http://www.apache.org/licenses/LICENSE-2.0 ", "Apache License, V2"), gitHubLink)));
         attrs.setMovementMethod(LinkMovementMethod.getInstance());
 
-        TextView info = (TextView) findViewById(R.id.info);
-        info.setText(Html.fromHtml(getString(R.string.infos, createLink("https://github.com/JakeWharton/ActionBarSherlock", "ActionBarSherlock"))));
-        info.setMovementMethod(LinkMovementMethod.getInstance());
-
         TextView feedback = (TextView) findViewById(R.id.feedback);
         feedback.setText(Html.fromHtml(getString(R.string.feedback, gitHubLink)));
         feedback.setMovementMethod(LinkMovementMethod.getInstance());
