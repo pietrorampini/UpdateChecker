@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.actionbarsherlock.sample.demos.MainActivity"
+            android:name=".StandardActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,14 @@
         </activity>
         <activity
             android:name="Infos"
-            android:parentActivityName="MainActivity">
+            android:parentActivityName=".StandardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name=".CustomActivity"
+            android:parentActivityName=".StandardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
