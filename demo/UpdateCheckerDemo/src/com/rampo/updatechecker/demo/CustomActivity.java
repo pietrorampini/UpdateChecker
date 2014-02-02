@@ -1,4 +1,4 @@
-package com.actionbarsherlock.sample.demos;
+package com.rampo.updatechecker.demo;
 
 import android.app.Activity;
 import android.content.Intent;
