@@ -24,35 +24,38 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 /**
+ * Builds a notification to alert the user if a new update is found.
+ * @see com.rampo.updatechecker.Notice#NOTIFICATION
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
 public class Notification {
-    public static void show(Context context, int notificationIconResIdPublic) {
-        android.app.Notification noti;
-        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName()));
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
+    public static void show(Context mContext, Store mStore, int mNotificationIconResId) {
+        android.app.Notification notification;
+        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + mContext.getPackageName()));
+        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, myIntent, Intent.FILL_IN_ACTION);
         String appName = null;
         try {
-            appName = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0).loadLabel(context.getPackageManager()).toString();
+            appName = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), 0).loadLabel(mContext.getPackageManager()).toString();
         } catch (PackageManager.NameNotFoundException ignored) {
         }
-        if (notificationIconResIdPublic == 0) {
-            noti = new NotificationCompat.Builder(context)
-                    .setTicker(context.getString(R.string.newUpdateAvailable))
-                    .setContentTitle(appName)
-                    .setContentText(context.getString(R.string.newUpdateAvailable))
-                    .setSmallIcon(R.drawable.ic_stat_ic_menu_play_store)
-                    .setContentIntent(pendingIntent).build();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+        builder.setTicker(mContext.getString(R.string.newUpdateAvailable))
+                .setContentTitle(appName)
+                .setContentText(mContext.getString(R.string.newUpdateAvailable))
+                .setContentIntent(pendingIntent).build();
+
+        if (mNotificationIconResId == 0) {
+            if (mStore == Store.GOOGLE_PLAY) {
+                builder.setSmallIcon(R.drawable.ic_stat_play_store);
+            } else if (mStore == Store.AMAZON) {
+                builder.setSmallIcon(R.drawable.ic_stat_amazon);
+            }
         } else {
-            noti = new NotificationCompat.Builder(context)
-                    .setTicker(context.getString(R.string.newUpdateAvailable))
-                    .setContentTitle(appName)
-                    .setContentText(context.getString(R.string.newUpdateAvailable))
-                    .setSmallIcon(notificationIconResIdPublic)
-                    .setContentIntent(pendingIntent).build();
+            builder.setSmallIcon(mNotificationIconResId);
         }
-        noti.flags = android.app.Notification.FLAG_AUTO_CANCEL;
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, noti);
+        notification = builder.build();
+        notification.flags = android.app.Notification.FLAG_AUTO_CANCEL;
+        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, notification);
     }
 }
