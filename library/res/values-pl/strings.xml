@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="downloadFor">Sprawdź to nowej aktualizacji dla %1$s!\nDostępne teraz w sklepie Play.</string>
+    <string name="downloadFor">Sprawdź to nowej aktualizacji dla %1$s!\nDostępne teraz w sklepie %2$s.</string>
     <string name="dialogPositiveButton">Oceń teraz</string>
     <string name="dialogNeutralButton">Póżniej</string>
     <string name="dialogNegativeButton">Nie, dziękuję</string>
