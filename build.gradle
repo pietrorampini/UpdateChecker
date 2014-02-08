@@ -15,7 +15,7 @@ allprojects {
 }
 
 def isReleaseBuild() {
-    return version.contains("RELEASE") == false
+    return version.contains("_develop") == false
 }
 
 allprojects {
