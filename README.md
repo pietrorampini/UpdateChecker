@@ -67,11 +67,12 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
 You can set the store where your app is published on, the successful checks necessary to show notice, modify the notice(Dialog or Notification) and modify the notice icon.
 Check out [Customization doc](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md) for more infos. 
 Example: show a **notification** instead of a dialog
-    ```java	
-    UpdateChecker checker = new UpdateChecker(this);
-    checker.setNotice(Notice.NOTIFICATION);
-    checker.start();
-    ```  	
+
+```java	
+UpdateChecker checker = new UpdateChecker(this);
+checker.setNotice(Notice.NOTIFICATION);
+checker.start();
+```  	
     
 ##Contribution
 
