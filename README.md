@@ -46,7 +46,7 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	```
     	
-- To start using UpdateChecker: a **dialog** is be shown if a new update is found:
+- Start using UpdateChecker: a **dialog** is be shown if a new update is found:
 
     ```java	
     UpdateChecker checker = new UpdateChecker(this);
@@ -65,16 +65,14 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
 
 ##Customization
 You can set the store where your app is published on, the successful checks necessary to show notice, modify the notice(Dialog or Notification) and modify the notice icon.
-Check out [Customization doc](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md)for more infos. 
+Check out [Customization doc](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md) for more infos. 
 Example: show a **notification** instead of a dialog
-
     ```java	
     UpdateChecker checker = new UpdateChecker(this);
     checker.setNotice(Notice.NOTIFICATION);
     checker.start();
     ```  	
-
-
+    
 ##Contribution
 
 ### Questions
