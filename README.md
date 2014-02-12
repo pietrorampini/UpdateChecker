@@ -26,26 +26,27 @@ It checks for new updates downloadable parsing the Store desktop page of your ap
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
-## Dependencies
-- android-support-v4.jar
-
 ## Example
 Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/tree/master/demo) or download directly [the apk](https://github.com/rampo/UpdateChecker/tree/master/apk) 
 
 ## Usage
 
-- Import android-support-v4.jar into the library.
+- In your `build.gradle` file:
 
-- Import the library into you app.
+	```groovy	
+	dependencies {
+	    compile 'com.github.rampo.updatechecker:library:2.0.0'
+	}	
+	```
 
-- First, add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's Manifest: 
+- Then, add **INTERNET** and **ACCESS_NETWORK_STATE** permissions to your app's Manifest: 
 
     ```xml		
 	<uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	```
     	
-- To show a **dialog** if a new update is found:
+- To start using UpdateChecker: a **dialog** is be shown if a new update is found:
 
     ```java	
     UpdateChecker checker = new UpdateChecker(this);
@@ -53,14 +54,6 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
     ```  
 	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
 
-- To show a Play-Store-like **notification** if a new update is found:
-		
-    ```java		
-    UpdateChecker checker = new UpdateChecker(this);
-    checker.setNotice(Notice.NOTIFICATION);
-    checker.start();
-    ```		
-    ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only.png)
 
 ##Important!
 
@@ -71,26 +64,18 @@ It's a precaution to make the library not too invasive. To modify this, see [Cus
 - See [Issue #1](https://github.com/rampo/UpdateChecker/issues/1)
 
 ##Customization
+You can set the store where your app is published on, the successful checks necessary to show notice, modify the notice(Dialog or Notification) and modify the notice icon.
+Check out [Customization doc](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md)for more infos. 
+Example: show a **notification** instead of a dialog
 
-- You can modify modify the number of checks after the dialog will be shown. Default is 5.
-    
-    ```java
-    UpdateChecker.checkForNotification(this, 10);
-    UpdateChecker.checkForDialog(this, 10);
-    ```
-
-- You can modify the notification Drawable by calling a variant of checkForNotification(...) method:
-    
-    ```java
-    UpdateChecker.checkForNotification(R.drawable.ic_launcher, this)
-    UpdateChecker.checkForNotification(R.drawable.ic_launcher, this, 10)
-    ```
-    ![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/notification_only_custom.png)
-        
+    ```java	
+    UpdateChecker checker = new UpdateChecker(this);
+    checker.setNotice(Notice.NOTIFICATION);
+    checker.start();
+    ```  	
 
 
 ##Contribution
-
 
 ### Questions
 
