@@ -117,7 +117,7 @@ Wrtiten and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroR
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
 </a>
 
-The UpdateChecker logo has been created by: [Michael Cook](https://plus.google.com/+michaelcook/posts)
+The UpdateChecker logo has been created by [Michael Cook](https://plus.google.com/+michaelcook/posts)
 ## License
 
 [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
