@@ -6,7 +6,7 @@
 
 ## Overview
 
-`UpdateChecker` is a class that can be used by Android Developers to increase the number of their apps' updates by showing a *"New update available"* Notification or Dialog. 
+`UpdateChecker` is a class can be used by Android Developers to increase the number of their apps' updates by showing a *"New update available"* Notification or Dialog. 
 
 It checks for new updates downloadable parsing the Store desktop page of your app.
 
@@ -46,7 +46,7 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	```
     	
-- Start using UpdateChecker: a **dialog** is be shown if a new update is found:
+- Start using UpdateChecker: a **dialog** will be shown if a new update is found:
 
     ```java	
     UpdateChecker checker = new UpdateChecker(this);
@@ -117,7 +117,7 @@ Wrtiten and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroR
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
 </a>
 
-The UpdateChecker logo has been created by: [Michael Cook](https://plus.google.com/+michaelcook/posts)
+The UpdateChecker logo has been created by [Michael Cook](https://plus.google.com/+michaelcook/posts)
 ## License
 
 [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
