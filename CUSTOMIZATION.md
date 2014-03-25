@@ -1,5 +1,4 @@
 # Customization 
-
 This is the base code.
 ```java
 UpdateChecker checker = new UpdateChecker(this);
@@ -35,10 +34,10 @@ Set the checks successful necessary to show the Notice. Default is 5.
 
 ```java
 UpdateChecker checker = new UpdateChecker(this);
-checker.setSuccessfulChecksRequired(1);
+checker.
 checker.start();
 ```
-Set the checks successful necessary to show the Notice. Default is 5.
+Set the notice
 
 
 ##setNoticeIcon(int noticeIconResId)
@@ -48,4 +47,4 @@ UpdateChecker checker = new UpdateChecker(this);
 checker.setSuccessfulChecksRequired(1);
 checker.start();
 ```
-Set the checks successful necessary to show the Notice. Default is 5.
+Set the notification or dialog icon
