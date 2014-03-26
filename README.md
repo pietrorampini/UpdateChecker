@@ -73,7 +73,8 @@ UpdateChecker checker = new UpdateChecker(this);
 checker.setNotice(Notice.NOTIFICATION);
 checker.start();
 ```  	
-    
+See [Custom implementation](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md#custom-implementation) if you don't want to use these Notices and manage the result by yourself.
+
 ##Contribution
 
 ### Questions
