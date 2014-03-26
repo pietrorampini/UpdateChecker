@@ -52,8 +52,6 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
     UpdateChecker checker = new UpdateChecker(this);
     checker.start();
     ```  
-	![Image](https://raw.github.com/rampo/UpdateChecker/master/arts/dialog.png)
-
 
 ##Important!
 
