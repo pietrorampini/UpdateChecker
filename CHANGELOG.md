@@ -1,7 +1,7 @@
 Change Log
 ===============================================================================
 
-Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(2014-01-29)*
+Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(2014-03-26)*
 ----------------------------
  * LIB: Complete Gradle support!
  * LIB: Removed `StyledDialogs` dependency 
