@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor">%1$s의 새 버전이 올라왔습니다.\n%2$s로 이동 할까요?</string>
+    <string name="dialogPositiveButton">네</string>
+    <string name="dialogNeutralButton">나중에</string>
+    <string name="dialogNegativeButton">아니오</string>
+    <string name="newUpdateAvailable">새 버전이 출시되었습니다.</string>
+</resources>

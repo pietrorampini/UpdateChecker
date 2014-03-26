@@ -1,6 +1,26 @@
 Change Log
 ===============================================================================
 
+Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(2014-03-26)*
+----------------------------
+ * LIB: Complete Gradle support!
+ * LIB: Added Hungarian translation (thanks to [@Pistabaaa](https://github.com/Pistabaaa))
+ * LIB: Removed `StyledDialogs` dependency 
+ * LIB: Removed `FragmentActivity` requirement 
+ * LIB: Support for Amazon App Store
+ * LIB: Now you can specify an icon also for Dialog
+ * LIB: Added the possibility to use a custom implementation. Manage yourself what to do if a new update is available  by implementing  `UpdateCheckerResult` instead of show a Dialog or Notification. See [Custom Implementation](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md#custom-implementation).
+ * LIB: Added `Notice` and `Store` classes to manager better the chooses of the dev
+ * LIB: Removed `DialogInterface` 
+ * LIB: `UpdateChecker.java` rewritten; now completely static
+ * LIB: Moved the `ASyncCheck` in its own class
+ * DEMO: New icon 
+ * DEMO: Demo app publised on Play Store [](https://play.google.com/store/apps/details?id=com.rampo.updatechecker.demo)
+ * DEMO: Demo app rewritten.
+ * DEMO: Demo app redesigned: branded to red
+ * DEMO: Set package of demo app to `com.rampo.updatechecker.demo` to publish the package on Play Store.
+ * DEMO: Added `CustomActivity`. See above
+ 
 Version [1.2.5](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.5) *(2013-12-29)*
 ----------------------------
  * LIB: Added Slovak translation (thanks to [@pylerSM](https://github.com/pylerSM))

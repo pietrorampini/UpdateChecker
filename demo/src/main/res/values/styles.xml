@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_background_textured</item>
+        <item name="android:titleTextStyle">@style/AppTheme.ActionBar.TitleTextStyle</item>
+        <item name="android:subtitleTextStyle">@style/AppTheme.ActionBar.SubTitleTextStyle</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.TitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.SubTitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="TextInfo" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:layout_marginTop">@dimen/padding_infos</item>
+        <item name="android:textColorLink">@color/red</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ButtonExecuteCheck">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="ButtonExecuteCheck.CustomImpl">
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/custom_impl</item>
+    </style>
+
+    <style name="CustomImplResult">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/padding_infos</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="LibraryUsageAdviceText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/padding_small</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:text">@string/how_to_test</item>
+    </style>
+
+</resources>

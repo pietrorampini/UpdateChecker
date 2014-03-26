@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor">Check out the new update for %1$s!\nAvailable now on %2$s.</string>
+    <string name="dialogPositiveButton">OK</string>
+    <string name="dialogNeutralButton">Later</string>
+    <string name="dialogNegativeButton">No, thanks</string>
+    <string name="newUpdateAvailable">New update found</string>
+    <string name="googlePlay">Google Play</string>
+    <string name="amazonStore">Amazon App Store</string>
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor">Provjerite novo ažuriranje za %1$s!\nDostupno na %2$s.</string>
+    <string name="dialogPositiveButton">U redu</string>
+    <string name="dialogNeutralButton">Poslije</string>
+    <string name="dialogNegativeButton">Ne, hvala</string>
+    <string name="newUpdateAvailable">Pronađeno novo ažuriranje</string>
+</resources>

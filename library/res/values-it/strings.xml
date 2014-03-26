@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="downloadFor">Scarica il nuovo aggiornamento per %1$s!\nDisponibile ora su Google Play.</string>
-    <string name="dialogPositiveButton">OK</string>
-    <string name="dialogNeutralButton">Dopo</string>
-    <string name="dialogNegativeButton">No Grazie</string>
-    <string name="newUpdateAvailable">Nuovo aggiornamento trovato</string>
-</resources>

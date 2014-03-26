@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloadFor">Vérifier de la nouvelle mise à jour pour %1$s!\nDisponible dès maintenant sur %2$s.</string>
+    <string name="dialogPositiveButton">Noter</string>
+    <string name="dialogNeutralButton">Plus tard</string>
+    <string name="dialogNegativeButton">Non merci</string>
+    <string name="newUpdateAvailable">Nouvelle mise à jour Trouvé</string>
+</resources>
