@@ -4,6 +4,7 @@ Change Log
 Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(2014-03-26)*
 ----------------------------
  * LIB: Complete Gradle support!
+ * LIB: Added Hungarian translation (thanks to [@Pistabaaa](https://github.com/Pistabaaa))
  * LIB: Removed `StyledDialogs` dependency 
  * LIB: Removed `FragmentActivity` requirement 
  * LIB: Support for Amazon App Store
