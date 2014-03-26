@@ -9,7 +9,7 @@ Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(20
  * LIB: Removed `FragmentActivity` requirement 
  * LIB: Support for Amazon App Store
  * LIB: Now you can specify an icon also for Dialog
- * LIB: Added the possibility to use a custom implementation. Manage yourself what to do if a new update is available  by implementing  `UpdateCheckerResult` instead of show a Dialog or Notification. See [CustomActivity.java](https://github.com/rampo/UpdateChecker/blob/master/demo/UpdateCheckerDemo/src/com/rampo/updatechecker/demo/CustomActivity.java) as example.
+ * LIB: Added the possibility to use a custom implementation. Manage yourself what to do if a new update is available  by implementing  `UpdateCheckerResult` instead of show a Dialog or Notification. See [Custom Implementation](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md#custom-implementation).
  * LIB: Added `Notice` and `Store` classes to manager better the chooses of the dev
  * LIB: Removed `DialogInterface` 
  * LIB: `UpdateChecker.java` rewritten; now completely static
