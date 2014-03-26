@@ -44,7 +44,7 @@ Set the notice. Notices supported:
 * NOTIFICATION = Show a Notification
 * DIALOG = Show a Dialog
 
-See [Custom implementation](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md#custom-implementation) if you don't want to use these Notices and managed the result by yourself.
+See [Custom implementation](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md#custom-implementation) if you don't want to use these Notices and manage the result by yourself.
 ###setNoticeIcon(int noticeIconResId)
 
 ```java
