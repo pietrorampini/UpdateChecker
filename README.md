@@ -59,7 +59,7 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 
 - If there is a new update available, when app launched, **not every time the Notification / Dialog will be shown.**
 The Notification/Dialog will be shown every 5 times the app ascertain that a new update is available.
-It's a precaution to make the library not too invasive. To modify this, see [Customization](https://github.com/rampo/UpdateChecker#customization).
+It's a precaution to make the library not too invasive. To modify this, see [Customization/setSuccessfulChecksRequired()](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md#setsuccessfulchecksrequiredint-checksrequired).
 
 - See [Issue #1](https://github.com/rampo/UpdateChecker/issues/1)
 
