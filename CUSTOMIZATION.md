@@ -16,8 +16,8 @@ checker.start();
 Declare the store where your are is published on. If you publish in more than one store modify this value before exporting the .apk for every store.
 Stores supported:
 
-* Google Play Store = GOOGLE_PLAY
-* Amazon App Store = AMAZON
+* GOOGLE_PLAY = Google Play Store 
+* AMAZON = Amazon App Store
 
 More stores coming soon...
 
@@ -34,17 +34,19 @@ Set the checks successful necessary to show the Notice. Default is 5.
 
 ```java
 UpdateChecker checker = new UpdateChecker(this);
-checker.
+checker.setNotice(Notice.NOTIFICATION);
 checker.start();
 ```
-Set the notice
+Set the notice. Notices supported:
 
+* NOTIFICATION = Show a Notification
+* DIALOG = Show a Dialog
 
 ##setNoticeIcon(int noticeIconResId)
 
 ```java
 UpdateChecker checker = new UpdateChecker(this);
-checker.setSuccessfulChecksRequired(1);
+checker.setNoticeIcon(R.drawable.ic_launcher);
 checker.start();
 ```
 Set the notification or dialog icon
