@@ -30,7 +30,7 @@ UpdateChecker checker = new UpdateChecker(this);
 checker.setSuccessfulChecksRequired(1);
 checker.start();
 ```
-Set the checks successful necessary to show the Notice. [Default is 5](https://github.com/rampo/UpdateChecker/blob/masterd/library/src/main/java/com/rampo/updatechecker/UpdateChecker.java#L36)
+Set the checks successful necessary to show the Notice. [Default is 5](https://github.com/rampo/UpdateChecker/blob/master/library/src/main/java/com/rampo/updatechecker/UpdateChecker.java#L36)
 
 ###setNotice(Notice notice)
 
@@ -132,3 +132,6 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
     }
 }
 ```
+
+Result:
+![Custom Implementation Screenshot](https://raw.githubusercontent.com/rampo/UpdateChecker/master/arts/Screenshots/screen_custom_impl.png)
