@@ -134,4 +134,5 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
 ```
 
 Result:
-![Custom Implementation Screenshot](https://raw.githubusercontent.com/rampo/UpdateChecker/master/arts/Screenshots/screen_custom_impl.png)
+
+![Custom Implementation Screenshot](https://raw.githubusercontent.com/rampo/UpdateChecker/master/arts/Screenshots/screen_custom_impl_small.png)
