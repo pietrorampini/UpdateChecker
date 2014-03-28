@@ -1,4 +1,4 @@
-package com.rampo.updatechecker.demo;
+package com.actionbarsherlock.sample.demos;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,6 +26,10 @@ public class Infos extends Activity {
         TextView attrs = (TextView) findViewById(R.id.attributions);
         attrs.setText(Html.fromHtml(getString(R.string.attributions, createLink("http://www.apache.org/licenses/LICENSE-2.0 ", "Apache License, V2"), gitHubLink)));
         attrs.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView info = (TextView) findViewById(R.id.abs);
+        info.setText(Html.fromHtml(getString(R.string.infos, createLink("https://github.com/JakeWharton/ActionBarSherlock", "ActionBarSherlock"))));
+        info.setMovementMethod(LinkMovementMethod.getInstance());
 
         TextView feedback = (TextView) findViewById(R.id.feedback);
         feedback.setText(Html.fromHtml(getString(R.string.feedback, gitHubLink)));
