@@ -15,11 +15,11 @@ Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(20
  * LIB: `UpdateChecker.java` rewritten; now completely static
  * LIB: Moved the `ASyncCheck` in its own class
  * DEMO: New icon 
- * DEMO: Demo app publised on Play Store [](https://play.google.com/store/apps/details?id=com.rampo.updatechecker.demo)
  * DEMO: Demo app rewritten.
  * DEMO: Demo app redesigned: branded to red
- * DEMO: Set package of demo app to `com.rampo.updatechecker.demo` to publish the package on Play Store.
  * DEMO: Added `CustomActivity`. See above
+ * <del>DEMO: Set package of demo app to `com.rampo.updatechecker.demo` to publish the package on Play Store.</del>
+ * <del>DEMO: Demo app publised on Play Store</del> (Play Store problems)
  
 Version [1.2.5](https://github.com/rampo/UpdateChecker/releases/tag/v1.2.5) *(2013-12-29)*
 ----------------------------
