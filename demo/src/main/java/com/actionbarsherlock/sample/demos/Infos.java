@@ -2,7 +2,6 @@ package com.actionbarsherlock.sample.demos;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
@@ -46,7 +45,7 @@ public class Infos extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        NavUtils.navigateUpFromSameTask(this);
+        finish();
         return super.onOptionsItemSelected(item);
     }
 }
