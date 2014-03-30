@@ -24,7 +24,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 /**
- * Builds a notification to alert the user if a new update is found.
+ Builds and show a Notification if a new update has been found.
  * @see com.rampo.updatechecker.Notice#NOTIFICATION
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */

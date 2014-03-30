@@ -25,7 +25,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 /**
- * Builds a dialog to alert the user if a new update is found. This is the default Notice.
+ * Builds and show a Dialog if a new update has been found. This is the default Notice.
  * I've used the old AlertDialog API because newer APIs require FragmentActivity.
  * @see com.rampo.updatechecker.Notice#DIALOG
  * @author Pietro Rampini (rampini.pietro@gmail.com)

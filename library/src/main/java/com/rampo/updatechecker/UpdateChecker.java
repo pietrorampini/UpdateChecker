@@ -90,7 +90,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     }
 
     /**
-     * Set the type of notice used to alert the user if a new updated is found. Default is Dialog.
+     * Set the type of notice used to alert the user if a new update has been found. Default is Dialog.
      *
      * @param notice to set.
      * @see com.rampo.updatechecker.Notice
