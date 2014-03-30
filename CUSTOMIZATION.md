@@ -71,17 +71,17 @@ You need to use the constructor with two argoments and implement UpdateCheckerRe
   ```java
      UpdateChecker checker = new UpdateChecker(this, new UpdateCheckerResult() {
             @Override
-            public void foundUpdateAndShowIt(String s) {
+            public void foundUpdateAndShowIt(String versionDonwloadable) {
                 
             }
 
             @Override
-            public void foundUpdateAndDontShowIt(String s) {
+            public void foundUpdateAndDontShowIt(String versionDonwloadable) {
 
             }
 
             @Override
-            public void upToDate(String s) {
+            public void upToDate(String versionDonwloadable) {
 
             }
         });
