@@ -23,9 +23,9 @@ public interface ASyncCheckResult {
     /**
      * If the library found a version available on the Store, and it's different from the installed one, notify it to the user.
      *
-     * @param mVersionDownloadable String to compare to the version installed of the app.
+     * @param versionDownloadable String to compare to the version installed of the app.
      */
-    public void versionDownloadableFound(String mVersionDownloadable);
+    public void versionDownloadableFound(String versionDownloadable);
 
     /**
      * Can't get the versionName from the Store.

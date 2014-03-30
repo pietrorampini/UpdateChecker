@@ -57,35 +57,35 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.UpdateChecker#setSuccessfulChecksRequired(int)
      */
     @Override
-    public void foundUpdateAndShowIt(String mVersionDonwloadable) {
-        result.setText("Update available\n" + "Version downloadable: " + mVersionDonwloadable + "\nVersion installed: " + mVersionInstalled());
+    public void foundUpdateAndShowIt(String versionDownloadable) {
+        result.setText("Update available\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + mVersionInstalled());
     }
 
     /**
      * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.UpdateChecker#setSuccessfulChecksRequired(int)
      */
     @Override
-    public void foundUpdateAndDontShowIt(String mVersionDonwloadable) {
-        result.setText("Already Shown\n" + "Version downloadable: " + mVersionDonwloadable + "\nVersion installed: " + mVersionInstalled());
+    public void foundUpdateAndDontShowIt(String versionDownloadable) {
+        result.setText("Already Shown\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + mVersionInstalled());
     }
 
     /**
      * mVersionDonwloadable is equal to manifest versionName -> No new update available.
      * Don't show the Notice
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      */
     @Override
-    public void upToDate(String mVersionDonwloadable) {
-        result.setText("Updated\n" + "Version downloadable: " + mVersionDonwloadable + "\nVersion installed: " + mVersionInstalled());
+    public void upToDate(String versionDownloadable) {
+        result.setText("Updated\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + mVersionInstalled());
     }
 
     public String mVersionInstalled() {

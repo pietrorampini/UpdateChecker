@@ -16,7 +16,7 @@
 package com.rampo.updatechecker;
 
 /**
- * Type of notice used to alert the user if a new updated is found. Settable with setNotice(Notice). Default is Dialog.
+ * Type of notice used to alert the user if a new update has been found. Settable with setNotice(Notice). Default is Dialog.
  * @see com.rampo.updatechecker.UpdateChecker#setNotice(Notice)
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */

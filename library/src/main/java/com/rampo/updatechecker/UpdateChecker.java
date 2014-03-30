@@ -90,7 +90,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     }
 
     /**
-     * Set the type of notice used to alert the user if a new updated is found. Default is Dialog.
+     * Set the type of notice used to alert the user if a new update has been found. Default is Dialog.
      *
      * @param notice to set.
      * @see com.rampo.updatechecker.Notice
@@ -117,9 +117,9 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         }
     }
 
-    /*
-    * Start the process
-    */
+    /**
+     * Start the process
+     */
     public static void start() {
         ASyncCheck asynctask = new ASyncCheck(mStore, mCheckResultCallback, mActivity);
         asynctask.execute();
@@ -128,18 +128,18 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * If the library found a version available on the Store, and it's different from the installed one, notify it to the user.
      *
-     * @param mVersionDonwloadable String to compare to the version installed of the app.
+     * @param versionDownloadable String to compare to the version installed of the app.
      */
     @Override
-    public void versionDownloadableFound(String mVersionDonwloadable) {
-        if (versionDownloadableIsDifferent(mVersionDonwloadable)) { // New Update Available
-            if (hasToShowNotice(mVersionDonwloadable) && !hasUserTappedToNotShowNoticeAgain(mVersionDonwloadable)) {
-                mLibraryResultCallaback.foundUpdateAndShowIt(mVersionDonwloadable);
+    public void versionDownloadableFound(String versionDownloadable) {
+        if (versionDownloadableIsDifferent(versionDownloadable)) { // New Update Available
+            if (hasToShowNotice(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
+                mLibraryResultCallaback.foundUpdateAndShowIt(versionDownloadable);
             } else {
-                mLibraryResultCallaback.foundUpdateAndDontShowIt(mVersionDonwloadable);
+                mLibraryResultCallaback.foundUpdateAndDontShowIt(versionDownloadable);
             }
         } else { // No new update available
-            mLibraryResultCallaback.upToDate(mVersionDonwloadable);
+            mLibraryResultCallaback.upToDate(versionDownloadable);
         }
 
     }
@@ -147,15 +147,13 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * Compare the string versionDownloadable to the version installed of the app.
      *
-     * @param mVersionDonwloadable String to compare to the version installed of the app.
+     * @param versionDownloadable String to compare to the version installed of the app.
      */
-    private boolean versionDownloadableIsDifferent(String mVersionDonwloadable) {
+    private boolean versionDownloadableIsDifferent(String versionDownloadable) {
         try {
-
-            return !mVersionDonwloadable.equals(mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName);
+            return !versionDownloadable.equals(mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName);
         } catch (PackageManager.NameNotFoundException ignored) {
         }
-
         return false;
     }
 
@@ -186,54 +184,54 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     }
 
     /**
-     * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
+     * versionDownloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.UpdateChecker#setSuccessfulChecksRequired(int)
      */
     @Override
-    public void foundUpdateAndShowIt(String mVersionDonwloadable) {
+    public void foundUpdateAndShowIt(String versionDownloadable) {
         if (mNotice == Notice.NOTIFICATION) {
             showNotification();
         } else if (mNotice == Notice.DIALOG) {
-            showDialog(mVersionDonwloadable);
+            showDialog(versionDownloadable);
         }
     }
 
     /**
-     * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
+     * versionDownloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.UpdateChecker#setSuccessfulChecksRequired(int)
      */
     @Override
-    public void foundUpdateAndDontShowIt(String mVersionDonwloadable) {
+    public void foundUpdateAndDontShowIt(String versionDownloadable) {
 
     }
 
     /**
-     * mVersionDonwloadable is equal to manifest versionName -> No new update available.
+     * versionDownloadable is equal to manifest versionName -> No new update available.
      * Don't show the Notice
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      */
     @Override
-    public void upToDate(String mVersionDonwloadable) {
+    public void upToDate(String versionDownloadable) {
 
     }
 
     /**
      * Get if the user has tapped on "No, thanks" button on dialog for this downloable version.
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDownloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.Dialog#userHasTappedToNotShowNoticeAgain(android.content.Context, String)
      */
 
-    private boolean hasUserTappedToNotShowNoticeAgain(String mVersionDonwloadable) {
+    private boolean hasUserTappedToNotShowNoticeAgain(String versionDownloadable) {
         SharedPreferences prefs = mActivity.getSharedPreferences(PREFS_FILENAME, 0);
-        String prefKey = DONT_SHOW_AGAIN_PREF_KEY + mVersionDonwloadable;
+        String prefKey = DONT_SHOW_AGAIN_PREF_KEY + versionDownloadable;
         return prefs.getBoolean(prefKey, false);
     }
 
@@ -241,15 +239,15 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * Show the Notice only if it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      */
-    private boolean hasToShowNotice(String mVersionDonwloadable) {
+    private boolean hasToShowNotice(String versionDownloadable) {
         SharedPreferences prefs = mActivity.getSharedPreferences(PREFS_FILENAME, 0);
-        String prefKey = SUCCESSFUL_CHEKS_PREF_KEY + mVersionDonwloadable;
+        String prefKey = SUCCESSFUL_CHEKS_PREF_KEY + versionDownloadable;
         int mChecksMade = prefs.getInt(prefKey, 0);
         if (mChecksMade % mSuccessfulChecksRequired == 0 || mChecksMade == 0) {
-            saveNumberOfChecksForUpdatedVersion(mVersionDonwloadable, mChecksMade);
+            saveNumberOfChecksForUpdatedVersion(versionDownloadable, mChecksMade);
             return true;
         } else {
-            saveNumberOfChecksForUpdatedVersion(mVersionDonwloadable, mChecksMade);
+            saveNumberOfChecksForUpdatedVersion(versionDownloadable, mChecksMade);
             return false;
         }
     }
@@ -257,11 +255,11 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * Update number of checks for this version downloadable from the Store.
      */
-    private void saveNumberOfChecksForUpdatedVersion(String mVersionDonwloadable, int mChecksMade) {
+    private void saveNumberOfChecksForUpdatedVersion(String versionDownloadable, int mChecksMade) {
         mChecksMade++;
         SharedPreferences prefs = mActivity.getSharedPreferences(PREFS_FILENAME, 0);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(SUCCESSFUL_CHEKS_PREF_KEY + mVersionDonwloadable, mChecksMade);
+        editor.putInt(SUCCESSFUL_CHEKS_PREF_KEY + versionDownloadable, mChecksMade);
         editor.commit();
 
     }
@@ -269,8 +267,8 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * Show Dialog
      */
-    public void showDialog(String mVersionDonwloadable) {
-        Dialog.show(mActivity, mStore, mVersionDonwloadable, mNoticeIconResId);
+    public void showDialog(String versionDownloadable) {
+        Dialog.show(mActivity, mStore, versionDownloadable, mNoticeIconResId);
     }
 
     /**

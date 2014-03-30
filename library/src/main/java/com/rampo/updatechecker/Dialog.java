@@ -25,54 +25,54 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 /**
- * Builds a dialog to alert the user if a new update is found. This is the default Notice.
+ * Builds and show a Dialog if a new update has been found. This is the default Notice.
  * I've used the old AlertDialog API because newer APIs require FragmentActivity.
  * @see com.rampo.updatechecker.Notice#DIALOG
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
 public class Dialog {
 
-    public static void show(final Context mContext, final Store mStore, final String mVersionDownloadable, final int mDialogIconResId) {
+    public static void show(final Context context, final Store store, final String versionDownloadable, final int dialogIconResId) {
         try {
             String storeName = null;
-            if (mStore == Store.GOOGLE_PLAY){
-                storeName = mContext.getString(R.string.googlePlay);
+            if (store == Store.GOOGLE_PLAY){
+                storeName = context.getString(R.string.googlePlay);
             }
-            else if (mStore == Store.AMAZON){
-                storeName = mContext.getString(R.string.amazonStore);
+            else if (store == Store.AMAZON){
+                storeName = context.getString(R.string.amazonStore);
             }
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
             String appName = null;
             try {
-                appName = (String) mContext.getPackageManager().getApplicationLabel(mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), 0));
+                appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
             } catch (PackageManager.NameNotFoundException ignored) {
             }
-            alertDialogBuilder.setTitle(mContext.getResources().getString(R.string.newUpdateAvailable));
-            alertDialogBuilder.setMessage(mContext.getResources().getString(R.string.downloadFor, appName, storeName))
+            alertDialogBuilder.setTitle(context.getResources().getString(R.string.newUpdateAvailable));
+            alertDialogBuilder.setMessage(context.getResources().getString(R.string.downloadFor, appName, storeName))
                     .setCancelable(true)
-                    .setPositiveButton(mContext.getString(R.string.dialogPositiveButton), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(context.getString(R.string.dialogPositiveButton), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            goToMarket(mContext);
+                            goToMarket(context);
                             dialog.cancel();
                         }
                     })
-                    .setNeutralButton(mContext.getString(R.string.dialogNeutralButton), new DialogInterface.OnClickListener() {
+                    .setNeutralButton(context.getString(R.string.dialogNeutralButton), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
                         }
                     })
-                    .setNegativeButton(mContext.getString(R.string.dialogNegativeButton), new DialogInterface.OnClickListener() {
+                    .setNegativeButton(context.getString(R.string.dialogNegativeButton), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            userHasTappedToNotShowNoticeAgain(mContext, mVersionDownloadable);
+                            userHasTappedToNotShowNoticeAgain(context, versionDownloadable);
                             dialog.cancel();
                         }
 
                     });
-            if (mDialogIconResId != 0) {
-                alertDialogBuilder.setIcon(mDialogIconResId);
+            if (dialogIconResId != 0) {
+                alertDialogBuilder.setIcon(dialogIconResId);
             }
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
