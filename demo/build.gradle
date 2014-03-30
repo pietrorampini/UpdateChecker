@@ -19,5 +19,4 @@ android {
 
 dependencies {
     compile 'com.github.rampo.updatechecker:library:2.0.0@aar'
-    compile 'com.android.support:support-v4:19.0.1'
 }
