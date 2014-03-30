@@ -122,7 +122,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     }
 
     /**
-     * return to the Fragment to work with the versionDownloadable if the library found it.
+     * Return to the Fragment to work with the versionDownloadable if the library found it.
      *
      * @param result
      */

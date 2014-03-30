@@ -22,28 +22,28 @@ package com.rampo.updatechecker;
  */
 public interface UpdateCheckerResult {
     /**
-     * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
+     * versionDonwloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDonwloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.UpdateChecker#setSuccessfulChecksRequired(int)
      */
-    public void foundUpdateAndShowIt(String mVersionDonwloadable);
+    public void foundUpdateAndShowIt(String versionDonwloadable);
 
     /**
-     * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
+     * versionDonwloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDonwloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.UpdateChecker#setSuccessfulChecksRequired(int)
      */
-    public void foundUpdateAndDontShowIt(String mVersionDonwloadable);
+    public void foundUpdateAndDontShowIt(String versionDonwloadable);
 
     /**
-     * mVersionDonwloadable is equal to manifest versionName -> No new update available.
+     * versionDonwloadable is equal to manifest versionName -> No new update available.
      * Don't show the Notice
      *
-     * @param mVersionDonwloadable version downloadable from the Store.
+     * @param versionDonwloadable version downloadable from the Store.
      */
-    public void upToDate(String mVersionDonwloadable);
+    public void upToDate(String versionDonwloadable);
 }

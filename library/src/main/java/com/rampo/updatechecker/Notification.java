@@ -29,33 +29,33 @@ import android.support.v4.app.NotificationCompat;
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
 public class Notification {
-    public static void show(Context mContext, Store mStore, int mNotificationIconResId) {
+    public static void show(Context context, Store store, int notificationIconResId) {
         android.app.Notification notification;
-        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + mContext.getPackageName()));
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, myIntent, Intent.FILL_IN_ACTION);
+        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName()));
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
         String appName = null;
         try {
-            appName = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), 0).loadLabel(mContext.getPackageManager()).toString();
+            appName = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0).loadLabel(context.getPackageManager()).toString();
         } catch (PackageManager.NameNotFoundException ignored) {
         }
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
-        builder.setTicker(mContext.getString(R.string.newUpdateAvailable))
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setTicker(context.getString(R.string.newUpdateAvailable))
                 .setContentTitle(appName)
-                .setContentText(mContext.getString(R.string.newUpdateAvailable))
+                .setContentText(context.getString(R.string.newUpdateAvailable))
                 .setContentIntent(pendingIntent).build();
 
-        if (mNotificationIconResId == 0) {
-            if (mStore == Store.GOOGLE_PLAY) {
+        if (notificationIconResId == 0) {
+            if (store == Store.GOOGLE_PLAY) {
                 builder.setSmallIcon(R.drawable.ic_stat_play_store);
-            } else if (mStore == Store.AMAZON) {
+            } else if (store == Store.AMAZON) {
                 builder.setSmallIcon(R.drawable.ic_stat_amazon);
             }
         } else {
-            builder.setSmallIcon(mNotificationIconResId);
+            builder.setSmallIcon(notificationIconResId);
         }
         notification = builder.build();
         notification.flags = android.app.Notification.FLAG_AUTO_CANCEL;
-        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
     }
 }
