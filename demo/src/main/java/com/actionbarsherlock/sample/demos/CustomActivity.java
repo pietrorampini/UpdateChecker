@@ -54,7 +54,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
     }
 
     /**
-     * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
+     * versionDownloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
      * @param versionDownloadable version downloadable from the Store.
@@ -66,7 +66,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
     }
 
     /**
-     * mVersionDonwloadable isn't equal to manifest versionName -> New update available.
+     * versionDownloadable isn't equal to manifest versionName -> New update available.
      * Show the Notice because it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).
      *
      * @param versionDownloadable version downloadable from the Store.
@@ -78,7 +78,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
     }
 
     /**
-     * mVersionDonwloadable is equal to manifest versionName -> No new update available.
+     * versionDownloadable is equal to manifest versionName -> No new update available.
      * Don't show the Notice
      *
      * @param versionDownloadable version downloadable from the Store.
