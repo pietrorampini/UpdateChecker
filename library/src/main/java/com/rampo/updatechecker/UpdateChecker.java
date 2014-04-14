@@ -45,6 +45,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     static UpdateCheckerResult mLibraryResultCallaback;
     static ASyncCheckResult mCheckResultCallback;
     static boolean mCustomImplementation;
+	static boolean mIsDebug;
 
     public UpdateChecker(Activity activity) {
         mActivity = activity;
@@ -55,6 +56,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         mCheckResultCallback = this;
         mLibraryResultCallaback = this;
         mCustomImplementation = false;
+        mIsDebug = false;
     }
 
     public UpdateChecker(Activity activity, UpdateCheckerResult updateCheckerResult) {
@@ -66,6 +68,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         mCheckResultCallback = this;
         mLibraryResultCallaback = updateCheckerResult;
         mCustomImplementation = true;
+        mIsDebug = false;
     }
 
     /**
@@ -116,6 +119,16 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
             throw new IllegalStateException("You can't set the notice Icon when you choose a custom implementation.\nThe Notice is controlled manually by you with the callbacks.\nTo call setNotice() use the UpdateChecker constructor with one argument.");
         }
     }
+    
+    /**
+     * Set debug mode.On debug mode, 
+     * {@link com.rampo.updatechecker.UpdateChecker#versionDownloadableIsDifferent versionDownloadableIsDifferent} will always return true
+     * and {@link com.rampo.updatechecker.UpdateChecker#saveNumberOfChecksForUpdatedVersion saveNumberOfChecksForUpdatedVersion} will always save 0.
+     * @param debug
+     */
+    public static void setDebug(boolean debug) {
+    	mIsDebug = debug;
+    }
 
     /**
      * Start the process
@@ -146,10 +159,15 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
 
     /**
      * Compare the string versionDownloadable to the version installed of the app.
+     * On debug mode ({@link com.rampo.updatechecker.UpdateChecker#mIsDebug mIsDebug} is true), will return true. 
      *
      * @param versionDownloadable String to compare to the version installed of the app.
      */
     private boolean versionDownloadableIsDifferent(String versionDownloadable) {
+    	if (mIsDebug) {
+    		return true;
+    	}
+    	
         try {
             return !versionDownloadable.equals(mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName);
         } catch (PackageManager.NameNotFoundException ignored) {
@@ -254,9 +272,14 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
 
     /**
      * Update number of checks for this version downloadable from the Store.
+     * On debug mode ({@link com.rampo.updatechecker.UpdateChecker#mIsDebug mIsDebug} is true), will save 0.
      */
     private void saveNumberOfChecksForUpdatedVersion(String versionDownloadable, int mChecksMade) {
-        mChecksMade++;
+    	if (mIsDebug) {
+    		mChecksMade = 0;
+    	} else {
+    		mChecksMade++;
+    	}
         SharedPreferences prefs = mActivity.getSharedPreferences(PREFS_FILENAME, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(SUCCESSFUL_CHEKS_PREF_KEY + versionDownloadable, mChecksMade);
