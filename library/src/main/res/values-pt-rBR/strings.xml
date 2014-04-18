@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloadFor">Confira a nova atualização para %1$s!\nDisponível agora em %2$s.</string>
+    <string name="dialogPositiveButton">OK</string>
+    <string name="dialogNeutralButton">Mais tarde</string>
+    <string name="dialogNegativeButton">Não, obrigado.</string>
+    <string name="newUpdateAvailable">Nova atualização encontrada</string>
+</resources>
