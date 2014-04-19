@@ -14,14 +14,19 @@ It checks for new updates downloadable parsing the Store desktop page of your ap
 
 [Featured on XDA Portal](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
+[Get the Demo on Google Play](https://play.google.com/store/apps/details?id=com.rampo.updatechecker.demo)
+
+<a href="https://play.google.com/store/apps/details?id=com.rampo.updatechecker.demo">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+</a>
+
 ### Changelog
 ##### Current version: 2.0.1
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
 ## Example
-Due to Play Store problems, I can't publish the demo app on Play Store, so the demo has the same package of [ActionBarSherlock: Demos](https://github.com/JakeWharton/ActionBarSherlock/tree/master/actionbarsherlock-samples/demos) because the library, to works, need a published app on Play Store.
-
 Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/tree/master/demo) or download directly [the apk](https://github.com/rampo/UpdateChecker/tree/master/apk) 
 
 ## Usage

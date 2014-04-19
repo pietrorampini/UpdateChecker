@@ -18,10 +18,6 @@
             style="@style/TextInfo" />
 
         <TextView
-            android:id="@+id/abs"
-            style="@style/TextInfo" />
-
-        <TextView
             android:id="@+id/attributions"
             style="@style/TextInfo" />
 
