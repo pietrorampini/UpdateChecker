@@ -30,7 +30,7 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 
 	```groovy	
 	dependencies {
-	    compile 'com.github.rampo.updatechecker:library:2.0.0'
+	    compile 'com.github.rampo.updatechecker:library:2.0.1'
 	}	
 	```
 
