@@ -15,7 +15,7 @@ It checks for new updates downloadable parsing the Store desktop page of your ap
 [Featured on XDA Portal](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-##### Current version: 2.0.0
+##### Current version: 2.0.1
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
 
