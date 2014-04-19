@@ -1,6 +1,11 @@
 Change Log
 ===============================================================================
 
+
+Version [2.0.1](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.1) *(2014-04-19)*
+----------------------------
+ * LIB: Added  Brazilian Portuguese translation (thanks to [@favasconcelos](https://github.com/favasconcelos))
+
 Version [2.0.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.0) *(2014-03-26)*
 ----------------------------
  * LIB: Complete Gradle support!
