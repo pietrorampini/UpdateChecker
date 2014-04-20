@@ -87,7 +87,7 @@ You need to use the constructor with two argoments and implement UpdateCheckerRe
         });
   ```
 
-Example: (See [CustomActivity.java](https://github.com/rampo/UpdateChecker/blob/master/demo/src/main/java/com/rampo/updatechecker/demo/CustomActivity.java) for more)
+Example: (See [CustomActivity.java](https://github.com/rampo/UpdateChecker/blob/master/demo/src/main/java/com/actionbarsherlock/sample/demos/CustomActivity.java) for more)
 ```java
 public class CustomActivity extends Activity implements UpdateCheckerResult {
     TextView result;
