@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="downloadFor">Telepítsd az új %1$s verziót - már elérhető a Play Áruházban.</string>
-    <string name="dialogPositiveButton">Frissítem</string>
-    <string name="dialogNeutralButton">Később</string>
-    <string name="dialogNegativeButton">Nem, köszönöm</string>
-    <string name="newUpdateAvailable">Új frissítés érhető el</string>
-</resources>

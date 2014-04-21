@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="downloadFor">Pozrite sa na novú aktualizáciu pre %1$s!\nTeraz dostupná v %2$s.</string>
-    <string name="dialogPositiveButton">OK</string>
-    <string name="dialogNeutralButton">Neskôr</string>
-    <string name="dialogNegativeButton">Nie, vďaka</string>
-    <string name="newUpdateAvailable">Nájdená nová aktualizácia</string>
-</resources>

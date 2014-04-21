@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="library_name">Update Checker</string>
-    <string name="downloadFor">Er is een nieuwe update beschikbaar voor %1$s!\nUpdate nu in de %2$s.</string>
-    <string name="dialogPositiveButton">OK</string>
-    <string name="dialogNeutralButton">Later</string>
-    <string name="dialogNegativeButton">Nee</string>
-    <string name="newUpdateAvailable">Nieuwe update beschikbaar</string>
-</resources>
