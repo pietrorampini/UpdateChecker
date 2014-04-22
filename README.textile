@@ -1,1 +1,1 @@
-h1. Child README file
+h1. GitHub Pages README file
