@@ -6,7 +6,7 @@
 
 ## Overview
 
-`UpdateChecker` is a class can be used by Android Developers to increase the number of their apps' updates by showing a *"New update available"* Notification or Dialog. 
+`UpdateChecker` is a class that can be used by Android Developers to increase the number of their apps' updates by showing a *"New update available"* Notification or Dialog. 
 
 It checks for new updates downloadable parsing the Store desktop page of your app.
 
@@ -17,12 +17,12 @@ It checks for new updates downloadable parsing the Store desktop page of your ap
 ### Changelog
 ##### Current version: 2.0.1
 
-See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md)
+See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md).
 
 ## Example
-Due to Play Store problems, I can't publish the demo app on Play Store, so the demo has the same package of [ActionBarSherlock: Demos](https://github.com/JakeWharton/ActionBarSherlock/tree/master/actionbarsherlock-samples/demos) because the library, to works, need a published app on Play Store.
+Due to Play Store problems, I can't publish the demo app on Play Store, so the demo has the same package of [ActionBarSherlock: Demos](https://github.com/JakeWharton/ActionBarSherlock/tree/master/actionbarsherlock-samples/demos) because the library needs a published app on Play Store to work.
 
-Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/tree/master/demo) or download directly [the apk](https://github.com/rampo/UpdateChecker/tree/master/apk) 
+Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/tree/master/demo) or download directly [the apk](https://github.com/rampo/UpdateChecker/tree/master/apk).
 
 ## Usage
 
@@ -50,14 +50,14 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 
 ##Important!
 
-- If there is a new update available, when app launched, **not every time the Notification / Dialog will be shown.**
-The Notification/Dialog will be shown every 5 times the app ascertain that a new update is available.
+- If there is a new update available when your app is launched, **the Notification / Dialog will not be shown every time.**
+The Notification/Dialog will be shown every 5 times the app ascertains that a new update is available.
 It's a precaution to make the library not too invasive. To modify this, see [Customization/setSuccessfulChecksRequired()](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md#setsuccessfulchecksrequiredint-checksrequired).
 
 - See [Issue #1](https://github.com/rampo/UpdateChecker/issues/1)
 
 ##Customization
-You can set the store where your app is published on, the successful checks necessary to show notice, modify the notice(Dialog or Notification) and modify the notice icon.
+You can set the store where your app is published on, the successful checks necessary to show notice, modify the notice (Dialog or Notification) and modify the notice icon.
 Check out [Customization doc](https://github.com/rampo/UpdateChecker/blob/master/CUSTOMIZATION.md) for more infos. 
 Example: show a **notification** instead of a dialog
 
@@ -74,9 +74,9 @@ See [Custom implementation](https://github.com/rampo/UpdateChecker/blob/master/C
 
 If you have any questions regarding UpdateChecker, [create an issue](https://github.com/rampo/UpdateChecker/issues/new).
 
-### Feaure request
+### Feature request
 
-To create a new Feature request, open an issue [here](https://github.com/rampo/UpdateChecker/issues?labels=optimization%2Crequest&page=1&state=open)
+To create a new Feature request, open an issue [here](https://github.com/rampo/UpdateChecker/issues?labels=optimization%2Crequest&page=1&state=open).
 
 I'll try to answer as soon as I find the time.
 
@@ -90,7 +90,7 @@ Please note, if you're working on a pull request, make sure to use the [develop 
 
 ### Discuss
 
-Join in the conversation, check out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385)
+Join in the conversation, check out the [XDA Thread](http://forum.xda-developers.com/showthread.php?t=2412385).
 
 ## Coming soon
  - Stackoverflow tag for more specific code problems
@@ -100,7 +100,7 @@ Join in the conversation, check out the [XDA Thread](http://forum.xda-developers
  
 ## Credits
 
-Wrtiten and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroRampini/posts) - PiKo Technologies
+Written and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroRampini/posts) - PiKo Technologies
 
 <a href="https://plus.google.com/u/0/+PietroRampini/posts">
   <img alt="Follow me on Google+"
