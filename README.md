@@ -74,7 +74,7 @@ See [Custom implementation](https://github.com/rampo/UpdateChecker/blob/master/C
 
 If you have any questions regarding UpdateChecker, [create an issue](https://github.com/rampo/UpdateChecker/issues/new).
 
-### Feaure request
+### Feature request
 
 To create a new Feature request, open an issue [here](https://github.com/rampo/UpdateChecker/issues?labels=optimization%2Crequest&page=1&state=open).
 
