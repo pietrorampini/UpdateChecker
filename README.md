@@ -106,7 +106,7 @@ Written and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroR
   <img alt="Follow me on Google+"
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
 </a>
-<a href="https://twitter.com/rampinipietro">
+<a href="https://twitter.com/rampo_dev">
   <img alt="Follow me on Twitter"
        src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
 </a>
