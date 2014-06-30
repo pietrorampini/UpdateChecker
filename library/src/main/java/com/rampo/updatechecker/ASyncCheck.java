@@ -41,7 +41,7 @@ import java.io.InputStreamReader;
  */
 class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "</script> </div> <div class=\"details-wrapper\">";
+    private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "itemprop=\"softwareVersion\"> ";
     private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION = "itemprop=\"softwareVersion\"> ";
     private static final String PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT = "  </div> </div>";
     private static final String PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "We're sorry, the requested URL was not found on this server.";
@@ -55,6 +55,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final int MULTIPLE_APKS_PUBLISHED = 1;
     private static final int NETWORK_ERROR = 2;
     private static final int PACKAGE_NOT_PUBLISHED = 3;
+    private static final int PLAY_ERROR = 4;
 
     Store mStore;
     Context mContext;
@@ -90,7 +91,9 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                             return PACKAGE_NOT_PUBLISHED;
                         }
                     }
-                    if (containsNumber(mVersionDownloadable)) {
+		    if (mVersionDownloadable == null) { //If page format change
+			return PLAY_ERROR;
+		    } else if (containsNumber(mVersionDownloadable)) {
                         return VERSION_DOWNLOADABLE_FOUND;
                     } else {
                         return MULTIPLE_APKS_PUBLISHED;
@@ -139,7 +142,9 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
         } else if (result == PACKAGE_NOT_PUBLISHED) {
             mResultInterface.appUnpublished();
             Log.e(LOG_TAG, "App unpublished");
-        }
+        } else if (result == PLAY_ERROR) {
+	    Log.e(LOG_TAG, "Play page format error");
+	}
     }
 
     /**
