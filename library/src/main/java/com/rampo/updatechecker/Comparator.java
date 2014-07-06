@@ -15,7 +15,6 @@
  */
 package com.rampo.updatechecker;
 
-
 import android.app.Activity;
 import android.content.pm.PackageManager;
 

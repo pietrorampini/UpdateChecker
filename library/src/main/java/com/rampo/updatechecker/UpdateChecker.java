@@ -238,9 +238,11 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     public void appUnpublished() {
     }
 
+    /**
+     * The check returns null for new version downloadble
+     */
     @Override
     public void storeError() {
-
     }
 
     /**
