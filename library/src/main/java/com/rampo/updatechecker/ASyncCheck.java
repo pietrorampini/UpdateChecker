@@ -20,6 +20,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.rampo.updatechecker.data.Constants;
+import com.rampo.updatechecker.store.Store;
 import com.rampo.updatechecker.utils.Network;
 
 import org.apache.http.HttpResponse;

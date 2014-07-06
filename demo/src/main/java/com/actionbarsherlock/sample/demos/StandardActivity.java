@@ -8,7 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.rampo.updatechecker.Notice;
+import com.rampo.updatechecker.notice.Notice;
 import com.rampo.updatechecker.UpdateChecker;
 
 public class StandardActivity extends Activity {

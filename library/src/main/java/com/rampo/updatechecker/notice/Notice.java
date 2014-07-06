@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.rampo.updatechecker;
+package com.rampo.updatechecker.notice;
 
 /**
  * Type of notice used to alert the user if a new update has been found. Settable with setNotice(Notice). Default is Dialog.

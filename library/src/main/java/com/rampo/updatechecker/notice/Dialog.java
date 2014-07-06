@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.rampo.updatechecker;
+package com.rampo.updatechecker.notice;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -24,12 +24,16 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
+import com.rampo.updatechecker.R;
+import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.UpdateChecker;
+
 /**
  * Builds and show a Dialog if a new update has been found. This is the default Notice.
  * I've used the old AlertDialog API because newer APIs require FragmentActivity.
  *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
- * @see com.rampo.updatechecker.Notice#DIALOG
+ * @see Notice#DIALOG
  */
 public class Dialog {
 
