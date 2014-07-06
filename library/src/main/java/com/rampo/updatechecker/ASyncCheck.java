@@ -41,7 +41,6 @@ import java.io.InputStreamReader;
  */
 class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "itemprop=\"softwareVersion\"> ";
     private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION = "itemprop=\"softwareVersion\"> ";
     private static final String PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT = "  </div> </div>";
     private static final String PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "We're sorry, the requested URL was not found on this server.";
@@ -83,7 +82,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        if (line.contains(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Play Store
+                        if (line.contains(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION)) { // Obtain HTML line contaning version available in Play Store
                             String containingVersion = line.substring(line.lastIndexOf(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
                             String[] removingUnusefulTags = containingVersion.split(PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove useless HTML tags
                             mVersionDownloadable = removingUnusefulTags[0]; // Obtain version available
