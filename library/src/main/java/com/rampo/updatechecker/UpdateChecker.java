@@ -17,7 +17,6 @@ package com.rampo.updatechecker;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 
 /**
@@ -132,7 +131,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void versionDownloadableFound(String versionDownloadable) {
-        if (versionDownloadableIsDifferent(versionDownloadable)) { // New Update Available
+        if (Comparator.isVersionDownloadableNewer(mActivity, versionDownloadable)) {
             if (hasToShowNotice(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
                 mLibraryResultCallaback.foundUpdateAndShowIt(versionDownloadable);
             } else {
@@ -142,19 +141,6 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
             mLibraryResultCallaback.upToDate(versionDownloadable);
         }
 
-    }
-
-    /**
-     * Compare the string versionDownloadable to the version installed of the app.
-     *
-     * @param versionDownloadable String to compare to the version installed of the app.
-     */
-    private boolean versionDownloadableIsDifferent(String versionDownloadable) {
-        try {
-            return !versionDownloadable.equals(mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName);
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        return false;
     }
 
     /**
@@ -181,6 +167,13 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void appUnpublished() {
+    }
+
+    /**
+     * The check returns null for new version downloadble
+     */
+    @Override
+    public void storeError() {
     }
 
     /**
