@@ -17,6 +17,7 @@ package com.rampo.updatechecker;
 
 /**
  * Returns the result of ASyncCheck to UpdateChecker.
+ *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
 public interface ASyncCheckResult {
@@ -34,13 +35,20 @@ public interface ASyncCheckResult {
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
     public void multipleApksPublished();
+
     /**
      * Can't download the store page.
      */
     public void networkError();
+
     /**
      * Can't find the store page for this app.
      */
     public void appUnpublished();
+
+    /**
+     * The check returns null for new version downloadble
+     */
+    public void storeError();
 
 }

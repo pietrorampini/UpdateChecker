@@ -55,7 +55,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final int MULTIPLE_APKS_PUBLISHED = 1;
     private static final int NETWORK_ERROR = 2;
     private static final int PACKAGE_NOT_PUBLISHED = 3;
-    private static final int PLAY_ERROR = 4;
+    private static final int STORE_ERROR = 4;
 
     Store mStore;
     Context mContext;
@@ -91,9 +91,9 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                             return PACKAGE_NOT_PUBLISHED;
                         }
                     }
-		    if (mVersionDownloadable == null) { //If page format change
-			return PLAY_ERROR;
-		    } else if (containsNumber(mVersionDownloadable)) {
+                    if (mVersionDownloadable == null) {
+                        return STORE_ERROR;
+                    } else if (containsNumber(mVersionDownloadable)) {
                         return VERSION_DOWNLOADABLE_FOUND;
                     } else {
                         return MULTIPLE_APKS_PUBLISHED;
@@ -108,7 +108,9 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                         if (line.contains(AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Amazon App Store
                             String versionDownloadableWithTags = line.substring(38); // Get the String starting with version available + Other HTML tags
                             mVersionDownloadable = versionDownloadableWithTags.substring(0, versionDownloadableWithTags.length() - 5); // Remove useless HTML tags
-                            return VERSION_DOWNLOADABLE_FOUND;
+                            if (mVersionDownloadable == null) {
+                                return STORE_ERROR;
+                            } else return VERSION_DOWNLOADABLE_FOUND;
                         } else if (line.contains(AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER)) { // This packages has not been found in Amazon App Store
                             return PACKAGE_NOT_PUBLISHED;
                         }
@@ -125,7 +127,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     }
 
     /**
-     * Return to the Fragment to work with the versionDownloadable if the library found it.
+     * Return to UpdateChecker class to work with the versionDownloadable if the library found it.
      *
      * @param result
      */
@@ -142,9 +144,10 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
         } else if (result == PACKAGE_NOT_PUBLISHED) {
             mResultInterface.appUnpublished();
             Log.e(LOG_TAG, "App unpublished");
-        } else if (result == PLAY_ERROR) {
-	    Log.e(LOG_TAG, "Play page format error");
-	}
+        } else if (result == STORE_ERROR) {
+            mResultInterface.storeError();
+            Log.e(LOG_TAG, "Store page format error");
+        }
     }
 
     /**
