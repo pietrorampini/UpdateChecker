@@ -137,7 +137,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void versionDownloadableFound(String versionDownloadable) {
-        if ((!mCompareNumerically && versionDownloadableIsDifferent(versionDownloadable)) || (mCompareNumerically && versionDownloadableIsGreat(versionDownloadable))) {
+        if (Comparator.isVersionDownloadableNewer(mActivity, versionDownloadable)) {
             if (hasToShowNotice(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
                 mLibraryResultCallaback.foundUpdateAndShowIt(versionDownloadable);
             } else {
