@@ -151,7 +151,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void multipleApksPublished() {
-
+        mLibraryResultCallaback.multipleApksPublished();
     }
 
     /**
@@ -159,7 +159,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void networkError() {
-
+        mLibraryResultCallaback.networkError();
     }
 
     /**
@@ -167,6 +167,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void appUnpublished() {
+        mLibraryResultCallaback.appUnpublished();
     }
 
     /**
@@ -174,6 +175,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void storeError() {
+        mLibraryResultCallaback.storeError();
     }
 
     /**
@@ -227,7 +229,6 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         String prefKey = DONT_SHOW_AGAIN_PREF_KEY + versionDownloadable;
         return prefs.getBoolean(prefKey, false);
     }
-
 
     /**
      * Show the Notice only if it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).

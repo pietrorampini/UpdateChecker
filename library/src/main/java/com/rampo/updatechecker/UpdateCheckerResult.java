@@ -46,4 +46,27 @@ public interface UpdateCheckerResult {
      * @param versionDonwloadable version downloadable from the Store.
      */
     public void upToDate(String versionDonwloadable);
+
+    /**
+     * Can't get the versionName from the Store.
+     * See #1
+     *
+     * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
+     */
+    public void multipleApksPublished();
+
+    /**
+     * Can't download the store page.
+     */
+    public void networkError();
+
+    /**
+     * Can't find the store page for this app.
+     */
+    public void appUnpublished();
+
+    /**
+     * The check returns null for new version downloadble
+     */
+    public void storeError();
 }

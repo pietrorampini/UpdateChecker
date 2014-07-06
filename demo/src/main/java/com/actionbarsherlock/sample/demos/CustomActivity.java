@@ -62,7 +62,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      */
     @Override
     public void foundUpdateAndShowIt(String versionDownloadable) {
-        result.setText("Update available\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + mVersionInstalled());
+        result.setText("Update available\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + getVersionInstalled());
     }
 
     /**
@@ -74,7 +74,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      */
     @Override
     public void foundUpdateAndDontShowIt(String versionDownloadable) {
-        result.setText("Already Shown\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + mVersionInstalled());
+        result.setText("Already Shown\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + getVersionInstalled());
     }
 
     /**
@@ -85,10 +85,45 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      */
     @Override
     public void upToDate(String versionDownloadable) {
-        result.setText("Updated\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + mVersionInstalled());
+        result.setText("Updated\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + getVersionInstalled());
     }
 
-    public String mVersionInstalled() {
+    /**
+     * Can't get the versionName from the Store.
+     * See #1
+     *
+     * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
+     */
+    @Override
+    public void multipleApksPublished() {
+        result.setText("Error #1");
+    }
+
+    /**
+     * Can't download the store page.
+     */
+    @Override
+    public void networkError() {
+        result.setText("Network Error");
+    }
+
+    /**
+     * Can't find the store page for this app.
+     */
+    @Override
+    public void appUnpublished() {
+        result.setText("App unpublished");
+    }
+
+    /**
+     * The check returns null for new version downloadble
+     */
+    @Override
+    public void storeError() {
+        result.setText("Store Error");
+    }
+
+    public String getVersionInstalled() {
         try {
             return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException ignored) {
