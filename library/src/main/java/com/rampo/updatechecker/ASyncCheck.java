@@ -16,10 +16,11 @@
 package com.rampo.updatechecker;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.rampo.updatechecker.data.Constants;
+import com.rampo.updatechecker.utils.Network;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -49,7 +50,6 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final String AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "<li><strong>Version:</strong>";
     private static final String AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "<title>Amazon.com: Apps for Android</title>";
 
-    private static final String LOG_TAG = "UpdateChecker";
     private static final int VERSION_DOWNLOADABLE_FOUND = 0;
     private static final int MULTIPLE_APKS_PUBLISHED = 1;
     private static final int NETWORK_ERROR = 2;
@@ -69,7 +69,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
 
     @Override
     protected Integer doInBackground(String... notused) {
-        if (isNetworkAvailable(mContext)) {
+        if (Network.isAvailable(mContext)) {
             try {
                 HttpParams params = new BasicHttpParams();
                 HttpConnectionParams.setConnectionTimeout(params, 4000);
@@ -116,7 +116,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                     }
                 }
             } catch (IOException connectionError) {
-                logConnectionError();
+                Network.logConnectionError();
                 return NETWORK_ERROR;
             }
         } else {
@@ -136,16 +136,16 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
             mResultInterface.versionDownloadableFound(mVersionDownloadable);
         } else if (result == NETWORK_ERROR) {
             mResultInterface.networkError();
-            logConnectionError();
+            Network.logConnectionError();
         } else if (result == MULTIPLE_APKS_PUBLISHED) {
             mResultInterface.multipleApksPublished();
-            Log.e(LOG_TAG, "Multiple APKs published ");
+            Log.e(Constants.LOG_TAG, "Multiple APKs published ");
         } else if (result == PACKAGE_NOT_PUBLISHED) {
             mResultInterface.appUnpublished();
-            Log.e(LOG_TAG, "App unpublished");
+            Log.e(Constants.LOG_TAG, "App unpublished");
         } else if (result == STORE_ERROR) {
             mResultInterface.storeError();
-            Log.e(LOG_TAG, "Store page format error");
+            Log.e(Constants.LOG_TAG, "Store page format error");
         }
     }
 
@@ -157,27 +157,5 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
      */
     public final boolean containsNumber(String string) {
         return string.matches(".*[0-9].*");
-    }
-
-    /**
-     * Check if a network available
-     */
-    public static boolean isNetworkAvailable(Context context) {
-        boolean connected = false;
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm != null) {
-            NetworkInfo ni = cm.getActiveNetworkInfo();
-            if (ni != null) {
-                connected = ni.isConnected();
-            }
-        }
-        return connected;
-    }
-
-    /**
-     * Log connection error
-     */
-    public void logConnectionError() {
-        Log.e(LOG_TAG, "Cannot connect to the Internet!");
     }
 }
