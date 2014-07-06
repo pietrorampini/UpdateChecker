@@ -69,9 +69,9 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         mCustomImplementation = true;
     }
 
-	public static void setCompareNumerically(boolean compareNumerically) {
-		mCompareNumerically = compareNumerically;
-	}
+    public static void setCompareNumerically(boolean compareNumerically) {
+        mCompareNumerically = compareNumerically;
+    }
 
     /**
      * Set the store where download the app page from. Default is Google Play.
@@ -137,17 +137,15 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void versionDownloadableFound(String versionDownloadable) {
-
-	if ( (!mCompareNumerically && versionDownloadableIsDifferent(versionDownloadable)) || // New Update Available
-		(mCompareNumerically && versionDownloadableIsGreat(versionDownloadable)) )  {
-		if (hasToShowNotice(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
-			mLibraryResultCallaback.foundUpdateAndShowIt(versionDownloadable);
-		} else {
-			mLibraryResultCallaback.foundUpdateAndDontShowIt(versionDownloadable);
-		}
-	} else { // No new update available
-		mLibraryResultCallaback.upToDate(versionDownloadable);
-	}
+        if ((!mCompareNumerically && versionDownloadableIsDifferent(versionDownloadable)) || (mCompareNumerically && versionDownloadableIsGreat(versionDownloadable))) {
+            if (hasToShowNotice(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
+                mLibraryResultCallaback.foundUpdateAndShowIt(versionDownloadable);
+            } else {
+                mLibraryResultCallaback.foundUpdateAndDontShowIt(versionDownloadable);
+            }
+        } else { // No new update available
+            mLibraryResultCallaback.upToDate(versionDownloadable);
+        }
 
     }
 
@@ -164,60 +162,55 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         return false;
     }
 
-	/**
-	 * Compare the string versionDownloadable to the version installed of the app.
-	 *
-	 * @param versionDownloadable String to compare to the version installed of the app.
-	 */
-	private boolean versionDownloadableIsGreat(String versionDownloadable) {
-		try {
-			String versionInstalled = mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName;
-			if (versionInstalled != null && versionDownloadable != null)
-				return versionCompare(versionDownloadable, versionInstalled) > 0;
-		} catch (PackageManager.NameNotFoundException ignored) {
-		}
-		return false;
-	}
+    /**
+     * Compare the string versionDownloadable to the version installed of the app.
+     *
+     * @param versionDownloadable String to compare to the version installed of the app.
+     */
+    private boolean versionDownloadableIsGreat(String versionDownloadable) {
+        try {
+            String versionInstalled = mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName;
+            if (versionInstalled != null && versionDownloadable != null)
+                return versionCompare(versionDownloadable, versionInstalled) > 0;
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return false;
+    }
 
-	/**
-	 * https://stackoverflow.com/questions/6701948/efficient-way-to-compare-version-strings-in-java
-	 *
-	 * Compares two version strings.
-	 *
-	 * Use this instead of String.compareTo() for a non-lexicographical
-	 * comparison that works for version strings. e.g. "1.10".compareTo("1.6").
-	 *
-	 * @note It does not work if "1.10" is supposed to be equal to "1.10.0".
-	 *
-	 * @param str1 a string of ordinal numbers separated by decimal points.
-	 * @param str2 a string of ordinal numbers separated by decimal points.
-	 * @return The result is a negative integer if str1 is _numerically_ less than str2.
-	 *         The result is a positive integer if str1 is _numerically_ greater than str2.
-	 *         The result is zero if the strings are _numerically_ equal.
-	 */
-	public Integer versionCompare(String str1, String str2)
-	{
-		String[] vals1 = str1.split("\\.");
-		String[] vals2 = str2.split("\\.");
-		int i = 0;
-		// set index to first non-equal ordinal or length of shortest version string
-		while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i]))
-		{
-			i++;
-		}
-		// compare first non-equal ordinal number
-		if (i < vals1.length && i < vals2.length)
-		{
-			int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
-			return Integer.signum(diff);
-		}
-		// the strings are equal or one string is a substring of the other
-		// e.g. "1.2.3" = "1.2.3" or "1.2.3" < "1.2.3.4"
-		else
-		{
-			return Integer.signum(vals1.length - vals2.length);
-		}
-	}
+    /**
+     * https://stackoverflow.com/questions/6701948/efficient-way-to-compare-version-strings-in-java
+     * <p/>
+     * Compares two version strings.
+     * <p/>
+     * Use this instead of String.compareTo() for a non-lexicographical
+     * comparison that works for version strings. e.g. "1.10".compareTo("1.6").
+     *
+     * @param str1 a string of ordinal numbers separated by decimal points.
+     * @param str2 a string of ordinal numbers separated by decimal points.
+     * @return The result is a negative integer if str1 is _numerically_ less than str2.
+     * The result is a positive integer if str1 is _numerically_ greater than str2.
+     * The result is zero if the strings are _numerically_ equal.
+     * @note It does not work if "1.10" is supposed to be equal to "1.10.0".
+     */
+    public Integer versionCompare(String str1, String str2) {
+        String[] vals1 = str1.split("\\.");
+        String[] vals2 = str2.split("\\.");
+        int i = 0;
+        // set index to first non-equal ordinal or length of shortest version string
+        while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
+            i++;
+        }
+        // compare first non-equal ordinal number
+        if (i < vals1.length && i < vals2.length) {
+            int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
+            return Integer.signum(diff);
+        }
+        // the strings are equal or one string is a substring of the other
+        // e.g. "1.2.3" = "1.2.3" or "1.2.3" < "1.2.3.4"
+        else {
+            return Integer.signum(vals1.length - vals2.length);
+        }
+    }
 
     /**
      * Can't get the versionName from Play Store.
@@ -243,6 +236,11 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void appUnpublished() {
+    }
+
+    @Override
+    public void storeError() {
+
     }
 
     /**
