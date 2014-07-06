@@ -24,9 +24,10 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 /**
- Builds and show a Notification if a new update has been found.
- * @see com.rampo.updatechecker.Notice#NOTIFICATION
+ * Builds and show a Notification if a new update has been found.
+ *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
+ * @see com.rampo.updatechecker.Notice#NOTIFICATION
  */
 public class Notification {
     public static void show(Context context, Store store, int notificationIconResId) {

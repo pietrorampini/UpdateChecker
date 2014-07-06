@@ -27,18 +27,18 @@ import android.net.Uri;
 /**
  * Builds and show a Dialog if a new update has been found. This is the default Notice.
  * I've used the old AlertDialog API because newer APIs require FragmentActivity.
- * @see com.rampo.updatechecker.Notice#DIALOG
+ *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
+ * @see com.rampo.updatechecker.Notice#DIALOG
  */
 public class Dialog {
 
     public static void show(final Context context, final Store store, final String versionDownloadable, final int dialogIconResId) {
         try {
             String storeName = null;
-            if (store == Store.GOOGLE_PLAY){
+            if (store == Store.GOOGLE_PLAY) {
                 storeName = context.getString(R.string.googlePlay);
-            }
-            else if (store == Store.AMAZON){
+            } else if (store == Store.AMAZON) {
                 storeName = context.getString(R.string.amazonStore);
             }
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
