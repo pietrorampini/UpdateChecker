@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.rampo.updatechecker;
+package com.rampo.updatechecker.store;
 
 /**
  * The store where your app is published. Settable with setStore(Store). Default is Google Play.
- * @see com.rampo.updatechecker.UpdateChecker#setStore(Store)
+ *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
+ * @see com.rampo.updatechecker.UpdateChecker#setStore(Store)
  */
 public class Store {
     public static final Store GOOGLE_PLAY = new Store(0);

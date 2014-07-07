@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
 
@@ -11,6 +11,13 @@ allprojects {
     repositories {
         mavenCentral()
     }
+}
+
+ext {
+    libraryPackageName = "com.rampo.updatechecker"
+    minSdkVersion = 7
+    compileSdkVersion = 19
+    buildToolsVersion = "19.1.0"
 }
 
 def isReleaseBuild() {

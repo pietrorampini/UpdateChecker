@@ -16,10 +16,12 @@
 package com.rampo.updatechecker;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.rampo.updatechecker.data.Constants;
+import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.utils.Network;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -41,7 +43,6 @@ import java.io.InputStreamReader;
  */
 class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "</script> </div> <div class=\"details-wrapper\">";
     private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION = "itemprop=\"softwareVersion\"> ";
     private static final String PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT = "  </div> </div>";
     private static final String PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "We're sorry, the requested URL was not found on this server.";
@@ -50,11 +51,11 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     private static final String AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "<li><strong>Version:</strong>";
     private static final String AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "<title>Amazon.com: Apps for Android</title>";
 
-    private static final String LOG_TAG = "UpdateChecker";
     private static final int VERSION_DOWNLOADABLE_FOUND = 0;
     private static final int MULTIPLE_APKS_PUBLISHED = 1;
     private static final int NETWORK_ERROR = 2;
     private static final int PACKAGE_NOT_PUBLISHED = 3;
+    private static final int STORE_ERROR = 4;
 
     Store mStore;
     Context mContext;
@@ -69,7 +70,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
 
     @Override
     protected Integer doInBackground(String... notused) {
-        if (isNetworkAvailable(mContext)) {
+        if (Network.isAvailable(mContext)) {
             try {
                 HttpParams params = new BasicHttpParams();
                 HttpConnectionParams.setConnectionTimeout(params, 4000);
@@ -82,7 +83,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        if (line.contains(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Play Store
+                        if (line.contains(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION)) { // Obtain HTML line contaning version available in Play Store
                             String containingVersion = line.substring(line.lastIndexOf(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
                             String[] removingUnusefulTags = containingVersion.split(PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove useless HTML tags
                             mVersionDownloadable = removingUnusefulTags[0]; // Obtain version available
@@ -90,7 +91,9 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                             return PACKAGE_NOT_PUBLISHED;
                         }
                     }
-                    if (containsNumber(mVersionDownloadable)) {
+                    if (mVersionDownloadable == null) {
+                        return STORE_ERROR;
+                    } else if (containsNumber(mVersionDownloadable)) {
                         return VERSION_DOWNLOADABLE_FOUND;
                     } else {
                         return MULTIPLE_APKS_PUBLISHED;
@@ -105,14 +108,16 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                         if (line.contains(AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Amazon App Store
                             String versionDownloadableWithTags = line.substring(38); // Get the String starting with version available + Other HTML tags
                             mVersionDownloadable = versionDownloadableWithTags.substring(0, versionDownloadableWithTags.length() - 5); // Remove useless HTML tags
-                            return VERSION_DOWNLOADABLE_FOUND;
+                            if (mVersionDownloadable == null) {
+                                return STORE_ERROR;
+                            } else return VERSION_DOWNLOADABLE_FOUND;
                         } else if (line.contains(AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER)) { // This packages has not been found in Amazon App Store
                             return PACKAGE_NOT_PUBLISHED;
                         }
                     }
                 }
             } catch (IOException connectionError) {
-                logConnectionError();
+                Network.logConnectionError();
                 return NETWORK_ERROR;
             }
         } else {
@@ -122,7 +127,7 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     }
 
     /**
-     * Return to the Fragment to work with the versionDownloadable if the library found it.
+     * Return to UpdateChecker class to work with the versionDownloadable if the library found it.
      *
      * @param result
      */
@@ -132,13 +137,16 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
             mResultInterface.versionDownloadableFound(mVersionDownloadable);
         } else if (result == NETWORK_ERROR) {
             mResultInterface.networkError();
-            logConnectionError();
+            Network.logConnectionError();
         } else if (result == MULTIPLE_APKS_PUBLISHED) {
             mResultInterface.multipleApksPublished();
-            Log.e(LOG_TAG, "Multiple APKs published ");
+            Log.e(Constants.LOG_TAG, "Multiple APKs published ");
         } else if (result == PACKAGE_NOT_PUBLISHED) {
             mResultInterface.appUnpublished();
-            Log.e(LOG_TAG, "App unpublished");
+            Log.e(Constants.LOG_TAG, "App unpublished");
+        } else if (result == STORE_ERROR) {
+            mResultInterface.storeError();
+            Log.e(Constants.LOG_TAG, "Store page format error");
         }
     }
 
@@ -150,27 +158,5 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
      */
     public final boolean containsNumber(String string) {
         return string.matches(".*[0-9].*");
-    }
-
-    /**
-     * Check if a network available
-     */
-    public static boolean isNetworkAvailable(Context context) {
-        boolean connected = false;
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm != null) {
-            NetworkInfo ni = cm.getActiveNetworkInfo();
-            if (ni != null) {
-                connected = ni.isConnected();
-            }
-        }
-        return connected;
-    }
-
-    /**
-     * Log connection error
-     */
-    public void logConnectionError() {
-        Log.e(LOG_TAG, "Cannot connect to the Internet!");
     }
 }

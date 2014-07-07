@@ -17,8 +17,12 @@ package com.rampo.updatechecker;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
+
+import com.rampo.updatechecker.notice.Dialog;
+import com.rampo.updatechecker.notice.Notice;
+import com.rampo.updatechecker.notice.Notification;
+import com.rampo.updatechecker.store.Store;
 
 /**
  * UpdateChecker is a class that can be used by Android Developers to increase the number of their apps' updates.
@@ -72,8 +76,8 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Set the store where download the app page from. Default is Google Play.
      *
      * @param store Store to set
-     * @see com.rampo.updatechecker.Store
-     * @see com.rampo.updatechecker.Store#GOOGLE_PLAY
+     * @see com.rampo.updatechecker.store.Store
+     * @see com.rampo.updatechecker.store.Store#GOOGLE_PLAY
      */
     public static void setStore(Store store) {
         mStore = store;
@@ -83,7 +87,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Set the checks successful necessary to show the Notice. Default is 5.
      *
      * @param checksRequired checks required to set
-     * @see com.rampo.updatechecker.Notice
+     * @see com.rampo.updatechecker.notice.Notice
      */
     public static void setSuccessfulChecksRequired(int checksRequired) {
         mSuccessfulChecksRequired = checksRequired;
@@ -93,8 +97,8 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Set the type of notice used to alert the user if a new update has been found. Default is Dialog.
      *
      * @param notice to set.
-     * @see com.rampo.updatechecker.Notice
-     * @see com.rampo.updatechecker.Notice#DIALOG
+     * @see com.rampo.updatechecker.notice.Notice
+     * @see com.rampo.updatechecker.notice.Notice#DIALOG
      */
     public static void setNotice(Notice notice) {
         mNotice = notice;
@@ -107,8 +111,8 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Set the Notifcation or Dialog icon. If you don't call this, the Notifcation will have the default Play Store Notification Icon as icon and the Dialog will have no icon.
      *
      * @param noticeIconResId Res Id of the icon to set.
-     * @see com.rampo.updatechecker.Notification
-     * @see com.rampo.updatechecker.Dialog
+     * @see com.rampo.updatechecker.notice.Notification
+     * @see com.rampo.updatechecker.notice.Dialog
      */
     public static void setNoticeIcon(int noticeIconResId) {
         mNoticeIconResId = noticeIconResId;
@@ -132,7 +136,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void versionDownloadableFound(String versionDownloadable) {
-        if (versionDownloadableIsDifferent(versionDownloadable)) { // New Update Available
+        if (Comparator.isVersionDownloadableNewer(mActivity, versionDownloadable)) {
             if (hasToShowNotice(versionDownloadable) && !hasUserTappedToNotShowNoticeAgain(versionDownloadable)) {
                 mLibraryResultCallaback.foundUpdateAndShowIt(versionDownloadable);
             } else {
@@ -145,19 +149,6 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     }
 
     /**
-     * Compare the string versionDownloadable to the version installed of the app.
-     *
-     * @param versionDownloadable String to compare to the version installed of the app.
-     */
-    private boolean versionDownloadableIsDifferent(String versionDownloadable) {
-        try {
-            return !versionDownloadable.equals(mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName);
-        } catch (PackageManager.NameNotFoundException ignored) {
-        }
-        return false;
-    }
-
-    /**
      * Can't get the versionName from Play Store.
      * See #1 error.
      *
@@ -165,7 +156,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void multipleApksPublished() {
-
+        mLibraryResultCallaback.multipleApksPublished();
     }
 
     /**
@@ -173,7 +164,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void networkError() {
-
+        mLibraryResultCallaback.networkError();
     }
 
     /**
@@ -181,6 +172,15 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void appUnpublished() {
+        mLibraryResultCallaback.appUnpublished();
+    }
+
+    /**
+     * The check returns null for new version downloadble
+     */
+    @Override
+    public void storeError() {
+        mLibraryResultCallaback.storeError();
     }
 
     /**
@@ -226,7 +226,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Get if the user has tapped on "No, thanks" button on dialog for this downloable version.
      *
      * @param versionDownloadable version downloadable from the Store.
-     * @see com.rampo.updatechecker.Dialog#userHasTappedToNotShowNoticeAgain(android.content.Context, String)
+     * @see com.rampo.updatechecker.notice.Dialog#userHasTappedToNotShowNoticeAgain(android.content.Context, String)
      */
 
     private boolean hasUserTappedToNotShowNoticeAgain(String versionDownloadable) {
@@ -234,7 +234,6 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         String prefKey = DONT_SHOW_AGAIN_PREF_KEY + versionDownloadable;
         return prefs.getBoolean(prefKey, false);
     }
-
 
     /**
      * Show the Notice only if it's the first time or the number of the checks made is a multiple of the argument of setSuccessfulChecksRequired(int) method. (If you don't call setSuccessfulChecksRequired(int) the default is 5).

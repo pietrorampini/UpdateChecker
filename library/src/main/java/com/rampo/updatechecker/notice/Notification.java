@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.rampo.updatechecker;
+package com.rampo.updatechecker.notice;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,10 +23,15 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
+import com.rampo.updatechecker.R;
+import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.UpdateChecker;
+
 /**
- Builds and show a Notification if a new update has been found.
- * @see com.rampo.updatechecker.Notice#NOTIFICATION
+ * Builds and show a Notification if a new update has been found.
+ *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
+ * @see Notice#NOTIFICATION
  */
 public class Notification {
     public static void show(Context context, Store store, int notificationIconResId) {
