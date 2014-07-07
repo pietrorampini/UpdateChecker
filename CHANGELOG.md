@@ -2,6 +2,15 @@ Change Log
 ===============================================================================
 
 
+Version [2.1.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.0) *(2014-07-08)*
+----------------------------
+ * LIB: Classes moved to make code more ordered
+ * LIB: Implemented all callbacks in UpdateCheckerResult.java (see [CustomActivity.java](https://github.com/rampo/UpdateChecker/blob/master/demo/src/main/java/com/actionbarsherlock/sample/demos/CustomActivity.java) for example) 
+ * LIB: Implemented numeric vesion comparator (based on [@Gsdstr](https://github.com/Gsdstr)'s work)
+ * LIB: Fixed [#73](https://github.com/rampo/UpdateChecker/issues/73) and [#75](https://github.com/rampo/UpdateChecker/issues/75) 
+ * LIB: Updated Hungarian and Russian translations (thanks to [@Gsdstr](https://github.com/Gsdstr))
+ * LIB: Added Catalan translation (thanks to [@alorma](https://github.com/alorma))
+
 Version [2.0.1](https://github.com/rampo/UpdateChecker/releases/tag/v2.0.1) *(2014-04-19)*
 ----------------------------
  * LIB: Added  Brazilian Portuguese translation (thanks to [@favasconcelos](https://github.com/favasconcelos))
