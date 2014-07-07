@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="downloadFor">Fes una ullada a la nova actualització per %1$s!\nDisponible ara a %2$s.</string>
+    <string name="dialogPositiveButton">Valorar ara</string>
+    <string name="dialogNeutralButton">Més tard</string>
+    <string name="dialogNegativeButton">No gràcies</string>
+    <string name="newUpdateAvailable">S\'ha trobat una nova actualització</string>
+</resources>
