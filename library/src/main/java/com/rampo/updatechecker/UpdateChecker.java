@@ -228,7 +228,6 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * @param versionDownloadable version downloadable from the Store.
      * @see com.rampo.updatechecker.notice.Dialog#userHasTappedToNotShowNoticeAgain(android.content.Context, String)
      */
-
     private boolean hasUserTappedToNotShowNoticeAgain(String versionDownloadable) {
         SharedPreferences prefs = mActivity.getSharedPreferences(PREFS_FILENAME, 0);
         String prefKey = DONT_SHOW_AGAIN_PREF_KEY + versionDownloadable;
