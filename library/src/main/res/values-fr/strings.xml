@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="library_name">Update Checker</string>
-    <string name="downloadFor">Vérification d'une nouvelle mise à jour pour %1$s!\nDisponible dès maintenant sur %2$s.</string>
+    <string name="downloadFor">Vérification d\'une nouvelle mise à jour pour %1$s!\nDisponible dès maintenant sur %2$s.</string>
     <string name="dialogPositiveButton">OK</string>
     <string name="dialogNeutralButton">Plus tard</string>
     <string name="dialogNegativeButton">Non merci</string>
