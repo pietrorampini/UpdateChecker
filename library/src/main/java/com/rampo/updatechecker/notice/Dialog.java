@@ -25,8 +25,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import com.rampo.updatechecker.R;
-import com.rampo.updatechecker.store.Store;
 import com.rampo.updatechecker.UpdateChecker;
+import com.rampo.updatechecker.store.Store;
 
 /**
  * Builds and show a Dialog if a new update has been found. This is the default Notice.

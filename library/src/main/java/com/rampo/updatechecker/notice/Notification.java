@@ -24,8 +24,8 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.rampo.updatechecker.R;
-import com.rampo.updatechecker.store.Store;
 import com.rampo.updatechecker.UpdateChecker;
+import com.rampo.updatechecker.store.Store;
 
 /**
  * Builds and show a Notification if a new update has been found.
