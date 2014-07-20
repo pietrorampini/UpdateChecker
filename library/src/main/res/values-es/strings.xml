@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="downloadFor">Compruébelo usted mismo la nueva actualización para %1$s!\nDisponible ahora en %2$s.</string>
+    <string name="downloadFor">Compruébelo usted mismo, hay una nueva actualización de %1$s!\nDisponible ahora en %2$s.</string>
     <string name="dialogPositiveButton">Valorar Ahora</string>
     <string name="dialogNeutralButton">Más tarde</string>
     <string name="dialogNegativeButton">No gracias</string>
-    <string name="newUpdateAvailable">Nueva actualización encontró</string>
+    <string name="newUpdateAvailable">Se encontró una nueva actualización</string>
 </resources>
