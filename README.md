@@ -44,7 +44,8 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 - Start using UpdateChecker: a **dialog** will be shown if a new update is found:
 
     ```java	
-    UpdateChecker checker = new UpdateChecker(this);
+    UpdateChecker checker = new UpdateChecker(this); // If you are in a Activity or a FragmentActivity
+    UpdateChecker checker = new UpdateChecker(getActivity()); // If you are in a Fragment
     checker.start();
     ```  
 
