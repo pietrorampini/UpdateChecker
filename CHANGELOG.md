@@ -1,7 +1,10 @@
 Change Log
 ===============================================================================
 
-
+Version [2.1.1](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.1) *(2014-07-26)*
+----------------------------
+ * LIB: Fixed [#90](https://github.com/rampo/UpdateChecker/issues/90): missing apostrophe in french strings.
+ 
 Version [2.1.0](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.0) *(2014-07-08)*
 ----------------------------
  * LIB: Classes moved to make code more ordered
