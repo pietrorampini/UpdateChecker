@@ -2,5 +2,4 @@
 <resources>
     <dimen name="padding_infos">20dp</dimen>
     <dimen name="padding_small">10dp</dimen>
-
 </resources>
