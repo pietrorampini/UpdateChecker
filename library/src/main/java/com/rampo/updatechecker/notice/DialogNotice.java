@@ -33,11 +33,16 @@ import com.rampo.updatechecker.store.Store;
  * I've used the old AlertDialog API because newer APIs require FragmentActivity.
  *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
- * @see Notice#DIALOG
+ * @see Notice
  */
-public class Dialog {
+public class DialogNotice extends Notice {
+    private static int mIconResId;
 
-    public static void show(final Context context, final Store store, final String versionDownloadable, final int dialogIconResId) {
+    public static void setIcon(int noticeIconResId) {
+        mIconResId = noticeIconResId;
+    }
+
+    public static void show(final Context context, final Store store, final String versionDownloadable) {
         try {
             String storeName = null;
             if (store == Store.GOOGLE_PLAY) {
@@ -75,8 +80,8 @@ public class Dialog {
                         }
 
                     });
-            if (dialogIconResId != 0) {
-                alertDialogBuilder.setIcon(dialogIconResId);
+            if (mIconResId != 0) {
+                alertDialogBuilder.setIcon(mIconResId);
             }
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
@@ -98,6 +103,5 @@ public class Dialog {
 
     private static void goToMarket(Context mContext) {
         mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + mContext.getPackageName())));
-
     }
 }

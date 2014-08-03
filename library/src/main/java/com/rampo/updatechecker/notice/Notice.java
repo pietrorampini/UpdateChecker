@@ -22,12 +22,4 @@ package com.rampo.updatechecker.notice;
  * @see com.rampo.updatechecker.UpdateChecker#setNotice(Notice)
  */
 public class Notice {
-    public static final Notice NOTIFICATION = new Notice(0);
-    public static final Notice DIALOG = new Notice(1);
-
-    int mNotice;
-
-    public Notice(int notice) {
-        mNotice = notice;
-    }
 }

@@ -31,10 +31,12 @@ import com.rampo.updatechecker.store.Store;
  * Builds and show a Notification if a new update has been found.
  *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
- * @see Notice#NOTIFICATION
+ * @see Notice
  */
-public class Notification {
-    public static void show(Context context, Store store, int notificationIconResId) {
+public class NotificationNotice extends Notice {
+    private static int mIconResId;
+
+    public static void show(Context context, Store store) {
         android.app.Notification notification;
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
@@ -49,18 +51,22 @@ public class Notification {
                 .setContentText(context.getString(R.string.newUpdateAvailable))
                 .setContentIntent(pendingIntent).build();
 
-        if (notificationIconResId == 0) {
+        if (mIconResId == 0) {
             if (store == Store.GOOGLE_PLAY) {
                 builder.setSmallIcon(R.drawable.ic_stat_play_store);
             } else if (store == Store.AMAZON) {
                 builder.setSmallIcon(R.drawable.ic_stat_amazon);
             }
         } else {
-            builder.setSmallIcon(notificationIconResId);
+            builder.setSmallIcon(mIconResId);
         }
         notification = builder.build();
         notification.flags = android.app.Notification.FLAG_AUTO_CANCEL;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
+    }
+
+    public static void setIcon(int noticeIconResId) {
+        mIconResId = noticeIconResId;
     }
 }

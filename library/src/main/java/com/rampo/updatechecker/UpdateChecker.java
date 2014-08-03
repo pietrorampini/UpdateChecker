@@ -19,9 +19,10 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 
-import com.rampo.updatechecker.notice.Dialog;
+import com.rampo.updatechecker.notice.DialogNotice;
+import com.rampo.updatechecker.notice.DiscreteNotice;
 import com.rampo.updatechecker.notice.Notice;
-import com.rampo.updatechecker.notice.Notification;
+import com.rampo.updatechecker.notice.NotificationNotice;
 import com.rampo.updatechecker.store.Store;
 
 /**
@@ -39,7 +40,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     static Store DEFAULT_STORE = Store.GOOGLE_PLAY;
     static int DEFAULT_SUCCESSFUL_CHECKS_REQUIRED = 5;
     static int DEFAULT_NOTICE_ICON_RES_ID = 0;
-    static Notice DEFAULT_NOTICE = Notice.DIALOG;
+    static Notice DEFAULT_NOTICE = new DiscreteNotice();
 
     static Activity mActivity;
     static Store mStore;
@@ -98,7 +99,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      *
      * @param notice to set.
      * @see com.rampo.updatechecker.notice.Notice
-     * @see com.rampo.updatechecker.notice.Notice#DIALOG
+     * @see com.rampo.updatechecker.notice.Notice#
      */
     public static void setNotice(Notice notice) {
         mNotice = notice;
@@ -111,9 +112,10 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Set the Notifcation or Dialog icon. If you don't call this, the Notifcation will have the default Play Store Notification Icon as icon and the Dialog will have no icon.
      *
      * @param noticeIconResId Res Id of the icon to set.
-     * @see com.rampo.updatechecker.notice.Notification
-     * @see com.rampo.updatechecker.notice.Dialog
+     * @see com.rampo.updatechecker.notice.NotificationNotice
+     * @see com.rampo.updatechecker.notice.DialogNotice
      */
+    @Deprecated
     public static void setNoticeIcon(int noticeIconResId) {
         mNoticeIconResId = noticeIconResId;
         if (mCustomImplementation) {
@@ -192,10 +194,12 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void foundUpdateAndShowIt(String versionDownloadable) {
-        if (mNotice == Notice.NOTIFICATION) {
+        if (mNotice instanceof NotificationNotice) {
             showNotification();
-        } else if (mNotice == Notice.DIALOG) {
+        } else if (mNotice instanceof DialogNotice) {
             showDialog(versionDownloadable);
+        } else if (mNotice instanceof DiscreteNotice) {
+
         }
     }
 
@@ -226,7 +230,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Get if the user has tapped on "No, thanks" button on dialog for this downloable version.
      *
      * @param versionDownloadable version downloadable from the Store.
-     * @see com.rampo.updatechecker.notice.Dialog#userHasTappedToNotShowNoticeAgain(android.content.Context, String)
+     * @see com.rampo.updatechecker.notice.DialogNotice#userHasTappedToNotShowNoticeAgain(android.content.Context, String)
      */
     private boolean hasUserTappedToNotShowNoticeAgain(String versionDownloadable) {
         SharedPreferences prefs = mActivity.getSharedPreferences(PREFS_FILENAME, 0);
@@ -265,15 +269,17 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * Show Dialog
      */
-    public void showDialog(String versionDownloadable) {
-        Dialog.show(mActivity, mStore, versionDownloadable, mNoticeIconResId);
+    public static void showDialog(String versionDownloadable) {
+        DialogNotice dialog = (DialogNotice) mNotice;
+        dialog.show(mActivity, mStore, versionDownloadable);
     }
 
     /**
      * Show Notification
      */
     public static void showNotification() {
-        Notification.show(mActivity, mStore, mNoticeIconResId);
+        NotificationNotice notification = (NotificationNotice) mNotice;
+        notification.show(mActivity, mStore);
     }
 
     /**
