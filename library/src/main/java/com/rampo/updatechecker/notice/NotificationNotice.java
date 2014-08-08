@@ -25,7 +25,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.rampo.updatechecker.R;
 import com.rampo.updatechecker.UpdateChecker;
-import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.store.VersionDownloadableSource;
 
 /**
  * Builds and show a Notification if a new update has been found.
@@ -36,7 +36,7 @@ import com.rampo.updatechecker.store.Store;
 public class NotificationNotice extends Notice {
     private static int mIconResId;
 
-    public static void show(Context context, Store store) {
+    public static void show(Context context, VersionDownloadableSource versionDownloadableSource) {
         android.app.Notification notification;
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + context.getPackageName()));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, myIntent, Intent.FILL_IN_ACTION);
@@ -52,9 +52,9 @@ public class NotificationNotice extends Notice {
                 .setContentIntent(pendingIntent).build();
 
         if (mIconResId == 0) {
-            if (store == Store.GOOGLE_PLAY) {
+            if (versionDownloadableSource == VersionDownloadableSource.GOOGLE_PLAY) {
                 builder.setSmallIcon(R.drawable.ic_stat_play_store);
-            } else if (store == Store.AMAZON) {
+            } else if (versionDownloadableSource == VersionDownloadableSource.AMAZON) {
                 builder.setSmallIcon(R.drawable.ic_stat_amazon);
             }
         } else {

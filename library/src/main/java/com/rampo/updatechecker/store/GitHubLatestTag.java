@@ -15,19 +15,15 @@
  */
 package com.rampo.updatechecker.store;
 
-/**
- * The store where your app is published. Settable with setStore(Store). Default is Google Play.
- *
- * @author Pietro Rampini (rampini.pietro@gmail.com)
- * @see com.rampo.updatechecker.UpdateChecker#setStore(Store)
- */
-public class Store {
-    public static final Store GOOGLE_PLAY = new Store(0);
-    public static final Store AMAZON = new Store(1);
+public class GitHubLatestTag extends VersionDownloadableSource {
+    private static String mLink;
+    private static String mPrefix;
 
-    int mStore;
+    public static void setProjectTagsPage(String link) {
+        mLink = link;
+    }
 
-    public Store(int store) {
-        mStore = store;
+    public static void setTagPrefix(String prefix) {
+        mPrefix = prefix;
     }
 }

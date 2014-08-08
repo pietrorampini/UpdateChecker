@@ -26,7 +26,7 @@ import android.net.Uri;
 
 import com.rampo.updatechecker.R;
 import com.rampo.updatechecker.UpdateChecker;
-import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.store.VersionDownloadableSource;
 
 /**
  * Builds and show a Dialog if a new update has been found. This is the default Notice.
@@ -42,12 +42,12 @@ public class DialogNotice extends Notice {
         mIconResId = noticeIconResId;
     }
 
-    public static void show(final Context context, final Store store, final String versionDownloadable) {
+    public static void show(final Context context, final VersionDownloadableSource versionDownloadableSource, final String versionDownloadable) {
         try {
             String storeName = null;
-            if (store == Store.GOOGLE_PLAY) {
+            if (versionDownloadableSource == VersionDownloadableSource.GOOGLE_PLAY) {
                 storeName = context.getString(R.string.googlePlay);
-            } else if (store == Store.AMAZON) {
+            } else if (versionDownloadableSource == VersionDownloadableSource.AMAZON) {
                 storeName = context.getString(R.string.amazonStore);
             }
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);

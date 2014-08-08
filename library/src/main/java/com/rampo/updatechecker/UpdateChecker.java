@@ -23,7 +23,7 @@ import com.rampo.updatechecker.notice.DialogNotice;
 import com.rampo.updatechecker.notice.DiscreteNotice;
 import com.rampo.updatechecker.notice.Notice;
 import com.rampo.updatechecker.notice.NotificationNotice;
-import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.store.VersionDownloadableSource;
 
 /**
  * UpdateChecker is a class that can be used by Android Developers to increase the number of their apps' updates.
@@ -37,13 +37,13 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     public static final String DONT_SHOW_AGAIN_PREF_KEY = "dontShow";
     private static final String SUCCESSFUL_CHEKS_PREF_KEY = "nLaunches";
 
-    static Store DEFAULT_STORE = Store.GOOGLE_PLAY;
+    static VersionDownloadableSource DEFAULT_VersionDownloadableSource = VersionDownloadableSource.GOOGLE_PLAY;
     static int DEFAULT_SUCCESSFUL_CHECKS_REQUIRED = 5;
     static int DEFAULT_NOTICE_ICON_RES_ID = 0;
     static Notice DEFAULT_NOTICE = new DiscreteNotice();
 
     static Activity mActivity;
-    static Store mStore;
+    static VersionDownloadableSource mVersionDownloadableSource;
     static int mSuccessfulChecksRequired;
     static Notice mNotice;
     static int mNoticeIconResId;
@@ -53,7 +53,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
 
     public UpdateChecker(Activity activity) {
         mActivity = activity;
-        mStore = DEFAULT_STORE;
+        mVersionDownloadableSource = DEFAULT_VersionDownloadableSource;
         mSuccessfulChecksRequired = DEFAULT_SUCCESSFUL_CHECKS_REQUIRED;
         mNotice = DEFAULT_NOTICE;
         mNoticeIconResId = DEFAULT_NOTICE_ICON_RES_ID;
@@ -64,7 +64,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
 
     public UpdateChecker(Activity activity, UpdateCheckerResult updateCheckerResult) {
         mActivity = activity;
-        mStore = DEFAULT_STORE;
+        mVersionDownloadableSource = DEFAULT_VersionDownloadableSource;
         mSuccessfulChecksRequired = DEFAULT_SUCCESSFUL_CHECKS_REQUIRED;
         mNotice = DEFAULT_NOTICE;
         mNoticeIconResId = DEFAULT_NOTICE_ICON_RES_ID;
@@ -76,12 +76,12 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     /**
      * Set the store where download the app page from. Default is Google Play.
      *
-     * @param store Store to set
-     * @see com.rampo.updatechecker.store.Store
-     * @see com.rampo.updatechecker.store.Store#GOOGLE_PLAY
+     * @param versionDownloadableSource Store to set
+     * @see com.rampo.updatechecker.store.VersionDownloadableSource
+     * @see com.rampo.updatechecker.store.VersionDownloadableSource#GOOGLE_PLAY
      */
-    public static void setStore(Store store) {
-        mStore = store;
+    public static void setWhereObtainVersionDownloadable(VersionDownloadableSource versionDownloadableSource) {
+        mVersionDownloadableSource = versionDownloadableSource;
     }
 
     /**
@@ -127,7 +127,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Start the process
      */
     public static void start() {
-        ASyncCheck asynctask = new ASyncCheck(mStore, mCheckResultCallback, mActivity);
+        VersionObtainer asynctask = new VersionObtainer(mVersionDownloadableSource, mCheckResultCallback, mActivity);
         asynctask.execute();
     }
 
@@ -271,7 +271,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     public static void showDialog(String versionDownloadable) {
         DialogNotice dialog = (DialogNotice) mNotice;
-        dialog.show(mActivity, mStore, versionDownloadable);
+        dialog.show(mActivity, mVersionDownloadableSource, versionDownloadable);
     }
 
     /**
@@ -279,7 +279,15 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     public static void showNotification() {
         NotificationNotice notification = (NotificationNotice) mNotice;
-        notification.show(mActivity, mStore);
+        notification.show(mActivity, mVersionDownloadableSource);
+    }
+
+    /**
+     * Show Discrete
+     */
+    public static void showDiscrete() {
+        DiscreteNotice discrete = (DiscreteNotice) mNotice;
+        discrete.show(mActivity);
     }
 
     /**

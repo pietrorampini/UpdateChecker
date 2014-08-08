@@ -20,7 +20,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.rampo.updatechecker.data.Constants;
-import com.rampo.updatechecker.store.Store;
+import com.rampo.updatechecker.store.AmazonAppStore;
+import com.rampo.updatechecker.store.GitHubGradleProperties;
+import com.rampo.updatechecker.store.GooglePlay;
+import com.rampo.updatechecker.store.VersionDownloadableSource;
 import com.rampo.updatechecker.utils.Network;
 
 import org.apache.http.HttpResponse;
@@ -41,29 +44,20 @@ import java.io.InputStreamReader;
  *
  * @author Pietro Rampini (rampini.pietro@gmail.com)
  */
-class ASyncCheck extends AsyncTask<String, Integer, Integer> {
-    private static final String PLAY_STORE_ROOT_WEB = "https://play.google.com/store/apps/details?id=";
-    private static final String PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION = "itemprop=\"softwareVersion\"> ";
-    private static final String PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT = "  </div> </div>";
-    private static final String PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "We're sorry, the requested URL was not found on this server.";
-
-    private static final String AMAZON_STORE_ROOT_WEB = "http://www.amazon.com/gp/mas/dl/android?p=";
-    private static final String AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE = "<li><strong>Version:</strong>";
-    private static final String AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER = "<title>Amazon.com: Apps for Android</title>";
-
+class VersionObtainer extends AsyncTask<String, Integer, Integer> {
     private static final int VERSION_DOWNLOADABLE_FOUND = 0;
     private static final int MULTIPLE_APKS_PUBLISHED = 1;
     private static final int NETWORK_ERROR = 2;
     private static final int PACKAGE_NOT_PUBLISHED = 3;
     private static final int STORE_ERROR = 4;
 
-    Store mStore;
+    VersionDownloadableSource mVersionDownloadableSource;
     Context mContext;
     ASyncCheckResult mResultInterface;
     String mVersionDownloadable;
 
-    ASyncCheck(Store store, ASyncCheckResult resultInterface, Context activity) {
-        this.mStore = store;
+    VersionObtainer(VersionDownloadableSource versionDownloadableSource, ASyncCheckResult resultInterface, Context activity) {
+        this.mVersionDownloadableSource = versionDownloadableSource;
         this.mResultInterface = resultInterface;
         this.mContext = activity;
     }
@@ -76,18 +70,18 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                 HttpConnectionParams.setConnectionTimeout(params, 4000);
                 HttpConnectionParams.setSoTimeout(params, 5000);
                 HttpClient client = new DefaultHttpClient(params);
-                if (mStore == Store.GOOGLE_PLAY) {
-                    HttpGet request = new HttpGet(PLAY_STORE_ROOT_WEB + mContext.getPackageName()); // Set the right Play Store page by getting package name.
+                if (mVersionDownloadableSource instanceof GooglePlay) {
+                    HttpGet request = new HttpGet(GooglePlay.PLAY_STORE_ROOT_WEB + mContext.getPackageName()); // Set the right Play Store page by getting package name.
                     HttpResponse response = client.execute(request);
                     InputStream is = response.getEntity().getContent();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        if (line.contains(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION)) { // Obtain HTML line contaning version available in Play Store
-                            String containingVersion = line.substring(line.lastIndexOf(PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
-                            String[] removingUnusefulTags = containingVersion.split(PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove useless HTML tags
+                        if (line.contains(GooglePlay.PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION)) { // Obtain HTML line contaning version available in Play Store
+                            String containingVersion = line.substring(line.lastIndexOf(GooglePlay.PLAY_STORE_HTML_TAGS_TO_GET_RIGHT_POSITION) + 28);  // Get the String starting with version available + Other HTML tags
+                            String[] removingUnusefulTags = containingVersion.split(GooglePlay.PLAY_STORE_HTML_TAGS_TO_REMOVE_USELESS_CONTENT); // Remove useless HTML tags
                             mVersionDownloadable = removingUnusefulTags[0]; // Obtain version available
-                        } else if (line.contains(PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER)) { // This packages has not been found in Play Store
+                        } else if (line.contains(GooglePlay.PLAY_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER)) { // This packages has not been found in Play Store
                             return PACKAGE_NOT_PUBLISHED;
                         }
                     }
@@ -98,23 +92,25 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
                     } else {
                         return MULTIPLE_APKS_PUBLISHED;
                     }
-                } else if (mStore == Store.AMAZON) {
-                    HttpGet request = new HttpGet(AMAZON_STORE_ROOT_WEB + mContext.getPackageName()); // Set the right Amazon App Store page by getting package name.
+                } else if (mVersionDownloadableSource instanceof AmazonAppStore) {
+                    HttpGet request = new HttpGet(AmazonAppStore.AMAZON_STORE_ROOT_WEB + mContext.getPackageName()); // Set the right Amazon App Store page by getting package name.
                     HttpResponse response = client.execute(request);
                     InputStream is = response.getEntity().getContent();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        if (line.contains(AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Amazon App Store
+                        if (line.contains(AmazonAppStore.AMAZON_STORE_HTML_TAGS_TO_GET_RIGHT_LINE)) { // Obtain HTML line contaning version available in Amazon App Store
                             String versionDownloadableWithTags = line.substring(38); // Get the String starting with version available + Other HTML tags
                             mVersionDownloadable = versionDownloadableWithTags.substring(0, versionDownloadableWithTags.length() - 5); // Remove useless HTML tags
                             if (mVersionDownloadable == null) {
                                 return STORE_ERROR;
                             } else return VERSION_DOWNLOADABLE_FOUND;
-                        } else if (line.contains(AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER)) { // This packages has not been found in Amazon App Store
+                        } else if (line.contains(AmazonAppStore.AMAZON_STORE_PACKAGE_NOT_PUBLISHED_IDENTIFIER)) { // This packages has not been found in Amazon App Store
                             return PACKAGE_NOT_PUBLISHED;
                         }
                     }
+                } else if (mVersionDownloadableSource instanceof GitHubGradleProperties) {
+                    //TODO
                 }
             } catch (IOException connectionError) {
                 Network.logConnectionError();

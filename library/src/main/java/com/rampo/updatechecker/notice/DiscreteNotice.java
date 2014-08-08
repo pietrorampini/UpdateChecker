@@ -118,7 +118,7 @@ public class DiscreteNotice extends Notice {
                     hideAllViews(activity, mFromTop, mainView);
                     //editor.putBoolean(KEY_CLICKED, true);
                     //commitEditor();
-                    //TODO 
+                    //TODO
                 }
             });
         }
