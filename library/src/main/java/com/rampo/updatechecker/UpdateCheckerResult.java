@@ -45,7 +45,7 @@ public interface UpdateCheckerResult {
      *
      * @param versionDonwloadable version downloadable from the Store.
      */
-    public void upToDate(String versionDonwloadable);
+    public void returnUpToDate(String versionDonwloadable);
 
     /**
      * Can't get the versionName from the Store.
@@ -53,20 +53,20 @@ public interface UpdateCheckerResult {
      *
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
-    public void multipleApksPublished();
+    public void returnMultipleApksPublished();
 
     /**
      * Can't download the store page.
      */
-    public void networkError();
+    public void returnNetworkError();
 
     /**
      * Can't find the store page for this app.
      */
-    public void appUnpublished();
+    public void returnAppUnpublished();
 
     /**
      * The check returns null for new version downloadble
      */
-    public void storeError();
+    public void returnStoreError();
 }
