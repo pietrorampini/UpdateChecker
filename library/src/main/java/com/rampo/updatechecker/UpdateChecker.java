@@ -143,7 +143,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
                 mLibraryResultCallaback.foundUpdateAndDontShowIt(versionDownloadable);
             }
         } else { // No new update available
-            mLibraryResultCallaback.upToDate(versionDownloadable);
+            mLibraryResultCallaback.returnUpToDate(versionDownloadable);
         }
 
     }
@@ -156,7 +156,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void multipleApksPublished() {
-        mLibraryResultCallaback.multipleApksPublished();
+        mLibraryResultCallaback.returnMultipleApksPublished();
     }
 
     /**
@@ -164,7 +164,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void networkError() {
-        mLibraryResultCallaback.networkError();
+        mLibraryResultCallaback.returnNetworkError();
     }
 
     /**
@@ -172,7 +172,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void appUnpublished() {
-        mLibraryResultCallaback.appUnpublished();
+        mLibraryResultCallaback.returnAppUnpublished();
     }
 
     /**
@@ -180,7 +180,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     @Override
     public void storeError() {
-        mLibraryResultCallaback.storeError();
+        mLibraryResultCallaback.returnStoreError();
     }
 
     /**
@@ -215,10 +215,30 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * versionDownloadable is equal to manifest versionName -> No new update available.
      * Don't show the Notice
      *
-     * @param versionDownloadable version downloadable from the Store.
+     * @param versionDonwloadable version downloadable from the Store.
      */
     @Override
-    public void upToDate(String versionDownloadable) {
+    public void returnUpToDate(String versionDonwloadable) {
+
+    }
+
+    @Override
+    public void returnMultipleApksPublished() {
+
+    }
+
+    @Override
+    public void returnNetworkError() {
+
+    }
+
+    @Override
+    public void returnAppUnpublished() {
+
+    }
+
+    @Override
+    public void returnStoreError() {
 
     }
 
