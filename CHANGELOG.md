@@ -1,6 +1,10 @@
 Change Log
 ===============================================================================
 
+Version [2.1.2](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.2) *(2014-08-20)*
+----------------------------
+ * LIB: Fixed [#93](https://github.com/rampo/UpdateChecker/issues/93): StackOverflowError when multiple apks are published.
+  
 Version [2.1.1](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.1) *(2014-07-26)*
 ----------------------------
  * LIB: Fixed [#90](https://github.com/rampo/UpdateChecker/issues/90): missing apostrophe in french strings.
