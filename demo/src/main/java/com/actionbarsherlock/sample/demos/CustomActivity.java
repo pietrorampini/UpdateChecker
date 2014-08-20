@@ -84,7 +84,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      * @param versionDownloadable version downloadable from the Store.
      */
     @Override
-    public void upToDate(String versionDownloadable) {
+    public void returnUpToDate(String versionDownloadable) {
         result.setText("Updated\n" + "Version downloadable: " + versionDownloadable + "\nVersion installed: " + getVersionInstalled());
     }
 
@@ -95,7 +95,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      * @see <a href="https://github.com/rampo/UpdateChecker/issues/1">Issue #1</a>
      */
     @Override
-    public void multipleApksPublished() {
+    public void returnMultipleApksPublished() {
         result.setText("Error #1");
     }
 
@@ -103,7 +103,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      * Can't download the store page.
      */
     @Override
-    public void networkError() {
+    public void returnNetworkError() {
         result.setText("Network Error");
     }
 
@@ -111,7 +111,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      * Can't find the store page for this app.
      */
     @Override
-    public void appUnpublished() {
+    public void returnAppUnpublished() {
         result.setText("App unpublished");
     }
 
@@ -119,7 +119,7 @@ public class CustomActivity extends Activity implements UpdateCheckerResult {
      * The check returns null for new version downloadble
      */
     @Override
-    public void storeError() {
+    public void returnStoreError() {
         result.setText("Store Error");
     }
 
