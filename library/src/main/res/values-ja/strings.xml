@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor">%1$sの新しいバージョンが見つかりました。%2$sを開いてダウンロードしますか？</string>
+    <string name="dialogPositiveButton">ダウンロード</string>
+    <string name="dialogNeutralButton">後で再度通知する</string>
+    <string name="dialogNegativeButton">無視する</string>
+    <string name="newUpdateAvailable">更新が見つかりました</string>
+    <string name="googlePlay">Google Play</string>
+    <string name="amazonStore">Amazon App Store</string>
+</resources>
