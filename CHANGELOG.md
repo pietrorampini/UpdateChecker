@@ -1,6 +1,10 @@
 Change Log
 ===============================================================================
 
+Version [2.1.3](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.3) *(2014-09-13)*
+----------------------------
+ * LIB: Added Japanese translation (thanks to [@cutmail](https://github.com/cutmail))
+ 
 Version [2.1.2](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.2) *(2014-08-20)*
 ----------------------------
  * LIB: Fixed [#93](https://github.com/rampo/UpdateChecker/issues/93): StackOverflowError when multiple apks are published.
