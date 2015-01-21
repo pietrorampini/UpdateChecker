@@ -1,6 +1,11 @@
 Change Log
 ===============================================================================
 
+Version [2.1.5](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.5) *(2015-01-21)*
+----------------------------
+ * LIB: Added Arabic translation (thanks to [@yazeed44](https://github.com/yazeed44))
+ * DEMO: Fixed error in parent activities
+ 
 Version [2.1.4](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.4) *(2014-09-25)*
 ----------------------------
  * LIB: German and hungarian translation updated (thanks to [@lmbd](https://github.com/lmbd) and [@megamegax](https://github.com/megamegax))
