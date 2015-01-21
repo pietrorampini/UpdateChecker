@@ -28,14 +28,14 @@
             android:parentActivityName=".StandardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value=".StandardActivity" />
         </activity>
         <activity
             android:name=".CustomActivity"
             android:parentActivityName=".StandardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value=".StandardActivity" />
         </activity>
     </application>
 
