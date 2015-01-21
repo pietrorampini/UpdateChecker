@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="downloadFor">Teste das neue Update für %1$s!\nJetzt verfügbar auf %2$s.</string>
-    <string name="dialogPositiveButton">Bewerten</string>
+    <string name="dialogPositiveButton">OK</string>
     <string name="dialogNeutralButton">Später</string>
     <string name="dialogNegativeButton">Nein, danke</string>
     <string name="newUpdateAvailable">Neues Update gefunden</string>

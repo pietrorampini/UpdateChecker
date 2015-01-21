@@ -1,6 +1,19 @@
 Change Log
 ===============================================================================
 
+Version [2.1.5](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.5) *(2015-01-21)*
+----------------------------
+ * LIB: Added Arabic translation (thanks to [@yazeed44](https://github.com/yazeed44))
+ * DEMO: Fixed error in parent activities
+ 
+Version [2.1.4](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.4) *(2014-09-25)*
+----------------------------
+ * LIB: German and hungarian translation updated (thanks to [@lmbd](https://github.com/lmbd) and [@megamegax](https://github.com/megamegax))
+ 
+Version [2.1.3](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.3) *(2014-09-13)*
+----------------------------
+ * LIB: Added Japanese translation (thanks to [@cutmail](https://github.com/cutmail))
+ 
 Version [2.1.2](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.2) *(2014-08-20)*
 ----------------------------
  * LIB: Fixed [#93](https://github.com/rampo/UpdateChecker/issues/93): StackOverflowError when multiple apks are published.
