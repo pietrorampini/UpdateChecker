@@ -80,12 +80,12 @@ public class Dialog {
             }
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } catch (NullPointerException activityClosed) {
+        } catch (NullPointerException | IllegalStateException | WindowManager.BadTokenException e) {
+
+            e.printStackTrace();
         /*   Happens when the library tries to open a dialog,
              but the activity is already closed, so generates a NullPointerException or IllegalStateException.
 			 In this way, a force close is avoided.*/
-        } catch (IllegalStateException activityClosed) {
-            // See up
         }
     }
 
