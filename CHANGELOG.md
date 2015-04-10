@@ -2,7 +2,7 @@ Change Log
 ===============================================================================
 Version [2.1.7](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.7) *(2015-04-10)*
 ----------------------------
- * LIB: Swedish translation added (thanks to [@Dvidan](https://github.com/Dvidan) https://github.com/rampo/UpdateChecker/issues/107)
+ * LIB: Swedish translation added (thanks to [@Dvidan](https://github.com/Dvidan)) Solves #107 
  * LIB: Polish translation updated (thanks to [@slawekkrol](https://github.com/slawekkrol))
  * LIB: Multiple APK treatment improved (thanks to [@Arne517](https://github.com/Arne517))
  
