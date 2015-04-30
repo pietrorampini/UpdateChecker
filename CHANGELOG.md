@@ -1,6 +1,11 @@
 Change Log
 ===============================================================================
-Version [2.1.7](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.7) *(2015-04-10)*
+
+Version [2.1.8](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.8) *(2015-04-30)*
+----------------------------
+ * LIB: Lithuanian, Latvian and Estonian translations added (thanks to [@jaroslavas](https://github.com/jaroslavas))
+ 
+ Version [2.1.7](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.7) *(2015-04-10)*
 ----------------------------
  * LIB: Swedish translation added (thanks to [@Dvidan](https://github.com/Dvidan)) Solves #107 
  * LIB: Polish translation updated (thanks to [@slawekkrol](https://github.com/slawekkrol))
