@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor">Nüüd saate alla laadida uut %1$s! versiooni %2$s</string>
+    <string name="dialogPositiveButton">Alla laadida</string>
+    <string name="dialogNeutralButton">Hiljem</string>
+    <string name="dialogNegativeButton">Tänan, ei soovi</string>
+    <string name="newUpdateAvailable">Uuendus</string>
+    <string name="googlePlay">Google Play</string>
+    <string name="amazonStore">Amazon App Store</string>
+</resources>

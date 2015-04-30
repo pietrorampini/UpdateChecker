@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor">Jau varat lejupielādēt jauno %1$s! versiju no %2$s</string>
+    <string name="dialogPositiveButton">Lejupielādēt</string>
+    <string name="dialogNeutralButton">Vēlāk</string>
+    <string name="dialogNegativeButton">Paldies, nē</string>
+    <string name="newUpdateAvailable"> Atjaunojums</string>
+    <string name="googlePlay">Google Play</string>
+    <string name="amazonStore">Amazon App Store</string>
+</resources>
