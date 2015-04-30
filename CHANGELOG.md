@@ -1,6 +1,16 @@
 Change Log
 ===============================================================================
-
+Version [2.1.7](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.7) *(2015-04-10)*
+----------------------------
+ * LIB: Swedish translation added (thanks to [@Dvidan](https://github.com/Dvidan)) Solves #107 
+ * LIB: Polish translation updated (thanks to [@slawekkrol](https://github.com/slawekkrol))
+ * LIB: Multiple APK treatment improved (thanks to [@Arne517](https://github.com/Arne517))
+ 
+Version [2.1.6](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.6) *(2015-03-06)*
+----------------------------
+ * LIB: Polish translation updated (thanks to [@slawekkrol](https://github.com/slawekkrol))
+ * LIB: Multiple APK treatment improved (thanks to [@Arne517](https://github.com/Arne517))
+  
 Version [2.1.5](https://github.com/rampo/UpdateChecker/releases/tag/v2.1.5) *(2015-01-21)*
 ----------------------------
  * LIB: Added Arabic translation (thanks to [@yazeed44](https://github.com/yazeed44))

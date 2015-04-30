@@ -15,7 +15,7 @@ It checks for new updates downloadable parsing the Store desktop page of your ap
 [Featured on XDA Portal](http://www.xda-developers.com/android/prod-your-apps-users-to-update-with-updatechecker-library/)
 
 ### Changelog
-##### Current version: 2.1.4
+##### Current version: 2.1.7
 
 See [complete ChangeLog](https://github.com/rampo/UpdateChecker/blob/master/CHANGELOG.md).
 
@@ -30,7 +30,7 @@ Check out the [source code of the demo](https://github.com/rampo/UpdateChecker/t
 
 	```groovy	
 	dependencies {
-	    compile 'com.github.rampo.updatechecker:library:2.1.4'
+	    compile 'com.github.rampo.updatechecker:library:2.1.7'
 	}	
 	```
 

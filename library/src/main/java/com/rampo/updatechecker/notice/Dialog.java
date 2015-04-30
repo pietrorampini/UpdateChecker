@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.view.WindowManager;
 
 import com.rampo.updatechecker.R;
 import com.rampo.updatechecker.UpdateChecker;
@@ -80,13 +81,16 @@ public class Dialog {
             }
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } catch (NullPointerException activityClosed) {
-        /*   Happens when the library tries to open a dialog,
-             but the activity is already closed, so generates a NullPointerException or IllegalStateException.
-			 In this way, a force close is avoided.*/
-        } catch (IllegalStateException activityClosed) {
-            // See up
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (WindowManager.BadTokenException e) {
+            e.printStackTrace();
         }
+        /*   Happens when the library tries to open a dialog,
+             but the activity is already closed, so generates a NullPointerException, IllegalStateException or BadTokenException.
+			 In this way, a force close is avoided.*/
     }
 
     private static void userHasTappedToNotShowNoticeAgain(Context mContext, String mVersionDownloadable) {
