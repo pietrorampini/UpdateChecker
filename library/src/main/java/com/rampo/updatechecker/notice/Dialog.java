@@ -16,13 +16,13 @@
  */
 package com.rampo.updatechecker.notice;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.view.WindowManager;
 
 import com.rampo.updatechecker.R;
