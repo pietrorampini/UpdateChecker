@@ -18,6 +18,7 @@ package com.rampo.updatechecker;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 
 import com.rampo.updatechecker.notice.Dialog;
 import com.rampo.updatechecker.notice.Notice;
@@ -31,24 +32,27 @@ import com.rampo.updatechecker.store.Store;
  */
 public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
 
-    public static final String ROOT_PLAY_STORE_DEVICE = "market://details?id=";
-    public static final String PREFS_FILENAME = "updateChecker";
-    public static final String DONT_SHOW_AGAIN_PREF_KEY = "dontShow";
+    public static final  String ROOT_PLAY_STORE_DEVICE    = "market://details?id=";
+    public static final  String PREFS_FILENAME            = "updateChecker";
+    public static final  String DONT_SHOW_AGAIN_PREF_KEY  = "dontShow";
     private static final String SUCCESSFUL_CHEKS_PREF_KEY = "nLaunches";
 
-    static Store DEFAULT_STORE = Store.GOOGLE_PLAY;
-    static int DEFAULT_SUCCESSFUL_CHECKS_REQUIRED = 5;
-    static int DEFAULT_NOTICE_ICON_RES_ID = 0;
-    static Notice DEFAULT_NOTICE = Notice.DIALOG;
+    static Store  DEFAULT_STORE                      = Store.GOOGLE_PLAY;
+    static int    DEFAULT_SUCCESSFUL_CHECKS_REQUIRED = 5;
+    static int    DEFAULT_NOTICE_ICON_RES_ID         = 0;
+    static Notice DEFAULT_NOTICE                     = Notice.DIALOG;
 
-    static Activity mActivity;
-    static Store mStore;
-    static int mSuccessfulChecksRequired;
-    static Notice mNotice;
-    static int mNoticeIconResId;
+    static Activity            mActivity;
+    static Store               mStore;
+    static int                 mSuccessfulChecksRequired;
+    static Notice              mNotice;
+    static int                 mNoticeIconResId;
     static UpdateCheckerResult mLibraryResultCallaback;
-    static ASyncCheckResult mCheckResultCallback;
-    static boolean mCustomImplementation;
+    static ASyncCheckResult    mCheckResultCallback;
+    static boolean             mCustomImplementation;
+    static CharSequence              mNotificationPositiveButtonText;
+    static CharSequence              mNotificationHeaderText;
+    static CharSequence              mNotificationContentText;
 
     public UpdateChecker(Activity activity) {
         mActivity = activity;
@@ -59,6 +63,9 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         mCheckResultCallback = this;
         mLibraryResultCallaback = this;
         mCustomImplementation = false;
+        mNotificationHeaderText = null;
+        mNotificationContentText = null;
+        mNotificationPositiveButtonText = null;
     }
 
     public UpdateChecker(Activity activity, UpdateCheckerResult updateCheckerResult) {
@@ -70,6 +77,9 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         mCheckResultCallback = this;
         mLibraryResultCallaback = updateCheckerResult;
         mCustomImplementation = true;
+        mNotificationHeaderText = null;
+        mNotificationContentText = null;
+        mNotificationPositiveButtonText = null;
     }
 
     /**
@@ -119,6 +129,68 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         if (mCustomImplementation) {
             throw new IllegalStateException("You can't set the notice Icon when you choose a custom implementation.\nThe Notice is controlled manually by you with the callbacks.\nTo call setNotice() use the UpdateChecker constructor with one argument.");
         }
+    }
+
+    /**
+     * Set the header text of the dialog. If you don't call this, the dialog will have the default text
+     *
+     * @param notificationHeaderText text for the header in the dialog.
+     * @see com.rampo.updatechecker.notice.Dialog
+     */
+    public static void setNotificationHeaderText(final CharSequence notificationHeaderText) {
+        if (notificationHeaderText == null || TextUtils.getTrimmedLength(notificationHeaderText) == 0) {
+            throw new IllegalStateException("The can't set an empty string or a null to the dialog header text");
+        }
+
+        if (mCustomImplementation) {
+            throw new IllegalStateException("You can't set the dialog header text when you choose a custom "
+                                            + "implementation.\nThe Dialog is controlled manually by you with the "
+                                            + "callbacks.");
+        }
+
+        mNotificationHeaderText = notificationHeaderText;
+    }
+
+    /**
+     * Set the content text of the dialog. If you don't call this, the dialog will have the default text
+     *
+     * @param notificationContentText text for the content text in the dialog.
+     * @see com.rampo.updatechecker.notice.Dialog
+     */
+    public static void setNotificationContentText(final CharSequence notificationContentText) {
+        if (notificationContentText == null || TextUtils.getTrimmedLength(notificationContentText) == 0) {
+            throw new IllegalStateException("The can't set an empty string or a null to the dialog content text");
+        }
+
+        if (mCustomImplementation) {
+            throw new IllegalStateException("You can't set the dialog content text when you choose a custom "
+                                            + "implementation.\nThe Dialog is controlled manually by you with the "
+                                            + "callbacks.");
+        }
+
+        mNotificationContentText = notificationContentText;
+    }
+
+    /**
+     * Set the positive button text of the dialog. If you don't call this, the dialog will have the default text
+     *
+     * @param notificationPositiveButtonText text for the positive button in the dialog.
+     * @see com.rampo.updatechecker.notice.Dialog
+     */
+    public static void setNotificationPositiveButtonText(final CharSequence notificationPositiveButtonText) {
+        if (notificationPositiveButtonText == null || TextUtils.getTrimmedLength(notificationPositiveButtonText) == 0) {
+            throw new IllegalStateException("The can't set an empty string or a null to the dialog positive button");
+        }
+
+        if (mCustomImplementation) {
+            throw new IllegalStateException("You can't set the dialog positive button text when you choose a custom "
+                                            + "implementation.\nThe Dialog is controlled manually by you with the "
+                                            + "callbacks.");
+        }
+
+        mNotificationPositiveButtonText = notificationPositiveButtonText;
+
+
     }
 
     /**
@@ -286,7 +358,8 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Show Dialog
      */
     public void showDialog(String versionDownloadable) {
-        Dialog.show(mActivity, mStore, versionDownloadable, mNoticeIconResId);
+        Dialog.show(mActivity, mStore, versionDownloadable, mNoticeIconResId, mNotificationHeaderText,
+                    mNotificationContentText, mNotificationPositiveButtonText);
     }
 
     /**
@@ -358,7 +431,8 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * @param notificationIconResId    R.drawable.* resource to set to Notification icon.
      */
     @Deprecated
-    public static void checkForNotification(int notificationIconResId, FragmentActivity fragmentActivity, int successfulChecksRequired) {
+    public static void checkForNotification(int notificationIconResId, FragmentActivity fragmentActivity,
+                                            int successfulChecksRequired) {
     }
 
     /**
