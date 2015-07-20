@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_name">Update Checker</string>
+    <string name="downloadFor"> %1$suygulamasının yeni güncellemesi çıktı!\n%2$s\'den indirebilirsin.</string>
+    <string name="dialogPositiveButton">Güncelle</string>
+    <string name="dialogNeutralButton">Daha sonra</string>
+    <string name="dialogNegativeButton">Hayır, teşekkürler</string>
+    <string name="newUpdateAvailable">Yeni Güncelleme Bulundu</string>
+    <string name="googlePlay">Google Play</string>
+    <string name="amazonStore">Amazon App Store</string>
+</resources>
