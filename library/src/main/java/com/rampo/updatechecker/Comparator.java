@@ -16,6 +16,7 @@
 package com.rampo.updatechecker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 
 public class Comparator {
@@ -24,10 +25,10 @@ public class Comparator {
      *
      * @param versionDownloadable String to compare to the version installed of the app.
      */
-    public static boolean isVersionDownloadableNewer(Activity mActivity, String versionDownloadable) {
+    public static boolean isVersionDownloadableNewer(Context context, String versionDownloadable) {
         String versionInstalled = null;
         try {
-            versionInstalled = mActivity.getPackageManager().getPackageInfo(mActivity.getPackageName(), 0).versionName;
+            versionInstalled = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException ignored) {
         }
         if (versionInstalled.equals(versionDownloadable)) { // If it is equal, no new version downloadable

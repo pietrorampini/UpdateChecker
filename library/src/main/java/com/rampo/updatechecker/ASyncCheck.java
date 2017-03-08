@@ -62,10 +62,10 @@ class ASyncCheck extends AsyncTask<String, Integer, Integer> {
     ASyncCheckResult mResultInterface;
     String mVersionDownloadable;
 
-    ASyncCheck(Store store, ASyncCheckResult resultInterface, Context activity) {
+    ASyncCheck(Store store, ASyncCheckResult resultInterface, Context context) {
         this.mStore = store;
         this.mResultInterface = resultInterface;
-        this.mContext = activity;
+        this.mContext = context;
     }
 
     @Override
