@@ -16,6 +16,7 @@
  */
 package com.rampo.updatechecker.notice;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.WindowManager;
 
 import com.rampo.updatechecker.R;
@@ -38,7 +40,7 @@ import com.rampo.updatechecker.store.Store;
  */
 public class Dialog {
 
-    public static void show(final Context context, final Store store, final String versionDownloadable, final int dialogIconResId) {
+    public static void show(final Context context, final Store store, final String versionDownloadable, final int dialogIconResId, final int dialogStyleResId) {
         try {
             String storeName = null;
             if (store == Store.GOOGLE_PLAY) {
@@ -46,7 +48,8 @@ public class Dialog {
             } else if (store == Store.AMAZON) {
                 storeName = context.getString(R.string.amazonStore);
             }
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+            @SuppressLint("RestrictedApi")
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(context, dialogStyleResId));
             String appName = null;
             try {
                 appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
