@@ -39,6 +39,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     static Store DEFAULT_STORE = Store.GOOGLE_PLAY;
     static int DEFAULT_SUCCESSFUL_CHECKS_REQUIRED = 5;
     static int DEFAULT_NOTICE_ICON_RES_ID = 0;
+    static int DEFAULT_DIALOG_STYLE_RES_ID = R.style.Theme_AppCompat_Dialog;
     static Notice DEFAULT_NOTICE = Notice.DIALOG;
 
     static Activity mActivity;
@@ -46,6 +47,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
     static int mSuccessfulChecksRequired;
     static Notice mNotice;
     static int mNoticeIconResId;
+    static int mDialogStyleResId;
     static UpdateCheckerResult mLibraryResultCallaback;
     static ASyncCheckResult mCheckResultCallback;
     static boolean mCustomImplementation;
@@ -56,6 +58,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
         mSuccessfulChecksRequired = DEFAULT_SUCCESSFUL_CHECKS_REQUIRED;
         mNotice = DEFAULT_NOTICE;
         mNoticeIconResId = DEFAULT_NOTICE_ICON_RES_ID;
+        mDialogStyleResId = DEFAULT_DIALOG_STYLE_RES_ID;
         mCheckResultCallback = this;
         mLibraryResultCallaback = this;
         mCustomImplementation = false;
@@ -116,6 +119,20 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      */
     public static void setNoticeIcon(int noticeIconResId) {
         mNoticeIconResId = noticeIconResId;
+        if (mCustomImplementation) {
+            throw new IllegalStateException("You can't set the notice Icon when you choose a custom implementation.\nThe Notice is controlled manually by you with the callbacks.\nTo call setNotice() use the UpdateChecker constructor with one argument.");
+        }
+    }
+
+    /**
+     * Set the Dialog style. If you don't call this, the Dialog will have the default style.
+     *
+     * @param dialogStyleResId Res Id of the dialog style to be set.
+     * @see com.rampo.updatechecker.notice.Notification
+     * @see com.rampo.updatechecker.notice.Dialog
+     */
+    public static void setDialogStyle(int dialogStyleResId) {
+        mDialogStyleResId = dialogStyleResId;
         if (mCustomImplementation) {
             throw new IllegalStateException("You can't set the notice Icon when you choose a custom implementation.\nThe Notice is controlled manually by you with the callbacks.\nTo call setNotice() use the UpdateChecker constructor with one argument.");
         }
@@ -286,7 +303,7 @@ public class UpdateChecker implements ASyncCheckResult, UpdateCheckerResult {
      * Show Dialog
      */
     public void showDialog(String versionDownloadable) {
-        Dialog.show(mActivity, mStore, versionDownloadable, mNoticeIconResId);
+        Dialog.show(mActivity, mStore, versionDownloadable, mNoticeIconResId, mDialogStyleResId);
     }
 
     /**
