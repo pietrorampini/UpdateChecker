@@ -106,15 +106,6 @@ Join in the conversation, check out the [XDA Thread](http://forum.xda-developers
 
 Written and maintained by: [Pietro Rampini]
 
-<a href="https://plus.google.com/u/0/+PietroRampini/posts">
-  <img alt="Follow me on Google+"
-       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/g+64.png" />
-</a>
-<a href="https://twitter.com/rampo_dev">
-  <img alt="Follow me on Twitter"
-       src="https://github.com/gabrielemariotti/cardslib/raw/master/demo/images/twitter64.png" />
-</a>
-
 The UpdateChecker logo has been created by [Michael Cook](https://plus.google.com/+michaelcook/posts)
 ## License
 
