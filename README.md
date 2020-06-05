@@ -104,7 +104,7 @@ Join in the conversation, check out the [XDA Thread](http://forum.xda-developers
  
 ## Credits
 
-Written and maintained by: [Pietro Rampini]
+Written and maintained by: Pietro Rampini
 
 The UpdateChecker logo has been created by [Michael Cook](https://plus.google.com/+michaelcook/posts)
 ## License
