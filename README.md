@@ -1,6 +1,7 @@
-##NO LONGER MAINTAINED
+# NO LONGER MAINTAINED
 
-#Update Checker
+# UPDATED CHECKER
+
 
 > Android User, never miss an Update.
 
