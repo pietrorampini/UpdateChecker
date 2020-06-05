@@ -1,3 +1,5 @@
+##NO LONGER MAINTAINED
+
 #Update Checker
 
 > Android User, never miss an Update.
@@ -101,7 +103,7 @@ Join in the conversation, check out the [XDA Thread](http://forum.xda-developers
  
 ## Credits
 
-Written and maintained by: [Pietro Rampini](https://plus.google.com/u/0/+PietroRampini/posts) - PiKo Technologies
+Written and maintained by: [Pietro Rampini]
 
 <a href="https://plus.google.com/u/0/+PietroRampini/posts">
   <img alt="Follow me on Google+"
