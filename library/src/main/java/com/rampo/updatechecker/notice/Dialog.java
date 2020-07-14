@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.WindowManager;
 
@@ -38,7 +39,14 @@ import com.rampo.updatechecker.store.Store;
  */
 public class Dialog {
 
-    public static void show(final Context context, final Store store, final String versionDownloadable, final int dialogIconResId) {
+    public static void show(final Context context, final Store store, final String versionDownloadable,
+                            final int dialogIconResId,
+                            @Nullable
+                            final CharSequence mDialogHeaderText,
+                            @Nullable
+                            final CharSequence mDialogContentText,
+                            @Nullable
+                            final CharSequence mDialogConfirmButtonText) {
         try {
             String storeName = null;
             if (store == Store.GOOGLE_PLAY) {
@@ -49,33 +57,46 @@ public class Dialog {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
             String appName = null;
             try {
-                appName = (String) context.getPackageManager().getApplicationLabel(context.getPackageManager().getApplicationInfo(context.getPackageName(), 0));
+                appName = (String) context.getPackageManager()
+                                          .getApplicationLabel(context.getPackageManager()
+                                                                      .getApplicationInfo(context.getPackageName(), 0));
             } catch (PackageManager.NameNotFoundException ignored) {
             }
-            alertDialogBuilder.setTitle(context.getResources().getString(R.string.newUpdateAvailable));
-            alertDialogBuilder.setMessage(context.getResources().getString(R.string.downloadFor, appName, storeName))
-                    .setCancelable(true)
-                    .setPositiveButton(context.getString(R.string.dialogPositiveButton), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            goToMarket(context);
-                            dialog.cancel();
-                        }
-                    })
-                    .setNeutralButton(context.getString(R.string.dialogNeutralButton), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    })
-                    .setNegativeButton(context.getString(R.string.dialogNegativeButton), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            userHasTappedToNotShowNoticeAgain(context, versionDownloadable);
-                            dialog.cancel();
-                        }
+            // If alternative text set manually, then take this (mDialogHeaderText != null)
+            alertDialogBuilder.setTitle(mDialogHeaderText != null ? mDialogHeaderText :
+                                                activity.getResources().getString(R.string.newUpdateAvailable));
+            // If alternative text set manually, then take this (mDialogContentText != null)
+            alertDialogBuilder.setMessage(mDialogContentText != null ? mDialogContentText : context.getResources()
+                                                                                                   .getString(R.string.downloadFor,
+                                                                                                              appName,
+                                                                                                              storeName))
+                              .setCancelable(true)
+                              .setPositiveButton(mDialogConfirmButtonText != null ? mDialogConfirmButtonText :
+                                                         context.getString(R.string.dialogPositiveButton),
+                                                 new DialogInterface.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(DialogInterface dialog, int which) {
+                                                         goToMarket(context);
+                                                         dialog.cancel();
+                                                     }
+                                                 })
+                              .setNeutralButton(context.getString(R.string.dialogNeutralButton),
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                              .setNegativeButton(context.getString(R.string.dialogNegativeButton),
+                                                 new DialogInterface.OnClickListener() {
+                                                     @Override
+                                                     public void onClick(DialogInterface dialog, int which) {
+                                                         userHasTappedToNotShowNoticeAgain(context,
+                                                                                           versionDownloadable);
+                                                         dialog.cancel();
+                                                     }
 
-                    });
+                                                 });
             if (dialogIconResId != 0) {
                 alertDialogBuilder.setIcon(dialogIconResId);
             }
@@ -101,7 +122,8 @@ public class Dialog {
     }
 
     private static void goToMarket(Context mContext) {
-        mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + mContext.getPackageName())));
+        mContext.startActivity(new Intent(Intent.ACTION_VIEW,
+                                          Uri.parse(UpdateChecker.ROOT_PLAY_STORE_DEVICE + mContext.getPackageName())));
 
     }
 }
